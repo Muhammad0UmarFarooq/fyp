@@ -160,13 +160,13 @@ d="M14 5l7 7m0 0l-7 7m7-7H3"/>
 
 </button>
 
-<a href="#" class="text-gray-400 text-xs font-bold tracking-widest uppercase hover:text-brand-dark">
+<a href="{{ route('pitch.arena') }}" class="text-gray-400 text-xs font-bold tracking-widest uppercase hover:text-brand-dark">
 Skip For Now
 </a>
 
 <p class="text-xs text-gray-400">
 Already have an account?
-<a href="{route('login')}" class="font-bold text-gray-900 underline">Log In</a>
+<a href="{{ route('investorLogin') }}" class="font-bold text-gray-900 underline">Log In</a>
 </p>
 
 </div>

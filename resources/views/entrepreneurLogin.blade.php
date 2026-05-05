@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InvestBridge - Login</title>
+    <title>InvestBridge - Entrepreneur Login</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -51,7 +51,7 @@
             <div class="px-8 py-10 md:px-12 md:py-12">
                 <!-- Header -->
                 <div class="text-center mb-10">
-                    <h1 class="text-3xl font-bold mb-2">Welcome<br>Investors</h1>
+                    <h1 class="text-3xl font-bold mb-2">Welcome<br>Entrepreneurs</h1>
                     <p class="text-brand-muted text-[10px] font-bold tracking-[0.15em] uppercase">Access the Sovereign Vault</p>
                 </div>
 
@@ -61,13 +61,13 @@
                     <!-- Email Address -->
                     <div class="space-y-2">
                         <label class="block text-[10px] font-bold text-gray-400 tracking-widest uppercase">Email Address</label>
-                        <input type="email" placeholder="investor@sovereign.vault" class="w-full bg-[#111625] border border-transparent rounded-sm px-4 py-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors" autocomplete="email">
+                        <input type="email" placeholder="investor@sovereign.vault" class="w-full bg-[#111625] border border-transparent rounded-sm px-4 py-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors" autocomplete="off">
                     </div>
 
                     <!-- Password -->
                     <div class="space-y-2">
                         <label class="block text-[10px] font-bold text-gray-400 tracking-widest uppercase">Password</label>
-                        <input type="password" placeholder="••••••••••••" class="w-full bg-[#111625] border border-transparent rounded-sm px-4 py-4 text-xl text-gray-200 placeholder-gray-500 tracking-[0.2em] focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors" autocomplete="current-password">
+                        <input type="password" placeholder="••••••••••••" class="w-full bg-[#111625] border border-transparent rounded-sm px-4 py-4 text-xl text-gray-200 placeholder-gray-500 tracking-[0.2em] focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors" autocomplete="off">
                     </div>
 
                     <!-- Options -->
@@ -87,7 +87,7 @@
                     
                     <div class="text-center pt-6">
                         <p class="text-[13px] text-gray-400">
-                            New to InvestBridge? <a href="{{ route('investor.register') }}" class="text-brand-yellow font-bold hover:underline">Register Here</a>
+                            New to InvestBridge? <a href="{{ route('entrepreneur.register') }}" class="text-brand-yellow font-bold hover:underline">Register Here</a>
                         </p>
                     </div>
                 </form>

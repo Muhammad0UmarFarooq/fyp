@@ -58,7 +58,7 @@
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Professional Email</label>
                             <input type="email" placeholder="name@firm.com" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green" autocomplete="off">
                         </div>
-                        
+
                         <!-- CNIC -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">CNIC (13-Digit Format)</label>
@@ -126,12 +126,12 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </button>
                         
-                        <a href="#" class="text-[#a0aec0] text-[11px] font-bold tracking-[0.15em] uppercase hover:text-brand-dark transition-colors">
+                        <a href="{{ route('pitch.arena') }}" class="text-[#a0aec0] text-[11px] font-bold tracking-[0.15em] uppercase hover:text-brand-dark transition-colors">
                             Skip For Now
                         </a>
 
                         <p class="text-xs text-gray-400 font-medium pb-2">
-                            Already have an account? <a href="#" class="font-bold text-gray-900 underline underline-offset-2 hover:text-brand-dark">Log In</a>
+                            Already have an account? <a href="{{ route('entrepreneur.login') }}" class="font-bold text-gray-900 underline underline-offset-2 hover:text-brand-dark">Log In</a>
                         </p>
                     </div>
 

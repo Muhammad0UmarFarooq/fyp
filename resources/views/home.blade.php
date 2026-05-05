@@ -63,7 +63,7 @@
     <!-- Navigation -->
     <nav class="hidden md:flex items-center gap-6">
 
-        <a href="#" class="text-brand-muted hover:text-white transition-colors text-sm font-medium">
+        <a href="{{ route('pitch.arena') }}" class="text-brand-muted hover:text-white transition-colors text-sm font-medium">
             Continue as Guest
         </a>
 
