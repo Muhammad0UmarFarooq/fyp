@@ -22,18 +22,54 @@ Route::get('/entrepreneur/login', function () {
     return view('entrepreneurLogin');
 })->name('entrepreneur.login');
 
-Route::get('/entrepreneur/home', function () {
-    return view('entrepreneur.home');
-})->name('entrepreneur.home');
+Route::get('/entrepreneur/dashboard', function () {
+    return view('entrepreneur.dashboard');
+})->name('entrepreneur.dashboard');
 
 Route::get('/entrepreneur/pitch/create', function () {
     return view('entrepreneur.createPitch');
 })->name('entrepreneur.pitch.create');
 
-Route::get('/pitch-arena', function () {
-    return view('pitchArena');
-})->name('pitch.arena');
+Route::get('/entrepreneur/pitch/update', function () {
+    return view('entrepreneur.updatePitch');
+})->name('entrepreneur.pitch.update');
+
+Route::get('/entrepreneur/offers', function () {
+    return view('entrepreneur.investorsOffer');
+})->name('entrepreneur.offers');
+
+Route::get('/entrepreneur/agreements', function () {
+    return view('entrepreneur.agreements');
+})->name('entrepreneur.agreements');
+
+Route::get('/entrepreneur/profile', function () {
+    return view('entrepreneur.profile');
+})->name('entrepreneur.profile');
+
+Route::get('/investor/home', function () {
+    return view('investorpages.home');
+})->name('investor.home');
+
+Route::get('/investor/offers', function () {
+    return view('investorpages.myOffers');
+})->name('investor.offers');
+
+Route::get('/investor/pitch/view', function () {
+    return view('investorpages.viewPitch');
+})->name('investor.pitch.view');
+
+Route::get('/investor/agreements', function () {
+    return view('investorpages.agreements');
+})->name('investor.agreements');
+
+Route::get('/investor/profile', function () {
+    return view('investorpages.profile');
+})->name('investor.profile');
 
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+Route::get('/pitch/arena', function () {
+    return view('pitchArena');
+})->name('pitch.arena');
