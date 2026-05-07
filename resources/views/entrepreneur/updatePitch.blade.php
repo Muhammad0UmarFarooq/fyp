@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create Your Pitch - InvestBridge</title>
+    <title>Update Your Pitch - InvestBridge</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -43,7 +43,7 @@
             <div class="max-w-4xl mx-auto">
                 <!-- Header -->
                 <div class="mb-12">
-                    <h1 class="text-4xl font-bold mb-4">Create Your Pitch</h1>
+                    <h1 class="text-4xl font-bold mb-4">Update Your Pitch</h1>
                     <p class="text-gray-400 text-sm max-w-2xl leading-relaxed">
                         Transform your vision into an institutional-grade investment opportunity. Complete the following dimensions of your venture.
                     </p>
@@ -153,10 +153,10 @@
                         </div>
                     </div>
 
-                    <!-- Publish Button -->
+                    <!-- Edit Button -->
                     <div class="flex justify-center pb-12">
                         <button type="submit" class="bg-[#4ade80] text-[#064e3b] px-16 py-4 rounded font-bold text-sm tracking-widest uppercase hover:bg-[#3dbd6d] transition-all shadow-xl shadow-brand-green/10">
-                            Publish Pitch
+                            Edit Pitch
                         </button>
                     </div>
                 </form>

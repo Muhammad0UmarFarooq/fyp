@@ -47,23 +47,23 @@ Route::get('/entrepreneur/profile', function () {
 })->name('entrepreneur.profile');
 
 Route::get('/investor/home', function () {
-    return view('investorpages.home');
+    return view('investor.home');
 })->name('investor.home');
 
 Route::get('/investor/offers', function () {
-    return view('investorpages.myOffers');
-})->name('investor.offers');
+    return view('investor.myOffers');
+})->name('investor.myOffers');
 
 Route::get('/investor/pitch/view', function () {
-    return view('investorpages.viewPitch');
+    return view('investor.viewPitch');
 })->name('investor.pitch.view');
 
 Route::get('/investor/agreements', function () {
-    return view('investorpages.agreements');
+    return view('investor.agreements');
 })->name('investor.agreements');
 
 Route::get('/investor/profile', function () {
-    return view('investorpages.profile');
+    return view('investor.profile');
 })->name('investor.profile');
 
 Route::get('/about', function () {
