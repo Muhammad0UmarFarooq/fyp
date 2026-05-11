@@ -9,29 +9,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet" />
     
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            dark: '#0f1523',
-                            card: '#1e2738',
-                            box: '#111625',
-                            green: '#4ade80',
-                            yellow: '#facc15',
-                            muted: '#64748b'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind & Vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#111625] text-white font-sans min-h-screen antialiased">
 
@@ -65,7 +44,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="w-full max-w-8xl mx-auto px-6 py-16 md:py-24">
+    <main class="w-full max-w-6xl mx-auto px-6 py-16 md:py-24">
         
         <!-- Hero Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center mb-24">

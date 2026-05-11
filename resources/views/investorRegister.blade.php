@@ -10,27 +10,8 @@
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet"/>
 
-<!-- Tailwind CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<script>
-tailwind.config = {
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Inter', 'sans-serif'],
-            },
-            colors: {
-                'brand-dark': '#111625',
-                'brand-input': '#f8fafc',
-                'brand-green': '#4ade80',
-                'brand-muted': '#718096',
-                'brand-btn': '#111827',
-            }
-        }
-    }
-}
-</script>   
+    <!-- Tailwind & Vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
@@ -200,17 +181,7 @@ Already have an account?
 </div>
 </div>
 
-<!-- Reusable Input Styles -->
-<style type="text/tailwindcss">
-.label{
-    @apply block text-[11px] font-bold text-gray-600 tracking-widest uppercase mb-2;
-}
 
-.input{
-    @apply w-full bg-brand-input border border-gray-200 px-4 py-4 text-sm text-gray-800 placeholder-gray-300
-    focus:outline-none focus:ring-2 focus:ring-brand-green rounded-md transition;
-}
-</style>
 
 </body>
 </html>

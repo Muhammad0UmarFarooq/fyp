@@ -22,5 +22,21 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             <span class="{{ request()->routeIs('entrepreneur.agreements') ? 'uppercase font-bold' : '' }}">Agreements</span>
         </a>
+
+        <!-- Profile -->
+        <a href="{{ route('entrepreneur.profile') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg font-medium text-sm transition-colors {{ request()->routeIs('entrepreneur.profile') ? 'bg-white/5 text-[#4ade80] border-r-2 border-[#4ade80]' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            <span>Profile</span>
+        </a>
     </nav>
+
+    <div class="px-4 mt-auto">
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="w-full flex items-center space-x-3 px-4 py-3 rounded-lg font-medium text-sm text-red-400 hover:text-red-300 hover:bg-red-400/5 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                <span>Logout</span>
+            </button>
+        </form>
+    </div>
 </aside>

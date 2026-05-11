@@ -9,29 +9,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet" />
     
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            dark: '#0f1523', // Page background
-                            card: '#1e293b', // Card background
-                            input: '#0b1120', // Input background
-                            green: '#4ade80', // Primary Green
-                            yellow: '#facc15', // Primary Yellow
-                            muted: '#64748b'  // Muted text
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind & Vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#111625] text-white font-sans min-h-screen flex flex-col antialiased">
 
@@ -56,24 +35,35 @@
                 </div>
 
                 <!-- Form -->
-                <form action="{{ route('entrepreneur.dashboard') }}" method="GET" class="space-y-6">
+                <form action="{{ route('login.post') }}" method="POST" class="space-y-6">
+                    @csrf
                     
+                    @if ($errors->any())
+                        <div class="bg-red-500/10 border border-red-500/20 text-red-500 text-xs p-4 rounded-sm">
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <!-- Email Address -->
                     <div class="space-y-2">
                         <label class="block text-[10px] font-bold text-gray-400 tracking-widest uppercase">Email Address</label>
-                        <input type="email" placeholder="investor@sovereign.vault" class="w-full bg-[#111625] border border-transparent rounded-sm px-4 py-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors" autocomplete="off">
+                        <input type="email" name="email" value="{{ old('email') }}" required placeholder="entrepreneur@investbridge.com" class="w-full bg-[#111625] border border-transparent rounded-sm px-4 py-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors" autocomplete="off">
                     </div>
 
                     <!-- Password -->
                     <div class="space-y-2">
                         <label class="block text-[10px] font-bold text-gray-400 tracking-widest uppercase">Password</label>
-                        <input type="password" placeholder="••••••••••••" class="w-full bg-[#111625] border border-transparent rounded-sm px-4 py-4 text-xl text-gray-200 placeholder-gray-500 tracking-[0.2em] focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors" autocomplete="off">
+                        <input type="password" name="password" required placeholder="••••••••••••" class="w-full bg-[#111625] border border-transparent rounded-sm px-4 py-4 text-xl text-gray-200 placeholder-gray-500 tracking-[0.2em] focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors" autocomplete="off">
                     </div>
 
                     <!-- Options -->
                     <div class="flex items-center justify-between text-xs pt-1 pb-1">
                         <label class="flex items-center text-gray-400 cursor-pointer hover:text-gray-300">
-                            <input type="checkbox" class="form-checkbox h-3.5 w-3.5 bg-[#111625] border-transparent rounded-sm text-brand-green focus:ring-0 focus:ring-offset-0">
+                            <input type="checkbox" name="remember" class="form-checkbox h-3.5 w-3.5 bg-[#111625] border-transparent rounded-sm text-brand-green focus:ring-0 focus:ring-offset-0">
                             <span class="ml-2 font-medium">Remember Me</span>
                         </label>
                         <a href="#" class="text-brand-yellow font-medium hover:underline">Forgot Password?</a>

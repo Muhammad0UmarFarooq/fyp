@@ -84,4 +84,47 @@ class AuthController extends Controller
 
         return redirect()->route('investor.home');
     }
+    /**
+     * Handle a login request.
+     */
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            if ($user->role === 'entrepreneur') {
+                return redirect()->intended(route('entrepreneur.dashboard'));
+            }
+
+            if ($user->role === 'investor') {
+                return redirect()->intended(route('investor.home'));
+            }
+
+            return redirect()->intended(route('home'));
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
+    /**
+     * Handle a logout request.
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
 }

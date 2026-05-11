@@ -9,28 +9,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet" />
     
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            dark: '#111625', // Deep navy background
-                            input: '#fcfcfd', // Very light grey for inputs
-                            green: '#4ade80', // Button text green
-                            muted: '#718096', // Label grey
-                            btn: '#111827'    // Dark button background
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind & Vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-brand-dark text-white font-sans min-h-screen flex flex-col items-center justify-center p-4 md:p-8 antialiased">
 

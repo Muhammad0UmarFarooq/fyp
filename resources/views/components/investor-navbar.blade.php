@@ -11,7 +11,10 @@
     </div>
 
     <div class="flex items-center space-x-4">
-        <a href="{{ route('investor.profile') }}" class="text-xs font-bold text-[#4ade80] cursor-pointer hover:text-[#4ade80]/80 transition-colors">Malik Riaz</a>
-        <a href="#" class="border border-white/10 px-4 py-1.5 rounded text-[9px] font-bold tracking-widest uppercase text-gray-500 hover:text-white hover:border-white/30 transition-colors">SIGN OUT</a>
+        <a href="{{ route('investor.profile') }}" class="text-xs font-bold text-[#4ade80] cursor-pointer hover:text-[#4ade80]/80 transition-colors">{{ auth()->user()->name }}</a>
+        <form action="{{ route('logout') }}" method="POST" class="inline">
+            @csrf
+            <button type="submit" class="border border-white/10 px-4 py-1.5 rounded text-[9px] font-bold tracking-widest uppercase text-gray-500 hover:text-white hover:border-white/30 transition-colors">SIGN OUT</button>
+        </form>
     </div>
 </nav>

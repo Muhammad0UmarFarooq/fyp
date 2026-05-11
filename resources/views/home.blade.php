@@ -9,38 +9,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet" />
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'brand-dark': '#0b1120',
-                        'brand-card': '#161e2d',
-                        'brand-green': '#4ade80',
-                        'brand-yellow': '#facc15',
-                        'brand-muted': '#94a3b8',
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .bg-grid-pattern {
-                background-image:
-                    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-                background-size: 40px 40px;
-            }
-        }
-    </style>
+    <!-- Tailwind & Vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-[#131B2E] text-white font-sans min-h-screen relative overflow-x-hidden selection:bg-brand-green selection:text-brand-dark">
@@ -62,23 +32,42 @@
 
     <!-- Navigation -->
     <nav class="hidden md:flex items-center gap-6">
+        @guest
+            <a href="{{ route('pitch.arena') }}" class="text-brand-muted hover:text-white transition-colors text-sm font-medium">
+                Continue as Guest
+            </a>
 
-        <a href="{{ route('pitch.arena') }}" class="text-brand-muted hover:text-white transition-colors text-sm font-medium">
-            Continue as Guest
-        </a>
+            <!-- Investor -->
+            <a href="{{ route('investor.register') }}"
+               class="bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors">
+                Investor Entry
+            </a>
 
-        <!-- Investor -->
-        <a href="{{ route('investor.register') }}"
-           class="bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors">
-            Investor Entry
-        </a>
-
-        <!-- Entrepreneur -->
-        <a href="{{ route('entrepreneur.register') }}"
-           class="bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors">
-            Entrepreneur Entry
-        </a>
-
+            <!-- Entrepreneur -->
+            <a href="{{ route('entrepreneur.register') }}"
+               class="bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors">
+                Entrepreneur Entry
+            </a>
+        @else
+            @if(auth()->user()->role === 'entrepreneur')
+                <a href="{{ route('entrepreneur.dashboard') }}"
+                   class="bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors">
+                    Go to Dashboard
+                </a>
+            @else
+                <a href="{{ route('investor.home') }}"
+                   class="bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors">
+                    Go to Dashboard
+                </a>
+            @endif
+            
+            <form action="{{ route('logout') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit" class="text-brand-muted hover:text-white transition-colors text-sm font-medium">
+                    Sign Out
+                </button>
+            </form>
+        @endguest
     </nav>
 </header>
 
