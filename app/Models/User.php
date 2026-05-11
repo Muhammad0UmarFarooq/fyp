@@ -18,6 +18,22 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Get the entrepreneur profile associated with the user.
+     */
+    public function entrepreneurProfile()
+    {
+        return $this->hasOne(EntrepreneurProfile::class);
+    }
+
+    /**
+     * Get the investor profile associated with the user.
+     */
+    public function investorProfile()
+    {
+        return $this->hasOne(InvestorProfile::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

@@ -53,38 +53,61 @@ tailwind.config = {
 
 <div class="p-8 md:p-14">
 
-<form action="#" method="POST" class="space-y-10">
+<form action="{{ route('investor.register.post') }}" method="POST" class="space-y-10">
+    @csrf
+
+    @if ($errors->any())
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-red-700 font-bold uppercase tracking-wider">
+                        Please correct the following errors:
+                    </p>
+                    <ul class="mt-2 list-disc list-inside text-xs text-red-600 space-y-1">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
 <!-- Full Name -->
 <div>
 <label class="label">Full Legal Name</label>
-<input type="text" placeholder="Johnathan Doe" class="input">
+<input type="text" name="name" placeholder="Johnathan Doe" class="input" required>
 </div>
 
 <!-- Email -->
 <div>
 <label class="label">Professional Email</label>
-<input type="email" placeholder="name@firm.com" class="input" autocomplete="off">
+<input type="email" name="email" placeholder="name@firm.com" class="input" autocomplete="off" required>
 </div>
 
 <!-- CNIC -->
 <div>
 <label class="label">CNIC (13-Digit Format)</label>
-<input type="text" placeholder="XXXXX-XXXXXXX-X" class="input">
+<input type="text" name="cnic" placeholder="XXXXX-XXXXXXX-X" class="input" required>
 </div>
 
 <!-- Phone -->
 <div>
 <label class="label">Phone No (+92)</label>
-<input type="text" placeholder="+92 -" class="input">
+<input type="text" name="phone" placeholder="+92 -" class="input" required>
 </div>
 
 <!-- City -->
 <div>
 <label class="label">City</label>
-<select class="input text-gray-500">
+<select name="city" class="input text-gray-500" required>
 <option disabled selected>Select Territory</option>
 <option>Karachi</option>
 <option>Lahore</option>
@@ -122,25 +145,25 @@ E-Commerce
 <!-- Investment Amount -->
 <div>
 <label class="label">Investment Amount (USD)</label>
-<input type="text" placeholder="e.g. 5000000" class="input">
+<input type="number" name="investment_amount" placeholder="e.g. 5000000" class="input" required>
 </div>
 
 <!-- Investment Focus -->
 <div>
 <label class="label">Investment Interest / Description</label>
-<input type="text" placeholder="Primary investment focus..." class="input">
+<input type="text" name="investment_focus" placeholder="Primary investment focus..." class="input" required>
 </div>
 
 <!-- Password -->
 <div>
 <label class="label">Secure Password</label>
-<input type="password" placeholder="••••••••••••" class="input tracking-widest" autocomplete="new-password">
+<input type="password" name="password" placeholder="••••••••••••" class="input tracking-widest" autocomplete="new-password" required>
 </div>
 
 <!-- Confirm Password -->
 <div>
 <label class="label">Confirm Password</label>
-<input type="password" placeholder="••••••••••••" class="input tracking-widest" autocomplete="new-password">
+<input type="password" name="password_confirmation" placeholder="••••••••••••" class="input tracking-widest" autocomplete="new-password" required>
 </div>
 
 </div>

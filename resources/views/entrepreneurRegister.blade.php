@@ -44,38 +44,39 @@
         <!-- Form Container -->
         <div class="w-full bg-white text-gray-900 shadow-2xl">
             <div class="p-8 md:p-14">
-                <form action="#" method="POST" class="space-y-8">
+                <form action="{{ route('entrepreneur.register.post') }}" method="POST" class="space-y-8">
+                    @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                         
                         <!-- Full Legal Name -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Full Legal Name</label>
-                            <input type="text" placeholder="Johnathan Doe" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green">
+                            <input type="text" name="name" placeholder="Johnathan Doe" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green" required>
                         </div>
 
                         <!-- Professional Email -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Professional Email</label>
-                            <input type="email" placeholder="name@firm.com" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green" autocomplete="off">
+                            <input type="email" name="email" placeholder="name@firm.com" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green" autocomplete="off" required>
                         </div>
 
                         <!-- CNIC -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">CNIC (13-Digit Format)</label>
-                            <input type="text" placeholder="XXXXX-XXXXXXX-X" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green">
+                            <input type="text" name="cnic" placeholder="XXXXX-XXXXXXX-X" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green" required>
                         </div>
 
                         <!-- Phone No -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Phone No (+92)</label>
-                            <input type="text" placeholder="+92 - " class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green">
+                            <input type="text" name="phone" placeholder="+92 - " class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green" required>
                         </div>
 
                         <!-- City -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">City</label>
                             <div class="relative">
-                                <select class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-500 appearance-none focus:outline-none focus:ring-1 focus:ring-brand-green">
+                                <select name="city" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-500 appearance-none focus:outline-none focus:ring-1 focus:ring-brand-green" required>
                                     <option value="" disabled selected>Select Territory</option>
                                     <option value="karachi">Karachi</option>
                                     <option value="lahore">Lahore</option>
@@ -90,38 +91,38 @@
                         <!-- Business -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Business</label>
-                            <input type="text" placeholder="Shoes Shop" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green">
+                            <input type="text" name="company_name" placeholder="Shoes Shop" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green" required>
                         </div>
 
                         <!-- Total Valuation -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Total Valuation</label>
-                            <input type="text" placeholder="e.g. 5000000" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green">
+                            <input type="number" name="total_valuation" placeholder="e.g. 5000000" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green" required>
                         </div>
 
                         <!-- Future Valuation -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Future Valuation</label>
-                            <input type="text" placeholder="i.e 100 00000" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green">
+                            <input type="number" name="future_valuation" placeholder="i.e 100 00000" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green" required>
                         </div>
 
                         <!-- Secure Password -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Secure Password</label>
-                            <input type="password" placeholder="••••••••••••" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-xl text-gray-800 placeholder-gray-300 tracking-[0.2em] focus:outline-none focus:ring-1 focus:ring-brand-green" autocomplete="new-password">
+                            <input type="password" name="password" placeholder="••••••••••••" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-xl text-gray-800 placeholder-gray-300 tracking-[0.2em] focus:outline-none focus:ring-1 focus:ring-brand-green" autocomplete="new-password" required>
                         </div>
 
                         <!-- Confirm Password -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Confirm Password</label>
-                            <input type="password" placeholder="••••••••••••" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-xl text-gray-800 placeholder-gray-300 tracking-[0.2em] focus:outline-none focus:ring-1 focus:ring-brand-green" autocomplete="new-password">
+                            <input type="password" name="password_confirmation" placeholder="••••••••••••" class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-xl text-gray-800 placeholder-gray-300 tracking-[0.2em] focus:outline-none focus:ring-1 focus:ring-brand-green" autocomplete="new-password" required>
                         </div>
 
                     </div>
 
                     <!-- Actions -->
                     <div class="pt-10 flex flex-col items-center space-y-8">
-                        <button type="button" class="w-full md:w-[60%] bg-brand-btn text-brand-green font-bold text-[11px] tracking-[0.15em] uppercase py-4 hover:bg-[#1a2336] transition-colors flex items-center justify-center space-x-2">
+                        <button type="submit" class="w-full md:w-[60%] bg-brand-btn text-brand-green font-bold text-[11px] tracking-[0.15em] uppercase py-4 hover:bg-[#1a2336] transition-colors flex items-center justify-center space-x-2">
                             <span>Register Account</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </button>

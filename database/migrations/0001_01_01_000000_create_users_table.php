@@ -18,9 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['entrepreneur', 'investor'])->default('entrepreneur');
+            $table->string('cnic')->nullable();
             $table->string('phone')->nullable();
-            $table->string('company_name')->nullable();
-            $table->string('industry')->nullable();
+            $table->string('city')->nullable();
             $table->text('bio')->nullable();
             $table->string('profile_image')->nullable();
             $table->rememberToken();

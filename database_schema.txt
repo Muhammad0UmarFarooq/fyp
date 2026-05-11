@@ -3,9 +3,9 @@ INVESTBRIDGE DATABASE SCHEMA DOCUMENTATION
 This document outlines the database structure, fields, and relationships for the InvestBridge application.
 
 --------------------------------------------------
-1. USERS TABLE (Core Authentication)
+1. USERS TABLE (Core Authentication & Identity)
 --------------------------------------------------
-Stores basic identity and authentication data.
+Stores basic identity, authentication, and common profile data.
 
 Fields:
 - id (Primary Key)
@@ -13,6 +13,10 @@ Fields:
 - email: Unique login email.
 - password: Encrypted password.
 - role: Type of user ('entrepreneur' or 'investor').
+- cnic: Government-issued identification number.
+- phone: Contact number.
+- city: Registered city.
+- bio: Professional summary or company vision.
 - profile_image: Path to the user's avatar (nullable).
 - timestamps: created_at and updated_at.
 
@@ -28,11 +32,12 @@ Stores professional details specific to entrepreneurs.
 Fields:
 - id (Primary Key)
 - user_id: Foreign Key (references users.id).
-- phone: Contact number.
 - company_name: Name of the startup venture.
 - industry: Professional sector (e.g., Tech, Healthcare).
 - experience_years: Total years of professional experience.
-- bio: Entrepreneur's biography or vision.
+- total_valuation: Initial startup valuation.
+- future_valuation: Projected future valuation.
+- website: Professional or startup website.
 - timestamps: created_at and updated_at.
 
 --------------------------------------------------
@@ -43,10 +48,10 @@ Stores professional details specific to investors.
 Fields:
 - id (Primary Key)
 - user_id: Foreign Key (references users.id).
-- phone: Contact number.
-- investment_focus: Specific sectors of interest (e.g., "AI, Clean Energy").
+- interested_businesses: JSON array of business sectors.
+- investment_amount: Total financial capital available for deployment.
+- investment_focus: Specific sectors of interest.
 - portfolio_size: Estimated total investment portfolio.
-- bio: Investor's biography or investment philosophy.
 - timestamps: created_at and updated_at.
 
 --------------------------------------------------

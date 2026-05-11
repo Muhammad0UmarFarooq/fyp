@@ -1,10 +1,22 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+Route::post('/register/entrepreneur', [AuthController::class, 'registerEntrepreneur'])->name('entrepreneur.register.post');
+Route::post('/register/investor', [AuthController::class, 'registerInvestor'])->name('investor.register.post');
+
+// Fallback GET routes for registration to handle refreshes
+Route::get('/register/entrepreneur', function () {
+    return redirect()->route('entrepreneur.register');
+});
+Route::get('/register/investor', function () {
+    return redirect()->route('investor.register');
+});
 
 Route::get('/investor/register', function () {
     return view('investorRegister');
