@@ -1,0 +1,134 @@
+INVESTBRIDGE DATABASE SCHEMA DOCUMENTATION
+
+This document outlines the database structure, fields, and relationships for the InvestBridge application.
+
+--------------------------------------------------
+1. USERS TABLE (Core Authentication)
+--------------------------------------------------
+Stores basic identity and authentication data.
+
+Fields:
+- id (Primary Key)
+- name: Full name of the user.
+- email: Unique login email.
+- password: Encrypted password.
+- role: Type of user ('entrepreneur' or 'investor').
+- profile_image: Path to the user's avatar (nullable).
+- timestamps: created_at and updated_at.
+
+Relationships:
+- Has One: Entrepreneur Profile (if role is entrepreneur).
+- Has One: Investor Profile (if role is investor).
+
+--------------------------------------------------
+2. ENTREPRENEUR_PROFILES TABLE
+--------------------------------------------------
+Stores professional details specific to entrepreneurs.
+
+Fields:
+- id (Primary Key)
+- user_id: Foreign Key (references users.id).
+- phone: Contact number.
+- company_name: Name of the startup venture.
+- industry: Professional sector (e.g., Tech, Healthcare).
+- experience_years: Total years of professional experience.
+- bio: Entrepreneur's biography or vision.
+- timestamps: created_at and updated_at.
+
+--------------------------------------------------
+3. INVESTOR_PROFILES TABLE
+--------------------------------------------------
+Stores professional details specific to investors.
+
+Fields:
+- id (Primary Key)
+- user_id: Foreign Key (references users.id).
+- phone: Contact number.
+- investment_focus: Specific sectors of interest (e.g., "AI, Clean Energy").
+- portfolio_size: Estimated total investment portfolio.
+- bio: Investor's biography or investment philosophy.
+- timestamps: created_at and updated_at.
+
+--------------------------------------------------
+4. PITCHES TABLE
+--------------------------------------------------
+Stores startup pitches created by entrepreneurs.
+
+Fields:
+- id (Primary Key)
+- user_id: Foreign Key (references users.id).
+- startup_name: Name of the venture.
+- invested_amount: Amount already invested by the owner.
+- monthly_net_value: Current monthly revenue minus expenses.
+- monthly_growth: Percentage growth rate.
+- vision_statement: Long-form text describing the future goal.
+- additional_detail: Supporting information for the pitch.
+- funding_required: Total capital sought from investors.
+- return_time: Expected period for investment return (e.g., "2 years").
+- total_valuation: The overall calculated value of the startup.
+- video_path: Storage path for the pitch video file.
+- status: Current state ('active', 'funded', 'archived').
+- timestamps: created_at and updated_at.
+
+Relationships:
+- Belongs To: User (Entrepreneur).
+- Has Many: Pitch Custom Fields.
+- Has Many: Offers.
+
+--------------------------------------------------
+5. PITCH_CUSTOM_FIELDS TABLE
+--------------------------------------------------
+Stores additional dynamic fields added to a specific pitch.
+
+Fields:
+- id (Primary Key)
+- pitch_id: Foreign Key (references pitches.id).
+- label: The name of the custom field (e.g., "Target Market").
+- value: The content of the custom field (e.g., "Global").
+- timestamps: created_at and updated_at.
+
+Relationships:
+- Belongs To: Pitch.
+
+--------------------------------------------------
+6. OFFERS TABLE
+--------------------------------------------------
+Tracks investment offers made by investors on startup pitches.
+
+Fields:
+- id (Primary Key)
+- pitch_id: Foreign Key (references pitches.id).
+- investor_id: Foreign Key (references users.id).
+- offer_amount: Financial capital offered.
+- time_period: Proposed duration for the investment.
+- valuation: Startup valuation as proposed in this offer.
+- status: State of the offer ('pending', 'accepted', 'rejected').
+- timestamps: created_at and updated_at.
+
+Relationships:
+- Belongs To: Pitch.
+- Belongs To: User (Investor).
+- Has One: Agreement (if accepted).
+
+--------------------------------------------------
+7. AGREEMENTS TABLE
+--------------------------------------------------
+Stores the final legal/financial contract data once an offer is accepted.
+
+Fields:
+- id (Primary Key)
+- offer_id: Foreign Key (references offers.id).
+- pitch_id: Foreign Key (references pitches.id).
+- entrepreneur_id: Foreign Key (references users.id).
+- investor_id: Foreign Key (references users.id).
+- ownership_stake: Percentage of equity granted to the investor.
+- estimated_roi: Projected return on investment.
+- agreement_date: Date the agreement was finalized.
+- status: Status of the deal ('pending_signature', 'active', 'completed').
+- timestamps: created_at and updated_at.
+
+Relationships:
+- Belongs To: Offer.
+- Belongs To: Pitch.
+- Belongs To: User (Entrepreneur).
+- Belongs To: User (Investor).

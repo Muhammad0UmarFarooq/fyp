@@ -40,7 +40,7 @@
         <x-sidebar />
 
         <main class="flex-1 p-12">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-8xl mx-auto">
                 <!-- Header -->
                 <div class="mb-12">
                     <h1 class="text-4xl font-bold mb-4">Create Your Pitch</h1>
@@ -70,63 +70,53 @@
 
                     <!-- 02. Pitches Identity -->
                     <div class="space-y-8">
-                        <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-sm">02. PITCHES IDENTITY</h2>
+                        <h2 class="text-[#facc15] font-bold tracking-[0.2em] text-sm uppercase">02. Pitches Identity</h2>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div id="pitch-identity-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
                             <div class="space-y-2">
-                                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Startup Name</label>
-                                <input type="text" value="Shoes shop" class="w-full bg-[#111625] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Startup Name</label>
+                                <input type="text" value="Shoes shop" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div class="space-y-2">
-                                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Invested Amount (Owner Investment)</label>
-                                <input type="text" value="$ 5000000" class="w-full bg-[#111625] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Invested Amount (Owner Investment)</label>
+                                <input type="text" value="$ 5000000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div class="space-y-2">
-                                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Monthly Net Value (Total Revenue - Total Expenses)</label>
-                                <input type="text" value="$ 1000000" class="w-full bg-[#111625] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Net Value(Total Revenue - Total Expenses )</label>
+                                <input type="text" value="$ 1000000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
-                            <div class="space-y-2">
-                                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Monthly Growth</label>
-                                <div class="flex space-x-2">
-                                    <input type="text" value="22%" class="flex-1 bg-[#111625] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm">
-                                    <button type="button" class="bg-[#111625] border border-white/5 p-3 rounded hover:bg-white/5 transition-colors">
-                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
-                                    </button>
+                            <div id="monthly-growth-field" class="space-y-2">
+                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Growth</label>
+                                <div class="flex items-center bg-[#0b1120] border border-white/5 rounded">
+                                    <input type="text" value="22%" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
+                                    <div class="p-2">
+                                        <button type="button" onclick="removeFinalField('monthly-growth-field')" class="bg-white w-8 h-8 flex items-center justify-center rounded shadow-sm group">
+                                            <div class="bg-[#ff0000] w-6 h-6 rounded-full flex items-center justify-center group-hover:bg-[#b30000] transition-colors">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"></path></svg>
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Dynamic Fields Example -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                            <div class="bg-[#111625] border border-white/5 p-4 rounded flex justify-center">
-                                <button type="button" class="bg-[#1e293b] p-2 rounded-full hover:bg-[#334155] transition-colors border border-white/10">
-                                    <svg class="w-6 h-6 text-[#4ade80]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            
+                            <!-- Add Button Box (Always at the end) -->
+                            <div id="add-button-box" class="bg-[#0b1120] border border-white/5 h-[84px] rounded flex items-center justify-center">
+                                <button type="button" onclick="showFieldCreator()" class="bg-white w-10 h-10 flex items-center justify-center rounded shadow-sm group">
+                                    <div class="bg-[#007bff] w-8 h-8 rounded-full flex items-center justify-center group-hover:bg-[#0056b3] transition-colors">
+                                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
+                                    </div>
                                 </button>
                             </div>
-                            <div class="bg-[#111625] border border-white/5 p-6 rounded-lg space-y-4">
-                                <div class="space-y-1">
-                                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Title</label>
-                                    <input type="text" class="w-full bg-[#0b1120] border border-white/5 rounded px-3 py-2 text-xs">
-                                </div>
-                                <div class="space-y-1">
-                                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Field</label>
-                                    <input type="text" class="w-full bg-[#0b1120] border border-white/5 rounded px-3 py-2 text-xs">
-                                </div>
-                                <div class="flex justify-end space-x-2">
-                                    <button type="button" class="bg-red-600 text-white text-[10px] font-bold px-3 py-1 rounded">Remove</button>
-                                    <button type="button" class="bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded">Add</button>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="space-y-2">
-                            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Vision Statement</label>
-                            <textarea rows="4" class="w-full bg-[#111625] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed">A future where no shoe is mass-produced before it's sold. We are building the infrastructure for footwear that fits every foot perfectly, is manufactured only when ordered, and scales without warehouses of dead stock — making traditional retail inventory obsolete.</textarea>
+                            <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Vision Statement</label>
+                            <textarea rows="4" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed">A future where no shoe is mass-produced before it's sold. We are building the infrastructure for footwear that fits every foot perfectly, is manufactured only when ordered, and scales without warehouses of dead stock — making traditional retail inventory obsolete.</textarea>
                         </div>
 
                         <div class="space-y-2">
-                            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Additional Detail</label>
-                            <textarea rows="4" class="w-full bg-[#111625] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed">The requested investment will be used to enhance our platform, grow our team, and execute targeted marketing strategies. With this capital, we aim to increase revenue, capture market share, and deliver strong returns for our investors.</textarea>
+                            <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Additional Detail</label>
+                            <textarea rows="4" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed">The requested investment will be used to enhance our platform, grow our team, and execute targeted marketing strategies. With this capital, we aim to increase revenue, capture market share, and deliver strong returns for our investors.</textarea>
                         </div>
                     </div>
 
@@ -163,6 +153,77 @@
             </div>
         </main>
     </div>
+
+    <script>
+        let fieldCount = 0;
+        
+        function showFieldCreator() {
+            fieldCount++;
+            const grid = document.getElementById('pitch-identity-grid');
+            const addButtonBox = document.getElementById('add-button-box');
+            const creatorId = `creator-${fieldCount}`;
+            
+            const creatorHTML = `
+                <div id="${creatorId}" class="bg-[#0b1120] border border-white/10 p-4 rounded space-y-3">
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Title</label>
+                        <input type="text" id="title-${fieldCount}" class="w-full bg-[#111625] border border-white/5 rounded px-3 py-2 text-xs text-gray-300 focus:outline-none" placeholder="e.g. Target Market">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Field</label>
+                        <input type="text" id="value-${fieldCount}" class="w-full bg-[#111625] border border-white/5 rounded px-3 py-2 text-xs text-gray-300 focus:outline-none" placeholder="e.g. Global">
+                    </div>
+                    <div class="flex items-center space-x-2 pt-1">
+                        <button type="button" onclick="removeCreator('${creatorId}')" class="bg-[#ff0000] text-white text-[10px] font-bold px-3 py-1.5 rounded uppercase tracking-wider hover:bg-red-700 transition-colors">Remove</button>
+                        <button type="button" onclick="addField(${fieldCount})" class="bg-[#007bff] text-white text-[10px] font-bold px-4 py-1.5 rounded uppercase tracking-wider hover:bg-[#0056b3] transition-colors">ADD</button>
+                    </div>
+                </div>
+            `;
+            
+            // Insert before the add button box
+            addButtonBox.insertAdjacentHTML('beforebegin', creatorHTML);
+        }
+
+        function addField(id) {
+            const titleInput = document.getElementById(`title-${id}`);
+            const valueInput = document.getElementById(`value-${id}`);
+            const title = titleInput.value || 'Additional Info';
+            const value = valueInput.value || '';
+            const creator = document.getElementById(`creator-${id}`);
+            const addButtonBox = document.getElementById('add-button-box');
+            
+            const fieldId = `field-final-${id}`;
+            const fieldHTML = `
+                <div id="${fieldId}" class="space-y-2">
+                    <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">${title}</label>
+                    <div class="flex items-center bg-[#0b1120] border border-white/5 rounded">
+                        <input type="text" value="${value}" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
+                        <div class="p-2">
+                            <button type="button" onclick="removeFinalField('${fieldId}')" class="bg-white w-8 h-8 flex items-center justify-center rounded shadow-sm group">
+                                <div class="bg-[#ff0000] w-6 h-6 rounded-full flex items-center justify-center group-hover:bg-[#b30000] transition-colors">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"></path></svg>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove the creator box
+            creator.remove();
+            
+            // Insert the permanent field before the add button box
+            addButtonBox.insertAdjacentHTML('beforebegin', fieldHTML);
+        }
+        
+        function removeCreator(id) {
+            document.getElementById(id).remove();
+        }
+
+        function removeFinalField(id) {
+            document.getElementById(id).remove();
+        }
+    </script>
 
 </body>
 </html>

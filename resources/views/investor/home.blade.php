@@ -39,7 +39,7 @@
         <x-investor-sidebar />
 
         <main class="flex-1 p-12">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-8xl mx-auto">
                 <!-- Header -->
                 <div class="mb-12">
                     <h1 class="text-4xl font-bold mb-2">Startup Pitch <span class="text-brand-green">Arena</span></h1>

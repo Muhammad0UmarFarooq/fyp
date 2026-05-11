@@ -39,7 +39,7 @@
         <x-investor-sidebar />
 
         <main class="flex-1 p-12">
-            <div class="max-w-4xl mx-auto space-y-16">
+            <div class="max-w-8xl mx-auto space-y-16">
                 
                 <!-- Section 1: Agreement Signature Page -->
                 <div class="space-y-8">

@@ -56,7 +56,7 @@
                 </div>
 
                 <!-- Form -->
-                <form action="{{ route('investor.dashboard') }}" method="GET" class="space-y-6">
+                <form action="{{ route('home') }}" method="GET" class="space-y-6">
                     
                     <!-- Email Address -->
                     <div class="space-y-2">

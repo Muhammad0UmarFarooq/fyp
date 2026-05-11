@@ -65,7 +65,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 py-12">
+    <main class="max-w-8xl mx-auto px-4 py-12">
         <!-- Header -->
         <div class="mb-12">
             <h1 class="text-3xl font-bold mb-2">Startup Pitch Arena</h1>

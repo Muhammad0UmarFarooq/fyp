@@ -40,7 +40,7 @@
         <x-sidebar />
 
         <main class="flex-1 p-12">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-8xl mx-auto">
                 <!-- Header -->
                 <div class="flex justify-between items-end mb-12">
                     <h1 class="text-4xl font-bold">Active <span class="text-brand-green">Offers</span></h1>
@@ -80,8 +80,8 @@
                         </div>
 
                         <div class="flex space-x-4">
-                            <button class="bg-[#991b1b] text-white px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-red-900 transition-colors">Reject</button>
-                            <button class="border border-brand-green/30 text-brand-green px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-brand-green/10 transition-colors">Accept</button>
+                            <button onclick="handleOffer(this)" class="bg-[#991b1b] text-white px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-red-900 transition-colors">Reject</button>
+                            <button onclick="handleOffer(this)" class="border border-brand-green/30 text-brand-green px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-brand-green/10 transition-colors">Accept</button>
                         </div>
                     </div>
 
@@ -116,14 +116,28 @@
                         </div>
 
                         <div class="flex space-x-4">
-                            <button class="bg-[#991b1b] text-white px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-red-900 transition-colors">Reject</button>
-                            <button class="border border-brand-green/30 text-brand-green px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-brand-green/10 transition-colors">Accept</button>
+                            <button onclick="handleOffer(this)" class="bg-[#991b1b] text-white px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-red-900 transition-colors">Reject</button>
+                            <button onclick="handleOffer(this)" class="border border-brand-green/30 text-brand-green px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-brand-green/10 transition-colors">Accept</button>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <script>
+        function handleOffer(button) {
+            const offerCard = button.closest('.bg-[#161e2d]');
+            if (offerCard) {
+                offerCard.style.transition = 'all 0.3s ease';
+                offerCard.style.opacity = '0';
+                offerCard.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    offerCard.remove();
+                }, 300);
+            }
+        }
+    </script>
 
 </body>
 </html>

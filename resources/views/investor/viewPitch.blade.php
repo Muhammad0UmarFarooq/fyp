@@ -39,8 +39,11 @@
     <div class="flex">
         <x-investor-sidebar />
 
-        <main class="flex-1 p-12">
-            <div class="max-w-4xl mx-auto space-y-16">
+        <main class="flex-1 p-12 relative">
+            <a href="{{ route('investor.home') }}" class="absolute top-4 left-4 inline-flex items-center text-brand-green text-xs font-bold tracking-widest uppercase hover:underline">
+                <span class="mr-2">🔙</span> Back to Home
+            </a>
+            <div class="max-w-8xl mx-auto space-y-16">
                 <!-- Header -->
                 <div>
                     <h1 class="text-4xl font-bold mb-2">View Pitch Page</h1>
@@ -83,9 +86,17 @@
                         </div>
                         <div class="space-y-2">
                             <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Monthly Growth</label>
-                            <input type="text" value="22%" readonly class="w-full bg-[#0b1120] border border-transparent rounded px-4 py-4 text-sm text-gray-200 focus:outline-none">
+                            <div class="flex gap-2">
+                                <input type="text" value="22%" readonly class="flex-1 bg-[#0b1120] border border-transparent rounded px-4 py-4 text-sm text-gray-200 focus:outline-none">
+                                <button type="button" onclick="addGrowthField()" class="bg-[#0b1120] border border-white/5 p-3 rounded hover:bg-white/5 transition-colors">
+                                    <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Dynamic Growth Fields -->
+                    <div id="growth-fields-container" class="grid grid-cols-2 gap-6"></div>
 
                     <div class="space-y-2">
                         <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Vision Statement</label>
@@ -99,6 +110,17 @@
                         <div class="w-full bg-[#0b1120] rounded p-6 text-sm text-gray-400 leading-relaxed italic">
                             The requested investment will be used to enhance our platform, grow our team, and execute targeted marketing strategies. With this capital, we aim to increase revenue, capture market share, and deliver strong returns for our investors.
                         </div>
+                    </div>
+
+                    <!-- Dynamic Input Groups Section -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Additional Fields</label>
+                            <button type="button" onclick="addInputGroup()" class="bg-[#1e293b] hover:bg-[#334155] transition-colors border border-white/10 p-2 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                        <div id="input-groups-container" class="space-y-4"></div>
                     </div>
                 </div>
 
@@ -129,15 +151,74 @@
                     </div>
                 </div>
 
-                <!-- Final Action -->
-                <div class="pt-8">
-                    <a href="{{ route('investor.dashboard') }}" class="inline-flex items-center text-brand-green text-xs font-bold tracking-widest uppercase hover:underline">
-                        <span class="mr-2">🔙</span> Back to Arena
-                    </a>
-                </div>
             </div>
         </main>
     </div>
+
+    <script>
+        let growthFieldCount = 0;
+        let inputGroupCount = 0;
+        
+        function addGrowthField() {
+            growthFieldCount++;
+            const container = document.getElementById('growth-fields-container');
+            const fieldId = `growth-field-${growthFieldCount}`;
+            
+            const fieldHTML = `
+                <div id="${fieldId}" class="space-y-2">
+                    <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Monthly Growth</label>
+                    <div class="flex gap-2">
+                        <input type="text" value="" class="flex-1 bg-[#0b1120] border border-white/5 rounded px-4 py-4 text-sm text-gray-200 focus:outline-none focus:border-brand-green/50 placeholder-gray-600" placeholder="Enter growth %">
+                        <button type="button" onclick="removeGrowthField('${fieldId}')" class="bg-[#0b1120] border border-white/5 p-3 rounded hover:bg-white/5 transition-colors">
+                            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', fieldHTML);
+        }
+        
+        function removeGrowthField(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.remove();
+            }
+        }
+
+        function addInputGroup() {
+            inputGroupCount++;
+            const container = document.getElementById('input-groups-container');
+            const groupId = `input-group-${inputGroupCount}`;
+            
+            const groupHTML = `
+                <div id="${groupId}" class="bg-[#161e2d] border border-white/5 rounded-lg p-6 space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Title</label>
+                        <input type="text" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-brand-green/50 placeholder-gray-600" placeholder="Enter title">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Description</label>
+                        <textarea class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-brand-green/50 placeholder-gray-600 resize-none" rows="4" placeholder="Enter description"></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" onclick="removeInputGroup('${groupId}')" class="bg-red-600 hover:bg-red-700 transition-colors text-white text-[10px] font-bold px-4 py-2 rounded">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', groupHTML);
+        }
+        
+        function removeInputGroup(groupId) {
+            const group = document.getElementById(groupId);
+            if (group) {
+                group.remove();
+            }
+        }
+    </script>
 
 </body>
 </html>

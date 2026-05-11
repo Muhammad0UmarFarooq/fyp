@@ -65,7 +65,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="w-full max-w-5xl mx-auto px-6 py-16 md:py-24">
+    <main class="w-full max-w-8xl mx-auto px-6 py-16 md:py-24">
         
         <!-- Hero Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center mb-24">

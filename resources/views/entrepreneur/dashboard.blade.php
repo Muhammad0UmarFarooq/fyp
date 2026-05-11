@@ -43,7 +43,7 @@
 
         <!-- Main Content -->
         <main class="flex-1 p-8">
-            <div class="max-w-5xl mx-auto bg-[#161e2d] rounded-3xl overflow-hidden shadow-2xl border border-white/5">
+            <div class="max-w-8xl mx-auto bg-[#161e2d] rounded-3xl overflow-hidden shadow-2xl border border-white/5">
                 
                 <!-- Action Buttons -->
                 <div class="p-6 flex justify-end space-x-4">

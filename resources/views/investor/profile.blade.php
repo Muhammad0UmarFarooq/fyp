@@ -39,7 +39,7 @@
         <x-investor-sidebar />
 
         <main class="flex-1 p-12">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-8xl mx-auto">
                 <!-- Go Back -->
                 <a href="{{ route('investor.home') }}" class="inline-flex items-center text-brand-green text-xs font-bold mb-12 hover:underline">
                     <span class="mr-2">🔙</span> Go Back
