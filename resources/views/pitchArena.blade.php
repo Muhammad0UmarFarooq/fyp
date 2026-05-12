@@ -122,7 +122,6 @@
                 <div class="relative w-full h-64 md:h-96 bg-gray-900 group">
                     <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1000&q=80" alt="Garments Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
                 </div>
-
                 <!-- Card Body -->
                 <div class="p-6 md:p-8">
                     <!-- Title Row -->

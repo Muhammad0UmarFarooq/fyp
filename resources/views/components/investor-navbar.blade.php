@@ -1,4 +1,4 @@
-<nav class="bg-[#0f1523] border-b border-white/5 px-8 py-4 flex justify-between items-center z-50 relative">
+<nav class="bg-[#0f1523] border-b border-white/5 px-8 py-4 flex justify-between items-center z-50 sticky top-0 w-full">
     <div class="flex items-center space-x-2 w-64">
         <div class="leading-none">
             <div class="text-xl font-bold tracking-tight text-white">

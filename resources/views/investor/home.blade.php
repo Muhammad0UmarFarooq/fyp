@@ -104,7 +104,7 @@
                     <!-- Pitch 2: Garments Shop -->
                     <div class="bg-[#161e2d] rounded-2xl overflow-hidden shadow-2xl border border-white/5">
                         <div class="relative aspect-video bg-gray-900 group">
-                            <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1000&q=80" alt="Garments Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <img src="https://img.magnific.com/free-photo/empty-boutique-shopping-centre_482257-78792.jpg?semt=ais_hybrid&w=740&q=80" alt="Garments Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10">
                                     <svg class="w-10 h-10 text-brand-green ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>

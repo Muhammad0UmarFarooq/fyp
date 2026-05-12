@@ -1,4 +1,4 @@
-<aside class="w-64 bg-[#0f1523] border-r border-white/5 min-h-[calc(100vh-73px)] flex flex-col py-6">
+<aside class="w-64 bg-[#0f1523] border-r border-white/5 h-[calc(100vh-73px)] sticky top-[73px] flex flex-col py-6 overflow-y-auto">
     <nav class="flex-1 space-y-2 px-4">
         <!-- Dashboard -->
         <a href="{{ route('entrepreneur.dashboard') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg font-medium text-sm transition-colors {{ request()->routeIs('entrepreneur.dashboard') ? 'bg-white/5 text-[#4ade80] border-r-2 border-[#4ade80]' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
