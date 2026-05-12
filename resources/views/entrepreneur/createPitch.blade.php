@@ -55,20 +55,20 @@
                         <div id="pitch-identity-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Startup Name</label>
-                                <input type="text" value="Shoes shop" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="text" placeholder="Enter your startup name" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Invested Amount (Owner Investment)</label>
-                                <input type="text" value="$ 5000000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="text" placeholder="e.g. $ 5,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Net Value(Total Revenue - Total Expenses )</label>
-                                <input type="text" value="$ 1000000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="text" placeholder="e.g. $ 1,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div id="monthly-growth-field" class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Growth</label>
                                 <div class="flex items-center bg-[#0b1120] border border-white/5 rounded">
-                                    <input type="text" value="22%" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
+                                    <input type="text" placeholder="e.g. 22%" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
                                     <div class="p-2">
                                         <button type="button" onclick="removeFinalField('monthly-growth-field')" class="bg-white w-8 h-8 flex items-center justify-center rounded shadow-sm group">
                                             <div class="bg-[#ff0000] w-6 h-6 rounded-full flex items-center justify-center group-hover:bg-[#b30000] transition-colors">
@@ -91,12 +91,12 @@
 
                         <div class="space-y-2">
                             <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Vision Statement</label>
-                            <textarea rows="4" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed">A future where no shoe is mass-produced before it's sold. We are building the infrastructure for footwear that fits every foot perfectly, is manufactured only when ordered, and scales without warehouses of dead stock — making traditional retail inventory obsolete.</textarea>
+                            <textarea rows="4" placeholder="Describe your vision for the future of this venture..." class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed"></textarea>
                         </div>
 
                         <div class="space-y-2">
                             <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Additional Detail</label>
-                            <textarea rows="4" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed">The requested investment will be used to enhance our platform, grow our team, and execute targeted marketing strategies. With this capital, we aim to increase revenue, capture market share, and deliver strong returns for our investors.</textarea>
+                            <textarea rows="4" placeholder="Include any other relevant information for investors..." class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed"></textarea>
                         </div>
                     </div>
 
@@ -108,17 +108,20 @@
                             <div class="space-y-6">
                                 <div class="space-y-2">
                                     <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required ($)</label>
-                                    <input type="text" value="$ 5000000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                                    <input type="text" placeholder="e.g. $ 5,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
                                 </div>
                                 <div class="space-y-2">
                                     <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Return Time (Period)</label>
-                                    <input type="text" value="2 years" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                                    <input type="text" placeholder="e.g. 2 years" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
                                 </div>
                             </div>
 
                             <div class="bg-[#0b1120] p-10 rounded-xl border border-white/5 text-center">
-                                <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Total Valuation</div>
-                                <div class="text-5xl font-bold text-brand-green">$10000000</div>
+                                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total Valuation</label>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <span class="text-5xl font-bold text-brand-green">$</span>
+                                    <input type="text" placeholder="10,000,000" class="bg-transparent text-5xl font-bold text-brand-green focus:outline-none w-full text-center">
+                                </div>
                             </div>
                         </div>
                     </div>

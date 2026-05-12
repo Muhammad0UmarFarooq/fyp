@@ -57,7 +57,7 @@
             <!-- Card 1 -->
             <div class="bg-brand-card rounded-lg overflow-hidden shadow-2xl border border-white/5">
                 <!-- Video/Image Section -->
-                <div class="relative w-full h-64 md:h-96 bg-gray-900 group">
+                <div class="relative w-full h-[70vh] bg-gray-900 group">
                     <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80" alt="Shoes Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
                     <!-- Play Button Overlay -->
                     <div class="absolute inset-0 flex items-center justify-center">
@@ -119,8 +119,8 @@
             <!-- Card 2 -->
             <div class="bg-brand-card rounded-lg overflow-hidden shadow-2xl border border-white/5">
                 <!-- Video/Image Section -->
-                <div class="relative w-full h-64 md:h-96 bg-gray-900 group">
-                    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1000&q=80" alt="Garments Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                <div class="relative w-full h-[70vh] bg-gray-900 group">
+                    <img src="https://img.magnific.com/free-photo/empty-boutique-shopping-centre_482257-78792.jpg?semt=ais_hybrid&w=740&q=80" alt="Garments Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
                 </div>
                 <!-- Card Body -->
                 <div class="p-6 md:p-8">

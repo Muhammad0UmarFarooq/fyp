@@ -77,7 +77,7 @@
                             <div class="h-px w-8 bg-brand-green"></div>
                             <h2 class="text-xl font-bold">Active Venture</h2>
                         </div>
-                        <div class="max-w-md bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl">
+                        <div class="max-w-md bg-[#161e2d] border border-white/5 rounded-2xl p-6 shadow-xl">
                             <div class="flex justify-between items-start mb-8">
                                 <div class="bg-[#1e293b] p-3 rounded-xl text-brand-green">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
@@ -86,11 +86,6 @@
                             </div>
                             <h3 class="text-2xl font-bold mb-2">Shoes Shop</h3>
                             <p class="text-sm text-gray-500 font-medium mb-12">Retail Tech - Next-Gen Footwear Logistics</p>
-                            
-                            <div class="pt-6 border-t border-white/5 flex justify-between items-center group cursor-pointer">
-                                <span class="text-xs text-gray-400 font-bold tracking-widest uppercase">ROI Forecast: +120%</span>
-                                <svg class="w-5 h-5 text-brand-green transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </div>
                         </div>
                     </div>
 

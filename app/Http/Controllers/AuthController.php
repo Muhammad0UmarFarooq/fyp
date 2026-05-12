@@ -84,6 +84,7 @@ class AuthController extends Controller
 
         return redirect()->route('investor.home');
     }
+
     /**
      * Handle a login request.
      */

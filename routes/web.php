@@ -20,7 +20,6 @@ Route::get('/pitch/arena', function () {
     return view('pitchArena');
 })->name('pitch.arena');
 
-
 /*
 |--------------------------------------------------------------------------
 | Guest Routes (Login & Registration)
@@ -37,7 +36,7 @@ Route::middleware('guest')->group(function () {
     })->name('entrepreneur.register');
 
     Route::post('/register/entrepreneur', [AuthController::class, 'registerEntrepreneur'])->name('entrepreneur.register.post');
-    
+
     // Investor Auth
     Route::get('/login', function () {
         return view('investorLogin');
@@ -52,7 +51,6 @@ Route::middleware('guest')->group(function () {
     // Generic Login Post (handles both)
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 });
-
 
 /*
 |--------------------------------------------------------------------------

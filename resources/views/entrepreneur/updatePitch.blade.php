@@ -117,8 +117,11 @@
                             </div>
 
                             <div class="bg-[#0b1120] p-10 rounded-xl border border-white/5 text-center">
-                                <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Total Valuation</div>
-                                <div class="text-5xl font-bold text-brand-green">$10000000</div>
+                                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total Valuation</label>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <span class="text-5xl font-bold text-brand-green">$</span>
+                                    <input type="text" value="10000000" class="bg-transparent text-5xl font-bold text-brand-green focus:outline-none w-full text-center">
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,7 @@
                 <!-- Pitch Content -->
                 <div class="px-8 pb-12">
                     <!-- Video/Image Preview -->
-                    <div class="relative w-full aspect-video bg-gray-900 rounded-2xl overflow-hidden mb-8 group">
+                    <div class="relative w-full h-[70vh] bg-gray-900 rounded-2xl overflow-hidden mb-8 group">
                         <img src="{{ asset('images/shoes_shop.jpg') }}" alt="Shoes Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
                         <!-- Play Button Overlay -->
                         <div class="absolute inset-0 flex items-center justify-center">

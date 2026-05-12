@@ -58,7 +58,7 @@
                                 <div class="w-12 h-12 rounded-lg overflow-hidden border border-white/10 bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-500">
                                     AS
                                 </div>
-                                <span class="font-bold text-gray-200">Azhar Saleem</span>
+                                <span class="font-bold text-gray-200">Abdus Salam</span>
                             </div>
                             <button class="bg-brand-green text-[#064e3b] px-10 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#3dbd6d] transition-colors">Sign Agreement</button>
                         </div>
