@@ -20,14 +20,11 @@
         <x-investor-sidebar />
 
         <main class="flex-1 p-12 relative">
-            <a href="{{ route('investor.myOffers') }}" class="absolute top-4 left-4 inline-flex items-center text-brand-green text-xs font-bold tracking-widest uppercase hover:underline">
-                <span class="mr-2">🔙</span> Back to Offers
-            </a>
             <div class="max-w-8xl mx-auto space-y-16">
                 <!-- Header -->
                 <div>
                     <h1 class="text-4xl font-bold mb-2">View Pitch Page</h1>
-                    <p class="text-gray-400 text-sm max-w-xl">Transform your vision into an institutional-grade investment opportunity. Complete the following dimensions of your venture.</p>
+                    <p class="text-gray-400 text-sm max-w-xl">Here You Can View The Details Of The Pitch</p>
                 </div>
 
                 <!-- 01. VIDEO TRANSMISSION -->
@@ -36,15 +33,15 @@
                         <h2 class="text-brand-yellow font-bold text-sm tracking-widest uppercase">01. VIDEO TRANSMISSION</h2>
                         <span class="text-[9px] text-gray-500 font-bold uppercase tracking-widest">EXECUTIVE PITCH PRESENTATION</span>
                     </div>
-                    <div class="relative w-full h-[70vh] bg-[#161e2d] rounded-2xl border border-white/5 flex items-center justify-center group overflow-hidden shadow-2xl cursor-pointer">
-                        <img src="{{ asset('images/shoes_shop.jpg') }}" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                        <div class="relative">
-                            <div class="bg-white/10 backdrop-blur-md p-8 rounded-full border border-white/20 text-brand-green transform group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-12 h-12 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <div class="bg-[#161e2d] rounded-2xl overflow-hidden shadow-2xl border border-white/5">
+                        <div class="relative aspect-video bg-gray-900 group">
+                            <img src="{{ asset('images/shoes_shop.jpg') }}" alt="Shoes Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10">
+                                    <svg class="w-10 h-10 text-brand-green ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
 
                 <!-- 02. PITCHES IDENTITY -->
@@ -116,7 +113,7 @@
                             </div>
                         </div>
 
-                        <div class="ml-12 bg-[#1e293b] rounded-2xl p-8 flex-shrink-0 w-64 text-center shadow-xl border border-white/5">
+                        <div class="ml-12 bg-[#1e293b] rounded-2xl p-8 flex-shrink-0 w-80 text-center shadow-xl border border-white/5">
                             <div class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-4">Total Valuation</div>
                             <div class="text-4xl font-black text-brand-green">$10000000</div>
                         </div>

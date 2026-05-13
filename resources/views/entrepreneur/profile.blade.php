@@ -21,10 +21,6 @@
 
         <main class="flex-1 p-12">
             <div class="max-w-8xl mx-auto">
-                <!-- Go Back -->
-                <a href="{{ route('entrepreneur.dashboard') }}" class="inline-flex items-center text-brand-green text-xs font-bold mb-12 hover:underline">
-                    <span class="mr-2">🔙</span> Go Back
-                </a>
 
                 <!-- Profile Header -->
                 <div class="flex items-center space-x-12 mb-16">

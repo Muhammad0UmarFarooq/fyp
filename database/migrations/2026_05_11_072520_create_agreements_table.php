@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('pitch_id')->constrained()->onDelete('cascade');
             $table->foreignId('entrepreneur_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('investor_id')->constrained('users')->onDelete('cascade');
-            $table->decimal('ownership_stake', 5, 2);
-            $table->decimal('estimated_roi', 15, 2);
+            $table->bigInteger('ownership_stake')->nullable();
+            $table->bigInteger('estimated_roi')->nullable();
             $table->date('agreement_date');
             $table->enum('status', ['pending_signature', 'active', 'completed'])->default('pending_signature');
             $table->timestamps();

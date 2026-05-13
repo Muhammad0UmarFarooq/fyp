@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pitch_id')->constrained()->onDelete('cascade');
             $table->foreignId('investor_id')->constrained('users')->onDelete('cascade');
-            $table->decimal('offer_amount', 15, 2);
+            $table->bigInteger('offer_amount')->nullable();
             $table->string('time_period');
-            $table->decimal('valuation', 15, 2);
+            $table->bigInteger('valuation')->nullable();
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });

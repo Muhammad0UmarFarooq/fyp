@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->json('interested_businesses')->nullable();
-            $table->decimal('investment_amount', 15, 2)->nullable();
+            $table->bigInteger('investment_amount')->nullable();
             $table->string('investment_focus')->nullable();
             $table->string('portfolio_size')->nullable();
             $table->timestamps();

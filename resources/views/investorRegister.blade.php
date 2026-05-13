@@ -170,7 +170,7 @@ Skip For Now
 
 <p class="text-xs text-gray-400">
 Already have an account?
-<a href="{{ route('investorLogin') }}" class="font-bold text-gray-900 underline">Log In</a>
+<a href="{{ route('login') }}" class="font-bold text-gray-900 underline">Log In</a>
 </p>
 
 </div>

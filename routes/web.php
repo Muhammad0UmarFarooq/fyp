@@ -26,30 +26,26 @@ Route::get('/pitch/arena', function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware('guest')->group(function () {
-    // Entrepreneur Auth
-    Route::get('/entrepreneur/login', function () {
-        return view('entrepreneurLogin');
-    })->name('entrepreneur.login');
+    // Unified Login
+    Route::get('/login', function () {
+        return view('login');
+    })->name('login');
 
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+    // Entrepreneur Registration
     Route::get('/entrepreneur/register', function () {
         return view('entrepreneurRegister');
     })->name('entrepreneur.register');
 
     Route::post('/register/entrepreneur', [AuthController::class, 'registerEntrepreneur'])->name('entrepreneur.register.post');
 
-    // Investor Auth
-    Route::get('/login', function () {
-        return view('investorLogin');
-    })->name('investorLogin');
-
+    // Investor Registration
     Route::get('/investor/register', function () {
         return view('investorRegister');
     })->name('investor.register');
 
     Route::post('/register/investor', [AuthController::class, 'registerInvestor'])->name('investor.register.post');
-
-    // Generic Login Post (handles both)
-    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 });
 
 /*

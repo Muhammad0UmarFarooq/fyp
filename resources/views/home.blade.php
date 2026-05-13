@@ -38,16 +38,12 @@
             </a>
 
             <!-- Investor -->
-            <a href="{{ route('investor.register') }}"
+            <a href="{{ route('login') }}"
                class="bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors">
-                Investor Entry
+                Login
             </a>
 
-            <!-- Entrepreneur -->
-            <a href="{{ route('entrepreneur.register') }}"
-               class="bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors">
-                Entrepreneur Entry
-            </a>
+            
         @else
             @if(auth()->user()->role === 'entrepreneur')
                 <a href="{{ route('entrepreneur.dashboard') }}"

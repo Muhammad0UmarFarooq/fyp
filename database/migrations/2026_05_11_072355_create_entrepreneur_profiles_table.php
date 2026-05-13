@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('company_name')->nullable();
             $table->string('industry')->nullable();
             $table->integer('experience_years')->nullable();
-            $table->decimal('total_valuation', 15, 2)->nullable();
-            $table->decimal('future_valuation', 15, 2)->nullable();
+            $table->bigInteger('total_valuation')->nullable();
+            $table->bigInteger('future_valuation')->nullable();
             $table->string('website')->nullable();
             $table->timestamps();
         });
