@@ -83,14 +83,6 @@
                             The requested investment will be used to enhance our platform, grow our team, and execute targeted marketing strategies. With this capital, we aim to increase revenue, capture market share, and deliver strong returns for our investors.
                         </div>
                     </div>
-
-                    <!-- Additional Fields Section -->
-                    <div class="space-y-4">
-                        <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Additional Fields</label>
-                        <div id="input-groups-container" class="space-y-4">
-                            <!-- Dynamic fields would be injected here if this was a real application with backend data -->
-                        </div>
-                    </div>
                 </div>
 
                 <!-- 03. THE CAPITAL ARCHITECTURE -->
