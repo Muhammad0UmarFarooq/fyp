@@ -30,7 +30,7 @@
             <div class="px-8 py-10 md:px-12 md:py-12">
                 <!-- Header -->
                 <div class="text-center mb-10">
-                    <h1 class="text-3xl font-bold mb-2">Welcome<br>Back</h1>
+                    <h1 class="text-3xl font-bold mb-2">Welcome To<br>InvestBridge</h1>
                     <p class="text-brand-muted text-[10px] font-bold tracking-[0.15em] uppercase">Access the Sovereign Vault</p>
                 </div>
 

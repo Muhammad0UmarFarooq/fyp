@@ -40,6 +40,7 @@
                             </div>
                             <div class="flex space-x-4">
                                 <button class="bg-red-600 text-white px-8 py-2 rounded font-bold text-xs">Reject</button>
+                                <button class="bg-blue-500 text-white px-8 py-2 rounded font-bold text-xs">Download</button>
                                 <button class="bg-brand-green text-[#064e3b] px-8 py-2 rounded font-bold text-xs">Sign Agreement</button>
                             </div>
                         </div>
@@ -54,6 +55,7 @@
                             </div>
                             <div class="flex space-x-4">
                                 <button class="bg-red-600 text-white px-8 py-2 rounded font-bold text-xs">Reject</button>
+                                <button class="bg-blue-500 text-white px-8 py-2 rounded font-bold text-xs">Download</button>
                                 <button class="bg-brand-green text-[#064e3b] px-8 py-2 rounded font-bold text-xs">Sign Agreement</button>
                             </div>
                         </div>
