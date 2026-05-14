@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Entrepreneur\PitchController;
+use App\Models\Pitch;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,17 +65,24 @@ Route::middleware('auth')->group(function () {
     */
     Route::prefix('entrepreneur')->name('entrepreneur.')->middleware('role:entrepreneur')->group(function () {
         Route::get('/dashboard', function () {
-            return view('entrepreneur.dashboard');
+            $pitch = Pitch::where('user_id', auth()->id())->first();
+            return view('entrepreneur.dashboard', compact('pitch'));
         })->name('dashboard');
 
         Route::prefix('pitch')->name('pitch.')->group(function () {
             Route::get('/create', function () {
+                if (\App\Models\Pitch::where('user_id', auth()->id())->exists()) {
+                    return redirect()->route('entrepreneur.dashboard')->with('error', 'You can only have one active pitch at a time.');
+                }
                 return view('entrepreneur.createPitch');
             })->name('create');
+            Route::post('/store', [PitchController::class, 'store'])->name('store');
 
-            Route::get('/update', function () {
-                return view('entrepreneur.updatePitch');
+            Route::get('/{pitch}/update', function (Pitch $pitch) {
+                return view('entrepreneur.updatePitch', compact('pitch'));
             })->name('update');
+            Route::put('/{pitch}/update', [PitchController::class, 'update'])->name('update.put');
+            Route::delete('/{pitch}', [PitchController::class, 'destroy'])->name('destroy');
         });
 
         Route::get('/offers', function () {
@@ -84,9 +93,8 @@ Route::middleware('auth')->group(function () {
             return view('entrepreneur.agreements');
         })->name('agreements');
 
-        Route::get('/profile', function () {
-            return view('entrepreneur.profile');
-        })->name('profile');
+        Route::get('/profile', [App\Http\Controllers\Entrepreneur\ProfileController::class, 'index'])->name('profile');
+        Route::post('/profile/image', [App\Http\Controllers\Entrepreneur\ProfileController::class, 'uploadImage'])->name('profile.image');
     });
 
     /*

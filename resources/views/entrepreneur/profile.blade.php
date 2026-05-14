@@ -24,29 +24,35 @@
 
                 <!-- Profile Header -->
                 <div class="flex items-center space-x-12 mb-16">
-                    <div class="relative group">
-                        <div class="w-40 h-40 bg-white rounded-2xl flex items-center justify-center border-4 border-white/10 overflow-hidden shadow-2xl">
-                            <svg class="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                    <form action="{{ route('entrepreneur.profile.image') }}" method="POST" enctype="multipart/form-data" class="relative group cursor-pointer" id="profileImageForm">
+                        @csrf
+                        <div class="w-40 h-40 bg-white rounded-2xl flex items-center justify-center border-4 border-white/10 overflow-hidden shadow-2xl relative transition-colors duration-300" id="imagePreviewContainer">
+                            @if(auth()->user()->profile_image)
+                                <img src="{{ asset('storage/' . auth()->user()->profile_image) }}" alt="Profile Image" class="w-full h-full object-cover">
+                            @else
+                                <svg class="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            @endif
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                 <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                             </div>
                         </div>
-                    </div>
+                        <input type="file" name="profile_image" id="profileImageInput" class="hidden" accept="image/*" onchange="document.getElementById('profileImageForm').submit()">
+                    </form>
 
                     <div class="space-y-4">
                         <span class="bg-[#1e293b] text-brand-green px-4 py-1.5 rounded text-[10px] font-bold tracking-widest uppercase">Verified Entrepreneur</span>
-                        <h1 class="text-6xl font-bold">Naeem Azhar</h1>
+                        <h1 class="text-6xl font-bold">{{ auth()->user()->name }}</h1>
                         <div class="flex items-center space-x-12 text-sm text-gray-400 font-medium">
                             <div class="flex items-center">
-                                <span class="mr-2">📍</span> Gujrat
+                                <span class="mr-2">📍</span> {{ auth()->user()->city ?? 'City Not Provided' }}
                             </div>
                             <div class="flex items-center">
-                                naeem@gmail.com
+                                {{ auth()->user()->email }}
                             </div>
                             <div class="flex items-center">
-                                03111111122
+                                {{ auth()->user()->phone ?? 'Phone Not Provided' }}
                             </div>
                         </div>
                     </div>
@@ -109,4 +115,42 @@
     </div>
 
 </body>
+    <script>
+        const imageForm = document.getElementById('profileImageForm');
+        const imageInput = document.getElementById('profileImageInput');
+        const previewContainer = document.getElementById('imagePreviewContainer');
+
+        previewContainer.addEventListener('click', () => imageInput.click());
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            previewContainer.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            previewContainer.addEventListener(eventName, () => {
+                previewContainer.classList.add('border-brand-green');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            previewContainer.addEventListener(eventName, () => {
+                previewContainer.classList.remove('border-brand-green');
+            }, false);
+        });
+
+        previewContainer.addEventListener('drop', (e) => {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+            
+            if (files.length) {
+                imageInput.files = files;
+                imageForm.submit();
+            }
+        });
+    </script>
 </html>
