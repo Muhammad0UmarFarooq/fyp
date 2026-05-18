@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Entrepreneur\OfferController;
 use App\Http\Controllers\Entrepreneur\PitchController;
+use App\Http\Controllers\Entrepreneur\ProfileController;
 use App\Models\Pitch;
 use Illuminate\Support\Facades\Route;
 
@@ -66,14 +68,16 @@ Route::middleware('auth')->group(function () {
     Route::prefix('entrepreneur')->name('entrepreneur.')->middleware('role:entrepreneur')->group(function () {
         Route::get('/dashboard', function () {
             $pitch = Pitch::where('user_id', auth()->id())->first();
+
             return view('entrepreneur.dashboard', compact('pitch'));
         })->name('dashboard');
 
         Route::prefix('pitch')->name('pitch.')->group(function () {
             Route::get('/create', function () {
-                if (\App\Models\Pitch::where('user_id', auth()->id())->exists()) {
+                if (Pitch::where('user_id', auth()->id())->exists()) {
                     return redirect()->route('entrepreneur.dashboard')->with('error', 'You can only have one active pitch at a time.');
                 }
+
                 return view('entrepreneur.createPitch');
             })->name('create');
             Route::post('/store', [PitchController::class, 'store'])->name('store');
@@ -85,16 +89,17 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{pitch}', [PitchController::class, 'destroy'])->name('destroy');
         });
 
-        Route::get('/offers', function () {
-            return view('entrepreneur.investorsOffer');
-        })->name('offers');
+        Route::get('/offers', [OfferController::class, 'index'])->name('offers');
+        Route::post('/offers/{offer}/status', [OfferController::class, 'updateStatus'])->name('offers.status');
 
-        Route::get('/agreements', function () {
-            return view('entrepreneur.agreements');
-        })->name('agreements');
+        Route::get('/agreements', [App\Http\Controllers\Entrepreneur\AgreementController::class, 'index'])->name('agreements');
+        Route::post('/agreements/{agreement}/sign', [App\Http\Controllers\Entrepreneur\AgreementController::class, 'sign'])->name('agreements.sign');
+        Route::post('/agreements/{agreement}/reject', [App\Http\Controllers\Entrepreneur\AgreementController::class, 'reject'])->name('agreements.reject');
+        Route::get('/agreements/{agreement}/download', [App\Http\Controllers\Investor\AgreementController::class, 'download'])->name('agreements.download');
+        Route::get('/agreements/{agreement}/download-signed', [App\Http\Controllers\Investor\AgreementController::class, 'downloadEntrepreneurFile'])->name('agreements.download.entrepreneur');
 
-        Route::get('/profile', [App\Http\Controllers\Entrepreneur\ProfileController::class, 'index'])->name('profile');
-        Route::post('/profile/image', [App\Http\Controllers\Entrepreneur\ProfileController::class, 'uploadImage'])->name('profile.image');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+        Route::post('/profile/image', [ProfileController::class, 'uploadImage'])->name('profile.image');
     });
 
     /*
@@ -103,25 +108,25 @@ Route::middleware('auth')->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::prefix('investor')->name('investor.')->middleware('role:investor')->group(function () {
-        Route::get('/home', function () {
-            return view('investor.home');
-        })->name('home');
+        Route::get('/home', [App\Http\Controllers\Investor\PitchController::class, 'index'])->name('home');
 
-        Route::get('/offers', function () {
-            return view('investor.myOffers');
-        })->name('myOffers');
+        Route::get('/offers', [App\Http\Controllers\Investor\OfferController::class, 'index'])->name('myOffers');
+        Route::post('/pitch/{pitch}/offer', [App\Http\Controllers\Investor\OfferController::class, 'store'])->name('offers.store');
+        Route::put('/offers/{offer}', [App\Http\Controllers\Investor\OfferController::class, 'update'])->name('offers.update');
+        Route::delete('/offers/{offer}', [App\Http\Controllers\Investor\OfferController::class, 'destroy'])->name('offers.destroy');
 
-        Route::get('/pitch/view', function () {
-            return view('investor.viewPitch');
-        })->name('pitch.view');
+        Route::get('/pitch/{pitch?}/view', [App\Http\Controllers\Investor\PitchController::class, 'show'])->name('pitch.view');
 
-        Route::get('/agreements', function () {
-            return view('investor.agreements');
-        })->name('agreements');
+        Route::get('/agreements', [App\Http\Controllers\Investor\AgreementController::class, 'index'])->name('agreements');
+        Route::post('/agreements/{agreement}/upload', [App\Http\Controllers\Investor\AgreementController::class, 'upload'])->name('agreements.upload');
+        Route::post('/agreements/{agreement}/remove', [App\Http\Controllers\Investor\AgreementController::class, 'removeFile'])->name('agreements.remove');
+        Route::post('/agreements/{agreement}/send', [App\Http\Controllers\Investor\AgreementController::class, 'send'])->name('agreements.send');
+        Route::get('/agreements/{agreement}/download', [App\Http\Controllers\Investor\AgreementController::class, 'download'])->name('agreements.download');
+        Route::get('/agreements/{agreement}/download-signed', [App\Http\Controllers\Investor\AgreementController::class, 'downloadEntrepreneurFile'])->name('agreements.download.entrepreneur');
 
-        Route::get('/profile', function () {
-            return view('investor.profile');
-        })->name('profile');
+        Route::get('/profile', [App\Http\Controllers\Investor\ProfileController::class, 'index'])->name('profile');
+        Route::post('/profile/image', [App\Http\Controllers\Investor\ProfileController::class, 'uploadImage'])->name('profile.image');
+        Route::post('/profile/update', [App\Http\Controllers\Investor\ProfileController::class, 'update'])->name('profile.update');
     });
 });
 

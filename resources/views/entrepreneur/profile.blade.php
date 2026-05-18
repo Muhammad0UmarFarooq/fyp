@@ -91,22 +91,42 @@
                         </div>
                     </div>
 
-                    <!-- Signed Agreements -->
+                    <!-- Signed Agreements Vault -->
                     <div class="space-y-6">
                         <div class="flex items-center space-x-4">
                             <div class="h-px w-8 bg-brand-green"></div>
-                            <h2 class="text-xl font-bold">Signed Agreements</h2>
+                            <h2 class="text-xl font-bold">Signed Agreements Vault</h2>
                         </div>
-                        <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 flex justify-between items-center group cursor-pointer hover:bg-[#1e293b] transition-colors shadow-xl">
-                            <div class="flex items-center space-x-4">
-                                <div class="bg-[#0b1120] p-3 rounded-xl text-brand-green">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <div class="space-y-4">
+                            @forelse($activeAgreements as $agreement)
+                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 flex justify-between items-center shadow-xl">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="bg-[#0b1120] p-3 rounded-xl text-brand-green">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <span class="font-bold text-gray-200 block text-base">{{ $agreement->agreement_filename ?? 'Signed_Agreement.pdf' }}</span>
+                                            <span class="text-xs text-gray-500">Investor: {{ $agreement->investor->name }} • Signed on {{ \Carbon\Carbon::parse($agreement->agreement_date)->format('M d, Y') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <a href="{{ route('entrepreneur.agreements.download', $agreement->id) }}" class="bg-[#1e293b] text-brand-green hover:bg-brand-green hover:text-[#064e3b] px-4 py-2 rounded-lg font-bold text-xs uppercase transition-colors flex items-center space-x-2">
+                                            <span>📥</span>
+                                            <span>Contract</span>
+                                        </a>
+                                        @if($agreement->entrepreneur_file)
+                                            <a href="{{ route('entrepreneur.agreements.download.entrepreneur', $agreement->id) }}" class="bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-[#0b1120] px-4 py-2 rounded-lg font-bold text-xs uppercase transition-colors flex items-center space-x-2">
+                                                <span>📥</span>
+                                                <span>Signed/Invoice</span>
+                                            </a>
+                                        @endif
+                                    </div>
                                 </div>
-                                <span class="font-bold text-gray-200">Shoes_Shop_Series_A_Agreement.pdf</span>
-                            </div>
-                            <div class="bg-brand-green/20 p-2 rounded-lg group-hover:bg-brand-green/30 transition-colors">
-                                <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            </div>
+                            @empty
+                                <div class="bg-[#161e2d]/30 border border-white/5 rounded-2xl p-8 text-center text-gray-500 font-medium">
+                                    No signed agreements yet. Once an agreement is finalized, it will appear here.
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>

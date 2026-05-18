@@ -34,6 +34,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the pitch associated with the entrepreneur user.
+     */
+    public function pitch()
+    {
+        return $this->hasOne(Pitch::class);
+    }
+
+    /**
+     * Get the offers sent by the investor.
+     */
+    public function sentOffers()
+    {
+        return $this->hasMany(Offer::class, 'investor_id');
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

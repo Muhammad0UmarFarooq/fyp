@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Investor Profile - Malik Riaz</title>
+    <title>Investor Profile - {{ $user->name }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -20,36 +20,63 @@
         <x-investor-sidebar />
 
         <main class="flex-1 p-12">
-            <div class="max-w-8xl mx-auto">
+            <div class="max-w-8xl mx-auto space-y-16">
+
+                @if(session('success'))
+                    <div class="bg-brand-green/20 border border-brand-green/30 text-brand-green px-6 py-4 rounded-xl flex items-center space-x-4 shadow-lg">
+                        <span>✅</span>
+                        <p class="font-semibold text-sm">{{ session('success') }}</p>
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="bg-red-500/20 border border-red-500/30 text-red-400 px-6 py-4 rounded-xl flex items-center space-x-4 shadow-lg">
+                        <span>❌</span>
+                        <p class="font-semibold text-sm">{{ session('error') }}</p>
+                    </div>
+                @endif
 
                 <!-- Profile Header -->
-                <div class="flex items-center space-x-12 mb-16">
-                    <div class="relative group">
-                        <div class="w-40 h-40 bg-white rounded-2xl flex items-center justify-center border-4 border-white/10 overflow-hidden shadow-2xl">
-                            <svg class="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                <div class="flex items-center justify-between bg-[#161e2d] border border-white/5 rounded-3xl p-12 shadow-2xl relative overflow-hidden">
+                    <div class="flex items-center space-x-12">
+                        <form action="{{ route('investor.profile.image') }}" method="POST" enctype="multipart/form-data" class="relative group cursor-pointer" id="profileImageForm">
+                            @csrf
+                            <div class="w-40 h-40 bg-[#0b1120] rounded-2xl flex items-center justify-center border-4 border-white/10 overflow-hidden shadow-2xl relative transition-colors duration-300" id="imagePreviewContainer">
+                                @if($user->profile_image)
+                                    <img src="{{ asset('storage/' . $user->profile_image) }}" alt="Profile Image" class="w-full h-full object-cover">
+                                @else
+                                    <span class="text-5xl font-extrabold text-brand-green">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
+                                @endif
+                                <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                </div>
+                            </div>
+                            <input type="file" name="profile_image" id="profileImageInput" class="hidden" accept="image/*" onchange="document.getElementById('profileImageForm').submit()">
+                        </form>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <span class="bg-[#1e293b] text-brand-green px-4 py-1.5 rounded text-[10px] font-bold tracking-widest uppercase">Verified Investor</span>
+                            </div>
+                            <h1 class="text-6xl font-bold">{{ $user->name }}</h1>
+                            <div class="flex items-center space-x-12 text-sm text-gray-400 font-medium">
+                                <div class="flex items-center">
+                                    <span class="mr-2">📍</span> {{ $user->city ?? 'City Not Provided' }}
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="mr-2">✉️</span> {{ $user->email }}
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="mr-2">📞</span> {{ $user->phone ?? 'Phone Not Provided' }}
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="space-y-4">
-                        <span class="bg-[#1e293b] text-brand-green px-4 py-1.5 rounded text-[10px] font-bold tracking-widest uppercase">Verified Investor</span>
-                        <h1 class="text-6xl font-bold">Malik Riaz</h1>
-                        <div class="flex items-center space-x-12 text-sm text-gray-400 font-medium">
-                            <div class="flex items-center">
-                                <span class="mr-2">📍</span> Lahore (DHA)
-                            </div>
-                            <div class="flex items-center">
-                                malik@gmail.com
-                            </div>
-                            <div class="flex items-center">
-                                03123311111122
-                            </div>
-                        </div>
-                    </div>
+                    <button onclick="document.getElementById('editProfileModal').classList.remove('hidden')" class="bg-brand-green text-[#064e3b] px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#3dbd6d] transition-colors flex items-center space-x-2 shadow-lg shadow-brand-green/20 cursor-pointer">
+                        <span>✏️</span>
+                        <span>Edit Profile</span>
+                    </button>
                 </div>
 
                 <!-- Sections -->
@@ -61,8 +88,8 @@
                             <h2 class="text-xl font-bold">Philosophy</h2>
                         </div>
                         <div class="bg-[#161e2d] border-l-4 border-brand-green p-10 rounded-r-2xl shadow-xl">
-                            <p class="text-gray-400 leading-loose text-lg italic">
-                                "I focus on high-conviction investing in decentralized infrastructure and ethical AI. My goal is to back founders who are building the foundational layers of the next digital era, ensuring transparency and human-centric values are hardcoded into the system."
+                            <p class="text-gray-300 leading-loose text-lg italic font-light">
+                                "{{ $user->bio ?? 'No investment philosophy or bio provided yet. Click Edit Profile to add your philosophy.' }}"
                             </p>
                         </div>
                     </div>
@@ -73,12 +100,16 @@
                             <div class="h-px w-8 bg-brand-green"></div>
                             <h2 class="text-xl font-bold">Focus Sectors</h2>
                         </div>
-                        <div class="flex flex-wrap gap-4">
-                            <span class="bg-[#161e2d] text-brand-green px-8 py-3 rounded-lg font-bold text-xs tracking-widest border border-white/5 shadow-lg">Energy</span>
-                            <span class="bg-[#161e2d] text-brand-green px-8 py-3 rounded-lg font-bold text-xs tracking-widest border border-white/5 shadow-lg">Technology</span>
-                            <span class="bg-[#161e2d] text-brand-green px-8 py-3 rounded-lg font-bold text-xs tracking-widest border border-white/5 shadow-lg">E-Commerce</span>
-                            <button class="bg-[#1e293b] text-gray-500 px-6 py-3 rounded-lg font-bold text-lg border border-white/5 hover:text-white transition-colors">
-                                +
+                        <div class="flex flex-wrap gap-4 items-center">
+                            @if(!empty($investorProfile->interested_businesses) && is_array($investorProfile->interested_businesses))
+                                @foreach($investorProfile->interested_businesses as $sector)
+                                    <span class="bg-[#161e2d] text-brand-green px-8 py-3 rounded-lg font-bold text-xs tracking-widest border border-white/5 shadow-lg">{{ $sector }}</span>
+                                @endforeach
+                            @else
+                                <span class="text-gray-500 text-sm italic">No focus sectors specified. Click Edit Profile to add sectors.</span>
+                            @endif
+                            <button onclick="document.getElementById('editProfileModal').classList.remove('hidden')" class="bg-[#1e293b] text-gray-400 px-6 py-3 rounded-lg font-bold text-sm border border-white/5 hover:text-white transition-colors cursor-pointer">
+                                + Add Sector
                             </button>
                         </div>
                     </div>
@@ -90,23 +121,26 @@
                             <h2 class="text-xl font-bold">Current Portfolio</h2>
                         </div>
                         <div class="grid grid-cols-2 gap-6">
-                            <!-- Shoes Shop -->
-                            <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl hover:bg-[#1e293b] transition-colors cursor-pointer group">
-                                <div class="bg-[#0b1120] w-12 h-12 rounded-xl flex items-center justify-center text-brand-green mb-6 group-hover:scale-110 transition-transform">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                            @forelse($activeAgreements as $agreement)
+                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl hover:bg-[#1e293b] transition-all group relative overflow-hidden flex items-center space-x-6">
+                                    <div class="bg-[#0b1120] w-16 h-16 rounded-2xl flex items-center justify-center text-brand-green font-bold text-2xl shadow-inner group-hover:scale-110 transition-transform flex-shrink-0">
+                                        @if($agreement->entrepreneur->profile_image)
+                                            <img src="{{ asset('storage/' . $agreement->entrepreneur->profile_image) }}" class="w-full h-full object-cover rounded-2xl">
+                                        @else
+                                            {{ strtoupper(substr($agreement->pitch->startup_name ?? $agreement->pitch->company_name ?? $agreement->entrepreneur->name, 0, 2)) }}
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold mb-1 text-white">{{ $agreement->pitch->startup_name ?? $agreement->pitch->company_name ?? $agreement->entrepreneur->company_name ?? 'Startup Venture' }}</h3>
+                                        <div class="text-[10px] text-brand-green font-bold uppercase tracking-widest">Founder: {{ $agreement->entrepreneur->name }} • Active Venture</div>
+                                        <p class="text-xs text-gray-400 mt-2 line-clamp-2">{{ $agreement->pitch->vision_statement ?? $agreement->pitch->additional_detail ?? 'Active investment agreement partner.' }}</p>
+                                    </div>
                                 </div>
-                                <h3 class="text-xl font-bold mb-1">Shoes Shop</h3>
-                                <div class="text-[9px] text-gray-500 font-bold uppercase tracking-widest">E-COMMERCE • SERIES A</div>
-                            </div>
-
-                            <!-- Nimbus AI -->
-                            <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl hover:bg-[#1e293b] transition-colors cursor-pointer group">
-                                <div class="bg-[#0b1120] w-12 h-12 rounded-xl flex items-center justify-center text-brand-green mb-6 group-hover:scale-110 transition-transform">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                            @empty
+                                <div class="col-span-2 bg-[#161e2d]/30 border border-white/5 rounded-2xl p-8 text-center text-gray-500 font-medium">
+                                    No active portfolio investments finalized yet. Check your agreements portal to complete pending agreements.
                                 </div>
-                                <h3 class="text-xl font-bold mb-1">Nimbus AI</h3>
-                                <div class="text-[9px] text-gray-500 font-bold uppercase tracking-widest">INFRASTRUCTURE • SEED</div>
-                            </div>
+                            @endforelse
                         </div>
                     </div>
 
@@ -114,18 +148,32 @@
                     <div class="space-y-6">
                         <div class="flex items-center space-x-4">
                             <div class="h-px w-8 bg-brand-green"></div>
-                            <h2 class="text-xl font-bold">Signed Agreements</h2>
+                            <h2 class="text-xl font-bold">Signed Agreements Vault</h2>
                         </div>
-                        <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 flex justify-between items-center group cursor-pointer hover:bg-[#1e293b] transition-colors shadow-xl">
-                            <div class="flex items-center space-x-4">
-                                <div class="bg-[#0b1120] p-3 rounded-xl text-brand-green">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <div class="space-y-4">
+                            @forelse($activeAgreements as $agreement)
+                                <a href="{{ route('investor.agreements.download', $agreement->id) }}" class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 flex justify-between items-center group cursor-pointer hover:bg-[#1e293b] hover:border-brand-green/30 transition-all shadow-xl block">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="bg-[#0b1120] p-3 rounded-xl text-brand-green group-hover:scale-110 transition-transform">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <span class="font-bold text-gray-200 block text-base">{{ $agreement->agreement_filename ?? 'Signed_Investment_Agreement.pdf' }}</span>
+                                            <span class="text-xs text-gray-500">{{ $agreement->entrepreneur->name }} • Signed {{ \Carbon\Carbon::parse($agreement->agreement_date)->format('M d, Y') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-4">
+                                        <span class="text-xs font-bold text-brand-green tracking-widest uppercase group-hover:underline">Download</span>
+                                        <div class="bg-brand-green/20 p-2.5 rounded-lg group-hover:bg-brand-green group-hover:text-[#0b1120] text-brand-green transition-colors">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                        </div>
+                                    </div>
+                                </a>
+                            @empty
+                                <div class="bg-[#161e2d]/30 border border-white/5 rounded-2xl p-8 text-center text-gray-500 font-medium">
+                                    No signed agreements available.
                                 </div>
-                                <span class="font-bold text-gray-200">Shoes_Shop_Series_A_Agreement.pdf</span>
-                            </div>
-                            <div class="bg-brand-green/20 p-2 rounded-lg group-hover:bg-brand-green/30 transition-colors">
-                                <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -133,5 +181,89 @@
         </main>
     </div>
 
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity">
+        <div class="bg-[#161e2d] border border-white/10 rounded-3xl max-w-3xl w-full p-10 shadow-2xl space-y-8 relative">
+            <div class="flex justify-between items-center border-b border-white/10 pb-6">
+                <h3 class="text-3xl font-bold text-white flex items-center space-x-3">
+                    <span>⚙️</span>
+                    <span>Edit Profile Details</span>
+                </h3>
+                <button onclick="document.getElementById('editProfileModal').classList.add('hidden')" class="text-gray-400 hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+
+            <form action="{{ route('investor.profile.update') }}" method="POST" class="space-y-6">
+                @csrf
+                <div class="grid grid-cols-3 gap-6">
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Full Name</label>
+                        <input type="text" name="name" value="{{ $user->name }}" required class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">City / Location</label>
+                        <input type="text" name="city" value="{{ $user->city }}" placeholder="e.g. Lahore (DHA)" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Phone Number</label>
+                        <input type="text" name="phone" value="{{ $user->phone }}" placeholder="e.g. 03123311111" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Focus Sectors (Comma separated)</label>
+                    <input type="text" name="interested_businesses" value="{{ is_array($investorProfile->interested_businesses) ? implode(', ', $investorProfile->interested_businesses) : '' }}" placeholder="Energy, Technology, E-Commerce, Fintech" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Investment Philosophy / Bio</label>
+                    <textarea name="bio" rows="4" placeholder="Share your investment strategy, vision, and what kind of founders you seek..." class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">{{ $user->bio }}</textarea>
+                </div>
+
+                <div class="flex justify-end space-x-4 border-t border-white/10 pt-6">
+                    <button type="button" onclick="document.getElementById('editProfileModal').classList.add('hidden')" class="px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors">Cancel</button>
+                    <button type="submit" class="bg-brand-green text-[#064e3b] px-10 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#3dbd6d] transition-colors shadow-lg shadow-brand-green/20 cursor-pointer">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </body>
+    <script>
+        const imageForm = document.getElementById('profileImageForm');
+        const imageInput = document.getElementById('profileImageInput');
+        const previewContainer = document.getElementById('imagePreviewContainer');
+
+        previewContainer.addEventListener('click', () => imageInput.click());
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            previewContainer.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            previewContainer.addEventListener(eventName, () => {
+                previewContainer.classList.add('border-brand-green');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            previewContainer.addEventListener(eventName, () => {
+                previewContainer.classList.remove('border-brand-green');
+            }, false);
+        });
+
+        previewContainer.addEventListener('drop', (e) => {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+            
+            if (files.length) {
+                imageInput.files = files;
+                imageForm.submit();
+            }
+        });
+    </script>
 </html>

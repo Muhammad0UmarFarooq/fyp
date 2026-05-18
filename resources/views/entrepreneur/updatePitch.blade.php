@@ -47,15 +47,32 @@
                     <div class="space-y-6">
                         <div class="flex justify-between items-end">
                             <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-sm">01. VIDEO TRANSMISSION</h2>
-                            <span class="text-[10px] text-gray-500 font-bold uppercase">MAX 250MB - MP4/MOV</span>
+                            <span class="text-[10px] text-gray-500 font-bold uppercase">MAX 2,500 MB - MP4/MOV</span>
                         </div>
                         
                         <div id="drop-zone" class="relative w-full aspect-video bg-[#111625] rounded-xl overflow-hidden border border-white/5 group cursor-pointer transition-colors duration-300" onclick="document.getElementById('video-upload').click()">
                             <input type="file" name="video" id="video-upload" accept="video/mp4,video/quicktime" class="hidden" onchange="handleFileSelect(event)">
-                            <img id="placeholder-img" src="{{ asset('images/shoes_shop.jpg') }}" class="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity">
-                            <video id="video-preview" class="hidden w-full h-full object-cover z-10 relative" controls></video>
+                            @if(isset($pitch) && $pitch->video_path)
+                                <img id="placeholder-img" src="{{ asset('images/shoes_shop.jpg') }}" class="hidden w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity">
+                                <video id="video-preview" src="{{ asset('storage/' . $pitch->video_path) }}" class="w-full h-full object-cover z-10 relative" controls></video>
+                                <div id="change-video-btn" class="absolute top-4 right-4 z-30">
+                                    <button type="button" onclick="document.getElementById('video-upload').click(); event.stopPropagation();" class="bg-[#161e2d]/80 hover:bg-[#161e2d] text-white border border-white/20 px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center space-x-2 shadow-2xl backdrop-blur-md transition-all">
+                                        <svg class="w-4 h-4 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                        <span>Edit Video</span>
+                                    </button>
+                                </div>
+                            @else
+                                <img id="placeholder-img" src="{{ asset('images/shoes_shop.jpg') }}" class="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity">
+                                <video id="video-preview" class="hidden w-full h-full object-cover z-10 relative" controls></video>
+                                <div id="change-video-btn" class="absolute top-4 right-4 z-30 hidden">
+                                    <button type="button" onclick="document.getElementById('video-upload').click(); event.stopPropagation();" class="bg-[#161e2d]/80 hover:bg-[#161e2d] text-white border border-white/20 px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center space-x-2 shadow-2xl backdrop-blur-md transition-all">
+                                        <svg class="w-4 h-4 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                        <span>Edit Video</span>
+                                    </button>
+                                </div>
+                            @endif
                             
-                            <div id="upload-overlay" class="absolute inset-0 flex flex-col items-center justify-center space-y-4 pointer-events-none z-20">
+                            <div id="upload-overlay" class="absolute inset-0 flex flex-col items-center justify-center space-y-4 pointer-events-none z-20 {{ (isset($pitch) && $pitch->video_path) ? 'hidden' : '' }}">
                                 <div class="bg-brand-green/20 p-4 rounded-xl border border-brand-green/30 transition-transform group-hover:scale-110 duration-300">
                                     <svg class="w-6 h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                                 </div>
@@ -292,12 +309,14 @@
             if (files.length > 0) {
                 const file = files[0];
                 if (file.type === 'video/mp4' || file.type === 'video/quicktime') {
-                    if (file.size <= 250 * 1024 * 1024) { // 250MB limit
+                    if (file.size <= 2500 * 1024 * 1024) { // 2,500 MB limit
                         const fileURL = URL.createObjectURL(file);
                         videoPreview.src = fileURL;
                         videoPreview.classList.remove('hidden');
                         placeholderImg.classList.add('hidden');
                         uploadOverlay.classList.add('hidden');
+                        const changeBtn = document.getElementById('change-video-btn');
+                        if (changeBtn) changeBtn.classList.remove('hidden');
                         
                         if (videoUpload.files !== files) {
                             const dataTransfer = new DataTransfer();
@@ -305,7 +324,7 @@
                             videoUpload.files = dataTransfer.files;
                         }
                     } else {
-                        alert('File size exceeds the 250MB limit.');
+                        alert('File size exceeds the 2,500 MB limit.');
                     }
                 } else {
                     alert('Please upload an MP4 or MOV file.');

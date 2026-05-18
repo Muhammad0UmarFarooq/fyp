@@ -30,4 +30,14 @@ class Pitch extends Model
     {
         return $this->hasMany(PitchField::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
 }

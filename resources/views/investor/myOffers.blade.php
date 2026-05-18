@@ -9,6 +9,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 
     <!-- Tailwind & Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -26,187 +30,112 @@
                 <!-- Header -->
                 <div class="mb-12">
                     <h1 class="text-4xl font-bold mb-2">Active Investment Offers</h1>
-                    <p class="text-gray-400 text-sm">Manage your current proposals and track the status of negotiations
-                        in the deal pipeline.</p>
+                    <p class="text-gray-400 text-sm">Manage your current proposals and track the status of negotiations in the deal pipeline.</p>
                 </div>
+
+                @if(session('success'))
+                <div class="bg-brand-green/20 border border-brand-green text-brand-green p-4 rounded-xl mb-8 flex items-center space-x-3">
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>{{ session('success') }}</span>
+                </div>
+                @endif
 
                 <!-- Offers List -->
                 <div class="space-y-6">
-
-                    <!-- Offer 1: Solaris Grid -->
-                    <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl">
+                    @forelse($offers as $offer)
+                    <div x-data="{ editing: false }" class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl">
                         <div class="flex justify-between items-start mb-10">
                             <div class="flex items-center space-x-4">
-                                <div
-                                    class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center text-brand-green overflow-hidden">
-                                    <img src="https://solarbusinesshub.com/wp-content/uploads/2016/12/solaris-expands-its-product-range-from-off-grid-solar-power-manufacturers.jpg"
-                                        class="w-full h-full object-cover">
+                                <div class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center text-brand-green overflow-hidden font-bold text-xl">
+                                    {{ substr($offer->pitch ? $offer->pitch->startup_name : 'S', 0, 1) }}
                                 </div>
                                 <div>
-                                    <h2 class="text-xl font-bold">Solaris Grid</h2>
-                                    <div
-                                        class="flex items-center text-[10px] text-brand-green font-bold uppercase tracking-widest mt-0.5">
+                                    <h2 class="text-xl font-bold">{{ $offer->pitch ? $offer->pitch->startup_name : 'Unknown Startup' }}</h2>
+                                    <div class="flex items-center text-[10px] text-brand-green font-bold uppercase tracking-widest mt-0.5">
                                         <span class="w-1 h-1 bg-brand-green rounded-full mr-2"></span>
-                                        Junaid Akhtar
+                                        {{ $offer->pitch && $offer->pitch->user ? $offer->pitch->user->name : 'Entrepreneur' }}
                                     </div>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Offer
-                                    Amount</div>
-                                <div class="text-3xl font-bold text-brand-green">$1000000</div>
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Offer Amount</div>
+                                <div class="text-3xl font-bold text-brand-green">${{ number_format($offer->offer_amount) }}</div>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-3 gap-8 mb-10">
                             <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Return
-                                    Time Period</div>
-                                <div class="text-lg font-bold">4 years</div>
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Return Time Period</div>
+                                <div class="text-lg font-bold">{{ $offer->time_period }}</div>
                             </div>
                             <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Valuation
-                                </div>
-                                <div class="text-lg font-bold">$2500000</div>
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Return Value</div>
+                                <div class="text-lg font-bold">${{ number_format($offer->valuation) }}</div>
                             </div>
                             <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Date Sent
-                                </div>
-                                <div class="text-lg font-bold">Oct 24, 2025</div>
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Date Sent</div>
+                                <div class="text-lg font-bold">{{ $offer->created_at->format('M d, Y') }}</div>
                             </div>
                         </div>
 
-                        <div class="flex justify-between items-center">
-                            <div class="flex space-x-3">
-                                <button
-                                    class="bg-red-600 text-white px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider">Cancel</button>
-                                <a href="{{ route('investor.pitch.view') }}"
-                                    class="bg-[#0b1120] text-gray-300 px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider inline-block">View
-                                    Pitch</a>
-                                <button
-                                    class="bg-[#1e293b] text-brand-green px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider">Edit
-                                    Terms</button>
+                        <div class="flex justify-between items-center" x-show="!editing">
+                            <div class="flex items-center space-x-3">
+                                <form action="{{ route('investor.offers.destroy', $offer) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to cancel this offer?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-600 text-white px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider hover:bg-red-700 transition-colors cursor-pointer">Cancel</button>
+                                </form>
+
+                                @if($offer->pitch)
+                                <a href="{{ route('investor.pitch.view', $offer->pitch->id) }}" class="bg-[#0b1120] text-gray-300 px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider inline-block hover:bg-gray-800 transition-colors">View Pitch</a>
+                                @endif
+
+                                @if($offer->status === 'accepted')
+                                <a href="{{ route('investor.agreements') }}" class="bg-brand-green text-[#064e3b] px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider inline-block hover:bg-[#3dbd6d] transition-colors font-extrabold">Proceed to Agreement</a>
+                                @else
+                                <button type="button" @click="editing = true" class="border border-brand-green/30 text-brand-green px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider hover:bg-brand-green/10 transition-colors cursor-pointer">
+                                    {{ $offer->status === 'rejected' ? 'Edit Terms' : 'Re-Bid' }}
+                                </button>
+                                @endif
                             </div>
-                            <div class="text-red-600 font-black text-[10px] tracking-widest uppercase">Rejected</div>
+                            <div>
+                                @if($offer->status === 'accepted')
+                                <span class="text-brand-green font-black text-[10px] tracking-widest uppercase bg-brand-green/10 px-3 py-1.5 rounded-full border border-brand-green/20">Accepted / Finalized</span>
+                                @elseif($offer->status === 'rejected')
+                                <span class="text-red-500 font-black text-[10px] tracking-widest uppercase bg-red-500/10 px-3 py-1.5 rounded-full border border-red-500/20">Rejected</span>
+                                @else
+                                <span class="text-amber-500 font-black text-[10px] tracking-widest uppercase bg-amber-500/10 px-3 py-1.5 rounded-full border border-amber-500/20">Pending Offer</span>
+                                @endif
+                            </div>
                         </div>
+
+                        <!-- Inline Edit Terms Form -->
+                        <form x-show="editing" x-transition x-cloak action="{{ route('investor.offers.update', $offer) }}" method="POST" class="mt-8 pt-8 border-t border-white/5 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            @csrf
+                            @method('PUT')
+                            <div class="space-y-1">
+                                <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Offer Amount ($)</label>
+                                <input type="number" name="offer_amount" value="{{ $offer->offer_amount }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Return Time Period</label>
+                                <input type="text" name="time_period" value="{{ $offer->time_period }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Return Value ($)</label>
+                                <input type="number" name="valuation" value="{{ $offer->valuation }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
+                            </div>
+                            <div class="md:col-span-3 flex justify-end space-x-3 pt-4 items-center">
+                                <button type="button" @click="editing = false" class="border border-red-900/30 text-red-400 px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider hover:bg-red-500/10 transition-colors cursor-pointer">Cancel</button>
+                                <button type="submit" class="bg-brand-green text-[#064e3b] px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider hover:bg-[#3dbd6d] transition-colors cursor-pointer font-black">Submit Re-Bid</button>
+                            </div>
+                        </form>
                     </div>
-
-                    <!-- Offer 2: Nimbus AI -->
-                    <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl">
-                        <div class="flex justify-between items-start mb-10">
-                            <div class="flex items-center space-x-4">
-                                <div
-                                    class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center text-brand-green overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=100&q=80"
-                                        class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <h2 class="text-xl font-bold">Nimbus AI</h2>
-                                    <div
-                                        class="flex items-center text-[10px] text-brand-green font-bold uppercase tracking-widest mt-0.5">
-                                        <span class="w-1 h-1 bg-brand-green rounded-full mr-2"></span>
-                                        Muhammad Usama
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Offer
-                                    Amount</div>
-                                <div class="text-3xl font-bold text-brand-green">$1200000</div>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-8 mb-10">
-                            <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Return
-                                    Time Period</div>
-                                <div class="text-lg font-bold text-gray-600">----</div>
-                            </div>
-                            <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Valuation
-                                    (POST)</div>
-                                <div class="text-lg font-bold text-gray-600">$-----</div>
-                            </div>
-                            <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Date Sent
-                                </div>
-                                <div class="text-lg font-bold">New Date</div>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center">
-                            <div class="flex space-x-3">
-                                <button
-                                    class="bg-red-600 text-white px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider">Cancel</button>
-                                <a href="{{ route('investor.pitch.view') }}"
-                                    class="bg-[#0b1120] text-gray-300 px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider inline-block">View
-                                    Pitch</a>
-                                <button
-                                    class="bg-[#1e293b] text-brand-green px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider">Re-Bid</button>
-                                <button
-                                    class="border border-red-900/30 text-red-900 px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider">Cancel</button>
-                            </div>
-                            <div class="text-gray-500 font-black text-[10px] tracking-widest uppercase">Pending Offer
-                            </div>
-                        </div>
+                    @empty
+                    <div class="bg-[#161e2d] rounded-2xl p-16 text-center border border-white/5 shadow-2xl">
+                        <p class="text-gray-400 text-sm">You have not submitted any investment offers yet.</p>
                     </div>
-
-                    <!-- Offer 3: Shoes Shop -->
-                    <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl">
-                        <div class="flex justify-between items-start mb-10">
-                            <div class="flex items-center space-x-4">
-                                <div
-                                    class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center text-brand-green overflow-hidden">
-                                    <img src="{{ asset('images/shoes_shop.jpg') }}" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <h2 class="text-xl font-bold">Shoes Shop</h2>
-                                    <div
-                                        class="flex items-center text-[10px] text-brand-green font-bold uppercase tracking-widest mt-0.5">
-                                        <span class="w-1 h-1 bg-brand-green rounded-full mr-2"></span>
-                                        Naeem Azhar
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Offer
-                                    Amount</div>
-                                <div class="text-3xl font-bold text-brand-green">$500000</div>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-8 mb-10">
-                            <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Return
-                                    Time Period</div>
-                                <div class="text-lg font-bold">2 years</div>
-                            </div>
-                            <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Valuation
-                                </div>
-                                <div class="text-lg font-bold">$1200000</div>
-                            </div>
-                            <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Date Sent
-                                </div>
-                                <div class="text-lg font-bold">Oct 15, 2025</div>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center">
-                            <div class="flex space-x-3">
-                                <button
-                                    class="bg-red-600 text-white px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider">Cancel</button>
-                                <a href="{{ route('investor.pitch.view') }}" class="bg-[#0b1120] text-gray-300 px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider inline-block">View Pitch</a>
-                                <button
-                                    class="bg-brand-green text-[#064e3b] px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider">Proceed
-                                    to Agreement</button>
-                            </div>
-                            <div class="text-gray-500 font-black text-[10px] tracking-widest uppercase">Offer Finalized
-                            </div>
-                        </div>
-                    </div>
-
+                    @endforelse
                 </div>
             </div>
         </main>

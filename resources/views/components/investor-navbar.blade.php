@@ -11,10 +11,19 @@
     </div>
 
     <div class="flex items-center space-x-4">
-        <a href="{{ route('investor.profile') }}" class="text-xs font-bold text-[#4ade80] cursor-pointer hover:text-[#4ade80]/80 transition-colors">{{ auth()->user()->name }}</a>
-        <form action="{{ route('logout') }}" method="POST" class="inline">
-            @csrf
-            <button type="submit" class="border border-white/10 px-4 py-1.5 rounded text-[9px] font-bold tracking-widest uppercase text-gray-500 hover:text-white hover:border-white/30 transition-colors">SIGN OUT</button>
-        </form>
+        <div class="text-right">
+            <a href="{{ route('investor.profile') }}" class="text-xs font-bold text-[#4ade80] cursor-pointer hover:text-[#4ade80]/80 transition-colors block">{{ auth()->user()->name }}</a>
+            <form action="{{ route('logout') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit" class="text-[9px] font-bold tracking-widest uppercase text-gray-500 hover:text-white transition-colors cursor-pointer">SIGN OUT</button>
+            </form>
+        </div>
+        <a href="{{ route('investor.profile') }}" class="w-8 h-8 rounded overflow-hidden border border-white/10 bg-gray-800 flex items-center justify-center cursor-pointer hover:border-brand-green transition-colors font-bold text-xs text-brand-green">
+            @if(auth()->user()->profile_image)
+                <img src="{{ asset('storage/' . auth()->user()->profile_image) }}" alt="Profile Image" class="w-full h-full object-cover">
+            @else
+                {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
+            @endif
+        </a>
     </div>
 </nav>

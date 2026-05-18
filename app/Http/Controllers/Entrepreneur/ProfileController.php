@@ -10,7 +10,14 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('entrepreneur.profile');
+        $user = auth()->user();
+        $activeAgreements = \App\Models\Agreement::with(['investor', 'pitch'])
+            ->where('entrepreneur_id', $user->id)
+            ->whereIn('status', ['active', 'completed'])
+            ->latest()
+            ->get();
+
+        return view('entrepreneur.profile', compact('user', 'activeAgreements'));
     }
 
     public function uploadImage(Request $request)

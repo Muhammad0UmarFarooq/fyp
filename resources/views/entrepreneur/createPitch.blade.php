@@ -46,7 +46,7 @@
                     <div class="space-y-6">
                         <div class="flex justify-between items-end">
                             <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-sm">01. VIDEO TRANSMISSION</h2>
-                            <span class="text-[10px] text-gray-500 font-bold uppercase">MAX 250MB - MP4/MOV</span>
+                            <span class="text-[10px] text-gray-500 font-bold uppercase">MAX 2,500 MB - MP4/MOV</span>
                         </div>
                         
                         <div id="drop-zone" class="relative w-full aspect-video bg-[#111625] rounded-xl overflow-hidden border border-white/5 group cursor-pointer transition-colors duration-300" onclick="document.getElementById('video-upload').click()">
@@ -272,7 +272,7 @@
             if (files.length > 0) {
                 const file = files[0];
                 if (file.type === 'video/mp4' || file.type === 'video/quicktime') {
-                    if (file.size <= 250 * 1024 * 1024) { // 250MB limit
+                    if (file.size <= 2500 * 1024 * 1024) { // 2,500 MB limit
                         const fileURL = URL.createObjectURL(file);
                         videoPreview.src = fileURL;
                         videoPreview.classList.remove('hidden');
@@ -285,7 +285,7 @@
                             videoUpload.files = dataTransfer.files;
                         }
                     } else {
-                        alert('File size exceeds the 250MB limit.');
+                        alert('File size exceeds the 2,500 MB limit.');
                     }
                 } else {
                     alert('Please upload an MP4 or MOV file.');

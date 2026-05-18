@@ -13,7 +13,7 @@ class PitchController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'video' => 'required|file|mimes:mp4,mov|max:256000', // 250MB
+            'video' => 'required|file|mimes:mp4,mov|max:2500000', // 250MB
             'startup_name' => 'required|string|max:255',
             'invested_amount' => 'nullable|string',
             'monthly_net_value' => 'nullable|string',
@@ -85,7 +85,7 @@ class PitchController extends Controller
         }
 
         $validated = $request->validate([
-            'video' => 'nullable|file|mimes:mp4,mov|max:256000', // 250MB
+            'video' => 'nullable|file|mimes:mp4,mov|max:2500000', // 250MB
             'startup_name' => 'required|string|max:255',
             'invested_amount' => 'nullable|string',
             'monthly_net_value' => 'nullable|string',
