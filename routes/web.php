@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Entrepreneur\AgreementController;
 use App\Http\Controllers\Entrepreneur\OfferController;
 use App\Http\Controllers\Entrepreneur\PitchController;
 use App\Http\Controllers\Entrepreneur\ProfileController;
@@ -21,7 +22,9 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/pitch/arena', function () {
-    return view('pitchArena');
+    $pitches = Pitch::with('user')->where('status', 'active')->latest()->get();
+
+    return view('pitchArena', compact('pitches'));
 })->name('pitch.arena');
 
 /*
@@ -92,14 +95,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/offers', [OfferController::class, 'index'])->name('offers');
         Route::post('/offers/{offer}/status', [OfferController::class, 'updateStatus'])->name('offers.status');
 
-        Route::get('/agreements', [App\Http\Controllers\Entrepreneur\AgreementController::class, 'index'])->name('agreements');
-        Route::post('/agreements/{agreement}/sign', [App\Http\Controllers\Entrepreneur\AgreementController::class, 'sign'])->name('agreements.sign');
-        Route::post('/agreements/{agreement}/reject', [App\Http\Controllers\Entrepreneur\AgreementController::class, 'reject'])->name('agreements.reject');
+        Route::get('/agreements', [AgreementController::class, 'index'])->name('agreements');
+        Route::post('/agreements/{agreement}/sign', [AgreementController::class, 'sign'])->name('agreements.sign');
+        Route::post('/agreements/{agreement}/reject', [AgreementController::class, 'reject'])->name('agreements.reject');
         Route::get('/agreements/{agreement}/download', [App\Http\Controllers\Investor\AgreementController::class, 'download'])->name('agreements.download');
         Route::get('/agreements/{agreement}/download-signed', [App\Http\Controllers\Investor\AgreementController::class, 'downloadEntrepreneurFile'])->name('agreements.download.entrepreneur');
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('/profile/image', [ProfileController::class, 'uploadImage'])->name('profile.image');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     });
 
     /*

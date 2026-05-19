@@ -60,9 +60,9 @@ test('investor can upload and send an agreement to entrepreneur', function () {
     // Entrepreneur views agreements page and signs
     $this->actingAs($entrepreneur)->get(route('entrepreneur.agreements'))->assertStatus(200);
 
-    $signedFile = UploadedFile::fake()->create('signed.pdf', 1000, 'application/pdf');
+    $base64Signature = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
     $signResponse = $this->actingAs($entrepreneur)->post(route('entrepreneur.agreements.sign', $agreement->id), [
-        'signed_file' => $signedFile,
+        'signature' => $base64Signature,
     ]);
     $signResponse->assertSessionHas('success');
     expect($agreement->fresh()->status)->toBe('active');

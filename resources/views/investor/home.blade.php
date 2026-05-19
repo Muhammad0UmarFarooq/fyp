@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="text-right">
                                     <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Seeking Capital</div>
-                                    <div class="text-3xl font-bold text-brand-green">${{ number_format($pitch->funding_required ?? 0) }}</div>
+                                    <div class="text-3xl font-bold text-brand-green">PKR {{ number_format($pitch->funding_required ?? 0) }}</div>
                                 </div>
                             </div>
 
@@ -81,7 +81,7 @@
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                                 <div class="bg-[#0b1120] p-4 rounded-xl border border-white/5">
                                     <div class="text-[8px] font-bold text-gray-500 tracking-widest uppercase mb-1">Monthly Net Value</div>
-                                    <div class="text-lg font-bold">${{ number_format($pitch->monthly_net_value ?? 0) }}</div>
+                                    <div class="text-lg font-bold">PKR {{ number_format($pitch->monthly_net_value ?? 0) }}</div>
                                 </div>
                                 <div class="bg-[#0b1120] p-4 rounded-xl border border-white/5">
                                     <div class="text-[8px] font-bold text-gray-500 tracking-widest uppercase mb-1">MOM Growth</div>
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="bg-[#0b1120] p-4 rounded-xl border border-white/5">
                                     <div class="text-[8px] font-bold text-gray-500 tracking-widest uppercase mb-1">Valuation</div>
-                                    <div class="text-lg font-bold">${{ number_format($pitch->total_valuation ?? 0) }}</div>
+                                    <div class="text-lg font-bold">PKR {{ number_format($pitch->total_valuation ?? 0) }}</div>
                                 </div>
                             </div>
 
@@ -120,7 +120,7 @@
                                     <svg class="w-6 h-6 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <div>
                                         <div class="text-sm font-bold text-white">Offer Already Placed</div>
-                                        <div class="text-xs text-gray-400">You submitted a bid of ${{ number_format($existingOffer->offer_amount) }}. Status: <span class="text-brand-green font-bold uppercase tracking-wider">{{ $existingOffer->status }}</span></div>
+                                        <div class="text-xs text-gray-400">You submitted a bid of PKR {{ number_format($existingOffer->offer_amount) }}. Status: <span class="text-brand-green font-bold uppercase tracking-wider">{{ $existingOffer->status }}</span></div>
                                     </div>
                                 </div>
                                 <a href="{{ route('investor.myOffers') }}" class="bg-brand-green text-[#064e3b] px-6 py-2.5 rounded font-black text-xs uppercase tracking-wider hover:bg-[#3dbd6d] transition-colors cursor-pointer font-extrabold">Manage in My Offers</a>
@@ -129,7 +129,7 @@
                             <form action="{{ route('investor.offers.store', $pitch) }}" method="POST" class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-8 border-t border-white/5">
                                 @csrf
                                 <div class="space-y-1">
-                                    <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Offer Amount ($)</label>
+                                    <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Offer Amount (PKR)</label>
                                     <input type="number" name="offer_amount" placeholder="e.g. 500000" required class="w-full bg-white text-orange-600 font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none placeholder:font-normal placeholder:text-gray-400">
                                 </div>
                                 <div class="space-y-1">

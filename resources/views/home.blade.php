@@ -135,7 +135,7 @@
     <div class="bg-[#1e293b]/40 backdrop-blur-lg border border-white/5 rounded-2xl w-full max-w-5xl px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-10">
 
         <div class="text-center">
-            <div class="text-3xl md:text-4xl font-bold text-brand-green mb-2">$100M+</div>
+            <div class="text-3xl md:text-4xl font-bold text-brand-green mb-2">PKR 100M+</div>
             <div class="text-[11px] text-brand-muted font-bold tracking-[0.15em] uppercase">
                 Capital Deployed
             </div>

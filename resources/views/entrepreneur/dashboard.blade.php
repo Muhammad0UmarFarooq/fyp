@@ -76,7 +76,7 @@
                         </div>
                         <div class="text-right">
                             <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-1">Seeking Capital</div>
-                            <div class="text-4xl font-bold text-brand-green">${{ number_format($pitch->funding_required ?? 0) }}</div>
+                            <div class="text-4xl font-bold text-brand-green">PKR {{ number_format($pitch->funding_required ?? 0) }}</div>
                         </div>
                     </div>
 
@@ -90,7 +90,7 @@
                         @if($pitch->monthly_net_value)
                         <div class="bg-[#0b1120] p-6 rounded-xl border border-white/5">
                             <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-2">Monthly Net Value</div>
-                            <div class="text-2xl font-bold text-white">${{ number_format($pitch->monthly_net_value) }}</div>
+                            <div class="text-2xl font-bold text-white">PKR {{ number_format($pitch->monthly_net_value) }}</div>
                         </div>
                         @endif
                         
@@ -111,7 +111,7 @@
                         @if($pitch->total_valuation)
                         <div class="bg-[#0b1120] p-6 rounded-xl border border-white/5">
                             <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-2">Valuation</div>
-                            <div class="text-2xl font-bold text-white">${{ number_format($pitch->total_valuation) }}</div>
+                            <div class="text-2xl font-bold text-white">PKR {{ number_format($pitch->total_valuation) }}</div>
                         </div>
                         @endif
 

@@ -125,8 +125,8 @@ E-Commerce
 
 <!-- Investment Amount -->
 <div>
-<label class="label">Investment Amount (USD)</label>
-<input type="number" name="investment_amount" placeholder="e.g. 5000000" class="input" required>
+<label class="label">Investment Amount (PKR)</label>
+<input type="number" min="0" name="investment_amount" placeholder="e.g. 5000000" class="input [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" required>
 </div>
 
 <!-- Investment Focus -->

@@ -53,124 +53,70 @@
 
         <!-- Cards List -->
         <div class="space-y-12">
-            
-            <!-- Card 1 -->
-            <div class="bg-brand-card rounded-lg overflow-hidden shadow-2xl border border-white/5">
-                <!-- Video/Image Section -->
-                <div class="relative w-full h-[70vh] bg-gray-900 group">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80" alt="Shoes Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    <!-- Play Button Overlay -->
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/10 shadow-lg">
-                            <svg class="w-10 h-10 text-brand-green ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                        </div>
+            @forelse($pitches as $pitch)
+                <div class="bg-brand-card rounded-lg overflow-hidden shadow-2xl border border-white/5">
+                    <!-- Video/Image Section -->
+                    <div class="relative w-full h-[70vh] bg-gray-900 group flex items-center justify-center">
+                        @if($pitch->video_path)
+                            <video src="{{ asset('storage/' . $pitch->video_path) }}" controls controlsList="nodownload" class="w-full h-full object-cover max-h-[70vh]"></video>
+                        @else
+                            <div class="text-gray-500 font-medium">No Video Available</div>
+                        @endif
                     </div>
-                </div>
 
-                <!-- Card Body -->
-                <div class="p-6 md:p-8">
-                    <!-- Title Row -->
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <h2 class="text-2xl font-bold">Shoes Shop</h2>
-                            <div class="flex items-center text-xs text-gray-400 mt-1">
-                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                                <span>Founder: <span class="text-white font-medium">Naeem Azhar</span></span>
+                    <!-- Card Body -->
+                    <div class="p-6 md:p-8">
+                        <!-- Title Row -->
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h2 class="text-2xl font-bold">{{ $pitch->startup_name }}</h2>
+                                <div class="flex items-center text-xs text-gray-400 mt-1">
+                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    <span>Founder: <span class="text-white font-medium">{{ $pitch->user->name }}</span></span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Seeking Capital</div>
+                                <div class="text-2xl font-bold text-brand-green">PKR {{ number_format($pitch->funding_required) }}</div>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Seeking Capital</div>
-                            <div class="text-2xl font-bold text-brand-green">$5000000</div>
-                        </div>
-                    </div>
 
-                    <!-- Stats Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
-                        <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
-                            <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">MRR</div>
-                            <div class="text-lg font-bold text-white">$100000</div>
-                        </div>
-                        <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
-                            <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Time Period</div>
-                            <div class="text-lg font-bold text-brand-green">2 year</div>
-                        </div>
-                        <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
-                            <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Valuation</div>
-                            <div class="text-lg font-bold text-brand-yellow">$10000000</div>
-                        </div>
-                    </div>
-
-                    <!-- Vision Statement -->
-                    <div class="mb-8">
-                        <h3 class="text-sm font-bold mb-3">Vision Statement</h3>
-                        <p class="text-sm text-gray-400 leading-relaxed">
-                            Bridging Our Shop to next Level in our areas. We need capital for strategic marketing expansion and high-end shop decorations to compete in the luxury segment. Expanding floor space by 200%.
-                        </p>
-                    </div>
-
-                    <!-- Invest Button -->
-                    <button onclick="window.location='{{ route('investor.register') }}'" class="w-full bg-[#252f40] hover:bg-[#344155] text-gray-300 font-bold text-xs tracking-widest uppercase py-4 rounded transition-colors flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        <span>Invest</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="bg-brand-card rounded-lg overflow-hidden shadow-2xl border border-white/5">
-                <!-- Video/Image Section -->
-                <div class="relative w-full h-[70vh] bg-gray-900 group">
-                    <img src="https://img.magnific.com/free-photo/empty-boutique-shopping-centre_482257-78792.jpg?semt=ais_hybrid&w=740&q=80" alt="Garments Shop" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                </div>
-                <!-- Card Body -->
-                <div class="p-6 md:p-8">
-                    <!-- Title Row -->
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <h2 class="text-2xl font-bold">Garments shop</h2>
-                            <div class="flex items-center text-xs text-gray-400 mt-1">
-                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                                <span>Founder: <span class="text-white font-medium">Saleem</span></span>
+                        <!-- Stats Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
+                            <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">MRR</div>
+                                <div class="text-lg font-bold text-white">PKR {{ number_format($pitch->monthly_net_value) }}</div>
+                            </div>
+                            <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Time Period</div>
+                                <div class="text-lg font-bold text-brand-green">{{ $pitch->return_time }}</div>
+                            </div>
+                            <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Valuation</div>
+                                <div class="text-lg font-bold text-brand-yellow">PKR {{ number_format($pitch->total_valuation) }}</div>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Seeking Capital</div>
-                            <div class="text-2xl font-bold text-brand-green">$7000000</div>
-                        </div>
-                    </div>
 
-                    <!-- Stats Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
-                        <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
-                            <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">MRR</div>
-                            <div class="text-lg font-bold text-white">$120000</div>
+                        <!-- Vision Statement -->
+                        <div class="mb-8">
+                            <h3 class="text-sm font-bold mb-3">Vision Statement</h3>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                {{ $pitch->vision_statement }}
+                            </p>
                         </div>
-                        <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
-                            <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Time Period</div>
-                            <div class="text-lg font-bold text-brand-green">3 year</div>
-                        </div>
-                        <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
-                            <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Valuation</div>
-                            <div class="text-lg font-bold text-brand-yellow">$13000000</div>
-                        </div>
-                    </div>
 
-                    <!-- Vision Statement -->
-                    <div class="mb-8">
-                        <h3 class="text-sm font-bold mb-3">Vision Statement</h3>
-                        <p class="text-sm text-gray-400 leading-relaxed">
-                            Bridging Our Shop to next Level in our areas. We need capital for strategic marketing expansion and high-end shop decorations to compete in the luxury segment. Expanding floor space by 200%.
-                        </p>
+                        <!-- Invest Button -->
+                        <button onclick="window.location='{{ route('investor.register') }}'" class="w-full bg-[#252f40] hover:bg-[#344155] text-gray-300 font-bold text-xs tracking-widest uppercase py-4 rounded transition-colors flex items-center justify-center space-x-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            <span>Invest</span>
+                        </button>
                     </div>
-
-                    <!-- Invest Button -->
-                    <button onclick="window.location='{{ route('investor.register') }}'" class="w-full bg-[#252f40] hover:bg-[#344155] text-gray-300 font-bold text-xs tracking-widest uppercase py-4 rounded transition-colors flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        <span>Invest</span>
-                    </button>
                 </div>
-            </div>
-
+            @empty
+                <div class="text-center text-gray-500 py-12">
+                    No pitches are currently active in the arena. Check back later!
+                </div>
+            @endforelse
         </div>
     </main>
 

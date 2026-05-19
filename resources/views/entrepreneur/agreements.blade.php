@@ -66,13 +66,9 @@
                                             <span>📥</span>
                                             <span>Download Contract</span>
                                         </a>
-                                        <form action="{{ route('entrepreneur.agreements.sign', $agreement->id) }}" method="POST" enctype="multipart/form-data" id="sign-form-{{ $agreement->id }}">
-                                            @csrf
-                                            <input type="file" name="signed_file" id="signed-file-{{ $agreement->id }}" class="hidden" accept=".pdf,.docx,.doc" onchange="document.getElementById('sign-form-{{ $agreement->id }}').submit()">
-                                            <button type="button" onclick="document.getElementById('signed-file-{{ $agreement->id }}').click()" class="bg-brand-green text-[#064e3b] px-6 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider hover:bg-[#3dbd6d] transition-all cursor-pointer shadow-lg shadow-brand-green/10">
-                                                Upload Signed PDF / Invoice
-                                            </button>
-                                        </form>
+                                        <button type="button" onclick="openSignatureModal('{{ route('entrepreneur.agreements.sign', $agreement->id) }}')" class="bg-brand-green text-[#064e3b] px-6 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider hover:bg-[#3dbd6d] transition-all cursor-pointer shadow-lg shadow-brand-green/10">
+                                            Sign Agreement
+                                        </button>
                                     </div>
                                 </div>
 
@@ -165,5 +161,174 @@
         </main>
     </div>
 
+    <!-- Signature Modal -->
+    <div id="signatureModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity">
+        <div class="bg-[#161e2d] border border-white/10 rounded-3xl max-w-2xl w-full p-8 shadow-2xl space-y-6 relative">
+            <div class="flex justify-between items-center border-b border-white/10 pb-4">
+                <h3 class="text-2xl font-bold text-white flex items-center space-x-3">
+                    <span>✍️</span>
+                    <span>Create your signature</span>
+                </h3>
+                <button type="button" onclick="closeSignatureModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer">&times;</button>
+            </div>
+
+            <form id="signatureForm" method="POST" class="space-y-6">
+                @csrf
+                
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="text-sm font-bold text-gray-200">Signature</label>
+                        <button type="button" onclick="clearSignature()" class="text-xs text-brand-green hover:underline">Clear</button>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl overflow-hidden border-2 border-dashed border-gray-300 relative h-64 w-full">
+                        <canvas id="signatureCanvas" class="w-full h-full cursor-crosshair"></canvas>
+                        <div id="signaturePlaceholder" class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <span class="text-gray-300 font-medium flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                <span>Draw signature</span>
+                            </span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="signature" id="signatureInput" required>
+                </div>
+
+                <div class="text-xs text-gray-500 font-medium leading-relaxed">
+                    By creating this signature, I consent to its use as my electronic signature for any purpose, including legally binding documents.
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex justify-end space-x-4 border-t border-white/10 pt-6">
+                    <button type="button" onclick="closeSignatureModal()" class="px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors cursor-pointer">Cancel</button>
+                    <button type="button" onclick="submitSignature()" class="bg-brand-green text-[#064e3b] px-10 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#3dbd6d] transition-colors shadow-lg shadow-brand-green/20 cursor-pointer">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </body>
+    <script>
+        // Signature Pad Logic
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        const placeholder = document.getElementById('signaturePlaceholder');
+        let isDrawing = false;
+        let hasSignature = false;
+
+        function resizeCanvas() {
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            ctx.scale(ratio, ratio);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#000000';
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        function getMousePos(canvas, evt) {
+            const rect = canvas.getBoundingClientRect();
+            let clientX, clientY;
+
+            if (evt.touches) {
+                clientX = evt.touches[0].clientX;
+                clientY = evt.touches[0].clientY;
+            } else {
+                clientX = evt.clientX;
+                clientY = evt.clientY;
+            }
+
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            hasSignature = true;
+            placeholder.classList.add('hidden');
+            const pos = getMousePos(canvas, e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            e.preventDefault(); // Prevent scrolling on touch devices
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const pos = getMousePos(canvas, e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            e.preventDefault();
+        }
+
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                ctx.closePath();
+            }
+        }
+
+        // Mouse events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // Touch events
+        canvas.addEventListener('touchstart', startDrawing, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('touchcancel', stopDrawing);
+
+        function clearSignature() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hasSignature = false;
+            placeholder.classList.remove('hidden');
+        }
+
+        function openSignatureModal(actionUrl) {
+            const modal = document.getElementById('signatureModal');
+            const form = document.getElementById('signatureForm');
+            form.action = actionUrl;
+            modal.classList.remove('hidden');
+            
+            // Need to wait for modal to be visible before resizing canvas correctly
+            setTimeout(() => {
+                resizeCanvas();
+                clearSignature();
+            }, 50);
+        }
+
+        function closeSignatureModal() {
+            document.getElementById('signatureModal').classList.add('hidden');
+            clearSignature();
+        }
+
+        function submitSignature() {
+            if (!hasSignature) {
+                alert('Please provide a signature before submitting.');
+                return;
+            }
+
+            // Create a temporary canvas to save with a white background instead of transparent
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            
+            // Fill white background
+            tempCtx.fillStyle = '#ffffff';
+            tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+            
+            // Draw signature on top
+            tempCtx.drawImage(canvas, 0, 0);
+
+            const dataUrl = tempCanvas.toDataURL('image/png');
+            document.getElementById('signatureInput').value = dataUrl;
+            document.getElementById('signatureForm').submit();
+        }
+    </script>
 </html>

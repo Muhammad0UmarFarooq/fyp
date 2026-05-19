@@ -13,7 +13,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $investorProfile = $user->investorProfile ?? new InvestorProfile();
+        $investorProfile = $user->investorProfile ?? new InvestorProfile;
 
         $activeAgreements = Agreement::with(['pitch'])
             ->where('investor_id', $user->id)
@@ -38,7 +38,7 @@ class ProfileController extends Controller
             }
 
             $path = $request->file('profile_image')->store('profile_images', 'public');
-            
+
             $user->update([
                 'profile_image' => $path,
             ]);

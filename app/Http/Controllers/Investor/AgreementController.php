@@ -41,11 +41,11 @@ class AgreementController extends Controller
 
             $file = $request->file('agreement_file');
             $path = $file->store('agreements', 'public');
-            
+
             $agreement->update([
                 'agreement_file' => $path,
                 'agreement_filename' => $file->getClientOriginalName(),
-                'agreement_filesize' => round($file->getSize() / 1048576, 2) . ' MB',
+                'agreement_filesize' => round($file->getSize() / 1048576, 2).' MB',
                 'status' => 'investor_uploaded',
                 'rejection_reason' => null,
             ]);

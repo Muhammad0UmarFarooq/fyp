@@ -92,11 +92,11 @@
                             </div>
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Invested Amount (Owner Investment)</label>
-                                <input type="text" name="invested_amount" value="{{ $pitch->invested_amount ?? '$ 5000000' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="text" name="invested_amount" value="{{ $pitch->invested_amount ?? 'PKR 5000000' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Net Value(Total Revenue - Total Expenses )</label>
-                                <input type="text" name="monthly_net_value" value="{{ $pitch->monthly_net_value ?? '$ 1000000' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="text" name="monthly_net_value" value="{{ $pitch->monthly_net_value ?? 'PKR 1000000' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div id="monthly-growth-field" class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Growth</label>
@@ -152,8 +152,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div class="space-y-6">
                                 <div class="space-y-2">
-                                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required ($)</label>
-                                    <input type="text" name="funding_required" value="{{ $pitch->funding_required ?? '$ 5000000' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required (PKR)</label>
+                                    <input type="text" name="funding_required" value="{{ $pitch->funding_required ?? 'PKR 5000000' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
                                 </div>
                                 <div class="space-y-2">
                                     <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Return Time (Period)</label>

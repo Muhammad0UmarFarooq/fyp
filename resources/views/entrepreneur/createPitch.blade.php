@@ -74,11 +74,11 @@
                             </div>
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Invested Amount (Owner Investment)</label>
-                                <input type="text" name="invested_amount" placeholder="e.g. $ 5,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="text" name="invested_amount" placeholder="e.g. PKR 5,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Net Value(Total Revenue - Total Expenses )</label>
-                                <input type="text" name="monthly_net_value" placeholder="e.g. $ 1,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="text" name="monthly_net_value" placeholder="e.g. PKR 1,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div id="monthly-growth-field" class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Growth</label>
@@ -115,8 +115,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div class="space-y-6">
                                 <div class="space-y-2">
-                                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required ($)</label>
-                                    <input type="text" name="funding_required" placeholder="e.g. $ 5,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required (PKR)</label>
+                                    <input type="text" name="funding_required" placeholder="e.g. PKR 5,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
                                 </div>
                                 <div class="space-y-2">
                                     <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Return Time (Period)</label>
@@ -127,7 +127,7 @@
                             <div class="bg-[#0b1120] p-10 rounded-xl border border-white/5 text-center">
                                 <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total Valuation</label>
                                 <div class="flex items-center justify-center space-x-2">
-                                    <span class="text-5xl font-bold text-brand-green">$</span>
+                                    <span class="text-5xl font-bold text-brand-green">PKR</span>
                                     <input type="text" name="total_valuation" placeholder="10,000,000" class="bg-transparent text-5xl font-bold text-brand-green focus:outline-none w-full text-center">
                                 </div>
                             </div>

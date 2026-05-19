@@ -34,29 +34,46 @@ class AgreementController extends Controller
         }
 
         $request->validate([
-            'signed_file' => 'required|file|mimes:pdf,docx,doc|max:25600',
+            'signature' => 'required|string',
         ]);
 
-        if ($request->hasFile('signed_file')) {
+        $signatureData = $request->input('signature');
+
+        if (preg_match('/^data:image\/(\w+);base64,/', $signatureData, $type)) {
+            $data = substr($signatureData, strpos($signatureData, ',') + 1);
+            $type = strtolower($type[1]); // png, jpg, etc
+
+            if (! in_array($type, ['png', 'jpg', 'jpeg'])) {
+                return back()->with('error', 'Invalid signature image type.');
+            }
+
+            $data = base64_decode($data);
+
+            if ($data === false) {
+                return back()->with('error', 'Signature decoding failed.');
+            }
+
             if ($agreement->entrepreneur_file) {
                 Storage::disk('public')->delete($agreement->entrepreneur_file);
             }
 
-            $file = $request->file('signed_file');
-            $path = $file->store('agreements/signed', 'public');
+            $filename = 'signature_'.time().'.'.$type;
+            $path = 'agreements/signed/'.$filename;
+
+            Storage::disk('public')->put($path, $data);
 
             $agreement->update([
                 'entrepreneur_file' => $path,
-                'entrepreneur_filename' => $file->getClientOriginalName(),
-                'entrepreneur_filesize' => round($file->getSize() / 1048576, 2) . ' MB',
+                'entrepreneur_filename' => $filename,
+                'entrepreneur_filesize' => round(strlen($data) / 1048576, 2).' MB',
                 'status' => 'active',
                 'agreement_date' => now()->toDateString(),
             ]);
 
-            return back()->with('success', 'Signed agreement document uploaded and finalized successfully!');
+            return back()->with('success', 'Agreement signed and finalized successfully!');
         }
 
-        return back()->with('error', 'Please upload a valid document.');
+        return back()->with('error', 'Please provide a valid signature.');
     }
 
     public function reject(Request $request, Agreement $agreement)

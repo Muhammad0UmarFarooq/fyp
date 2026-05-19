@@ -101,7 +101,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                 <!-- Stat 1 -->
                 <div>
-                    <div class="text-3xl md:text-4xl font-extrabold text-brand-green mb-2">$100M+</div>
+                    <div class="text-3xl md:text-4xl font-extrabold text-brand-green mb-2">PKR 100M+</div>
                     <div class="text-[9px] font-bold tracking-[0.15em] text-gray-500 uppercase">Capital Deployed</div>
                 </div>
                 <!-- Stat 2 -->

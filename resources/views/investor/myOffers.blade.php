@@ -59,7 +59,7 @@
                             </div>
                             <div class="text-right">
                                 <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Offer Amount</div>
-                                <div class="text-3xl font-bold text-brand-green">${{ number_format($offer->offer_amount) }}</div>
+                                <div class="text-3xl font-bold text-brand-green">PKR {{ number_format($offer->offer_amount) }}</div>
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@
                             </div>
                             <div>
                                 <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Return Value</div>
-                                <div class="text-lg font-bold">${{ number_format($offer->valuation) }}</div>
+                                <div class="text-lg font-bold">PKR {{ number_format($offer->valuation) }}</div>
                             </div>
                             <div>
                                 <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Date Sent</div>
@@ -114,7 +114,7 @@
                             @csrf
                             @method('PUT')
                             <div class="space-y-1">
-                                <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Offer Amount ($)</label>
+                                <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Offer Amount (PKR)</label>
                                 <input type="number" name="offer_amount" value="{{ $offer->offer_amount }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
                             </div>
                             <div class="space-y-1">
@@ -122,7 +122,7 @@
                                 <input type="text" name="time_period" value="{{ $offer->time_period }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
                             </div>
                             <div class="space-y-1">
-                                <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Return Value ($)</label>
+                                <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Return Value (PKR)</label>
                                 <input type="number" name="valuation" value="{{ $offer->valuation }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
                             </div>
                             <div class="md:col-span-3 flex justify-end space-x-3 pt-4 items-center">

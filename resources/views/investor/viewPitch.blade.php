@@ -65,11 +65,11 @@
                         </div>
                         <div class="space-y-2">
                             <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Invested Amount (Owner Investment)</label>
-                            <input type="text" value="{{ $pitch && $pitch->invested_amount ? '$ ' . number_format($pitch->invested_amount) : 'N/A' }}" readonly class="w-full bg-[#0b1120] border border-transparent rounded px-4 py-4 text-sm text-gray-200 focus:outline-none">
+                            <input type="text" value="{{ $pitch && $pitch->invested_amount ? 'PKR ' . number_format($pitch->invested_amount) : 'N/A' }}" readonly class="w-full bg-[#0b1120] border border-transparent rounded px-4 py-4 text-sm text-gray-200 focus:outline-none">
                         </div>
                         <div class="space-y-2">
                             <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Monthly Net Value (Total Revenue - Total Expenses)</label>
-                            <input type="text" value="{{ $pitch && $pitch->monthly_net_value ? '$ ' . number_format($pitch->monthly_net_value) : 'N/A' }}" readonly class="w-full bg-[#0b1120] border border-transparent rounded px-4 py-4 text-sm text-gray-200 focus:outline-none">
+                            <input type="text" value="{{ $pitch && $pitch->monthly_net_value ? 'PKR ' . number_format($pitch->monthly_net_value) : 'N/A' }}" readonly class="w-full bg-[#0b1120] border border-transparent rounded px-4 py-4 text-sm text-gray-200 focus:outline-none">
                         </div>
                         <div class="space-y-2">
                             <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Monthly Growth</label>
@@ -111,7 +111,7 @@
                     <div class="flex justify-between items-start">
                         <div class="space-y-8 flex-1 max-w-md">
                             <div class="space-y-2">
-                                <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required ($)</label>
+                                <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required (PKR)</label>
                                 <div class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 text-xl font-bold text-white">
                                     <span class="text-gray-600 mr-2">$</span> {{ $pitch && $pitch->funding_required ? number_format($pitch->funding_required) : '0' }}
                                 </div>
@@ -126,7 +126,7 @@
 
                         <div class="ml-12 bg-[#1e293b] rounded-2xl p-8 flex-shrink-0 w-80 text-center shadow-xl border border-white/5">
                             <div class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-4">Total Valuation</div>
-                            <div class="text-4xl font-black text-brand-green">${{ $pitch && $pitch->total_valuation ? number_format($pitch->total_valuation) : '0' }}</div>
+                            <div class="text-4xl font-black text-brand-green">PKR {{ $pitch && $pitch->total_valuation ? number_format($pitch->total_valuation) : '0' }}</div>
                         </div>
                     </div>
                 </div>
