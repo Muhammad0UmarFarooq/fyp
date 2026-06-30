@@ -92,8 +92,8 @@
                         <div>
                             <label class="label">Phone No(start from 3)</label>
                             <input type="tel" name="phone" placeholder="+923XXXXXXX" class="input" required
-                                maxlength="11" pattern="0[0-9]{10}"
-                                title="Phone number must start with 0 and contain exactly 11 digits."
+                                maxlength="11" pattern="3[0-9]{10}"
+                                title="Phone number must start with 3 and contain exactly 11 digits."
                                 oninput="this.value=this.value.replace(/[^0-9]/g,'')">
                         </div>
 
