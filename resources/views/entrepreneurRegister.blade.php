@@ -35,9 +35,9 @@
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Full
                                 Legal Name</label>
-                            <input type="text" name="name" placeholder="Johnathan Doe"
-                                class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                required>
+                            <input type="text" name="name" placeholder="Johnathan Doe" class="input" required
+                                maxlength="25" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$"
+                                title="Only letters and single spaces allowed. Maximum 25 characters.">
                         </div>
 
                         <!-- Professional Email -->
@@ -45,9 +45,9 @@
                             <label
                                 class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Professional
                                 Email</label>
-                            <input type="email" name="email" placeholder="name@firm.com"
-                                class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                autocomplete="off" required>
+                            <input type="email" name="email" class="input" placeholder="example@gmail.com"
+                                maxlength="100" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required
+                                title="Enter a valid email address (e.g., user@example.com).">
                         </div>
 
                         <!-- CNIC -->
@@ -56,16 +56,15 @@
                                 (13-Digit Format)</label>
                             <input type="text" name="cnic" placeholder="XXXXX-XXXXXXX-X"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                required>
+                                required maxlength="15" title="CNIC must be in the format XXXXX-XXXXXXX-X">
                         </div>
 
                         <!-- Phone No -->
-                        <div class="space-y-2.5">
-                            <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Phone No
-                                (+92)</label>
-                            <input type="text" name="phone" placeholder="+92 - "
-                                class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                required>
+                        <div>
+                            <label class="label">Phone No</label>
+                            <input type="text" name="phone" placeholder="+92-3XXXXXXXXX" class="input" required
+                                maxlength="15" pattern="^\+92-3\d{9}$"
+                                title="Phone number must start with 3 and have exactly 10 digits (excluding +92-)">
                         </div>
 
                         <!-- City -->
@@ -116,52 +115,63 @@
                         <div class="space-y-2.5">
                             <label
                                 class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Business</label>
-                            <input type="text" name="company_name" placeholder="Shoes Shop"
+                            <input type="text" name="company_name" placeholder="Shoes Shop Store"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                required>
+                                pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$" maxlength="50" required
+                                title="Business name: letters only with single spaces between words. No numbers, symbols or double spaces.">
                         </div>
 
                         <!-- Experience -->
                         <div class="space-y-2.5">
-                            <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Experience (Years)</label>
-                            <input type="number" name="experience" placeholder="e.g. 3 Years"
+                            <label
+                                class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Experience
+                                (Years)</label>
+                            <input type="text" inputmode="numeric" name="experience" placeholder="e.g. 3"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                required>
+                                pattern="^([0-5]?[0-9]|60)$" maxlength="2" required
+                                title="Experience must be between 0 and 60 years (max 2 digits).">
                         </div>
                         <!-- Total Valuation -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Total
                                 Valuation</label>
-                            <input type="number" name="total_valuation" placeholder="e.g. 5000000"
-                                class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                required>
+                            <input type="number" id="total_valuation" name="total_valuation" placeholder="e.g. 50000"
+                                class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                min="50000" max="1000000000" required
+                                title="Total Valuation must be between 50,000 and 1,000,000,000 (1 Billion).">
+                            <p id="total_val_error" class="hidden text-red-500 text-[11px] font-semibold mt-1"></p>
                         </div>
 
                         <!-- Future Valuation -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Future
                                 Valuation</label>
-                            <input type="number" name="future_valuation" placeholder="i.e 100 00000"
-                                class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                required>
+                            <input type="number" id="future_valuation" name="future_valuation" placeholder="e.g. 80000"
+                                class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                min="80000" max="100000000000" required
+                                title="Future Valuation must be between 80,000 and 100,000,000,000 (100 Billion).">
+                            <p id="future_val_error" class="hidden text-red-500 text-[11px] font-semibold mt-1"></p>
                         </div>
 
                         <!-- Secure Password -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Secure
                                 Password</label>
-                            <input type="password" name="password" placeholder="••••••••••••"
+                            <input type="password" id="password" name="password" placeholder="••••••••••••"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-xl text-gray-800 placeholder-gray-300 tracking-[0.2em] focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                autocomplete="new-password" required>
+                                maxlength="16" autocomplete="new-password" required
+                                title="Password: max 16 characters, must include at least 1 uppercase letter, 1 number, and 1 special symbol.">
+                            <p id="pw_error" class="hidden text-red-500 text-[11px] font-semibold mt-1"></p>
                         </div>
 
                         <!-- Confirm Password -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Confirm
                                 Password</label>
-                            <input type="password" name="password_confirmation" placeholder="••••••••••••"
+                            <input type="password" id="password_confirmation" name="password_confirmation" placeholder="••••••••••••"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-xl text-gray-800 placeholder-gray-300 tracking-[0.2em] focus:outline-none focus:ring-1 focus:ring-brand-green"
-                                autocomplete="new-password" required>
+                                maxlength="16" autocomplete="new-password" required>
+                            <p id="pw_confirm_error" class="hidden text-red-500 text-[11px] font-semibold mt-1"></p>
                         </div>
 
                     </div>
@@ -194,6 +204,323 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent entering 'e', 'E', '+', '-' in number fields
+            const numberInputs = document.querySelectorAll('input[type="number"]');
+            numberInputs.forEach(input => {
+                input.addEventListener('keydown', function(e) {
+                    if (['e', 'E', '+', '-'].includes(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+                input.addEventListener('paste', function(e) {
+                    const clipboardData = e.clipboardData || window.clipboardData;
+                    const pastedData = clipboardData.getData('text');
+                    if (/[eE\+\-]/.test(pastedData)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            // Business field – letters + single spaces between words only (no double spaces)
+            const businessInput = document.querySelector('input[name="company_name"]');
+            if (businessInput) {
+                businessInput.addEventListener('keydown', function(e) {
+                    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Home', 'End'];
+                    if (allowedKeys.includes(e.key)) return;
+                    if (e.ctrlKey || e.metaKey) return;
+
+                    if (e.key === ' ') {
+                        // Block space if field is empty or the last typed character is already a space
+                        if (this.value.length === 0 || this.value.endsWith(' ')) {
+                            e.preventDefault();
+                        }
+                        return;
+                    }
+
+                    // Only letters allowed
+                    if (!/^[A-Za-z]$/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+
+                businessInput.addEventListener('input', function() {
+                    // Strip anything that isn't a letter or space
+                    let val = this.value.replace(/[^A-Za-z ]/g, '');
+                    // Remove leading space
+                    val = val.replace(/^ +/, '');
+                    // Collapse any double (or more) spaces into a single space
+                    val = val.replace(/ {2,}/g, ' ');
+                    this.value = val;
+                });
+
+                businessInput.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+                    // Keep only letters and spaces, collapse multiple spaces, trim leading space
+                    let clean = pasted
+                        .replace(/[^A-Za-z ]/g, '')
+                        .replace(/^ +/, '')
+                        .replace(/ {2,}/g, ' ');
+                    // Insert at cursor position and re-sanitize
+                    const start = this.selectionStart;
+                    const end = this.selectionEnd;
+                    let current = this.value;
+                    let combined = current.substring(0, start) + clean + current.substring(end);
+                    combined = combined.replace(/^ +/, '').replace(/ {2,}/g, ' ');
+                    this.value = combined.substring(0, 50);
+                });
+            }
+
+            // Experience field – strict 2-digit, max 60 enforcement
+            const experienceInput = document.querySelector('input[name="experience"]');
+            if (experienceInput) {
+                // Block invalid key presses in real-time
+                experienceInput.addEventListener('keydown', function(e) {
+                    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+                    if (allowedKeys.includes(e.key)) return;
+
+                    // Only digits allowed
+                    if (!/^\d$/.test(e.key)) {
+                        e.preventDefault();
+                        return;
+                    }
+
+                    const current = this.value;
+
+                    // Block if already 2 digits
+                    if (current.length >= 2) {
+                        e.preventDefault();
+                        return;
+                    }
+
+                    // If first digit is 6, only '0' is allowed as second digit
+                    if (current === '6' && e.key !== '0') {
+                        e.preventDefault();
+                        return;
+                    }
+
+                    // Block any first digit > 6 (7,8,9 would exceed 60 even as tens digit)
+                    // Allow 0-6 as first digit only
+                    if (current.length === 0 && parseInt(e.key) > 6) {
+                        e.preventDefault();
+                        return;
+                    }
+                });
+
+                // Sanitize on paste or autofill
+                experienceInput.addEventListener('input', function() {
+                    // Strip non-digits
+                    let val = this.value.replace(/\D/g, '');
+                    // Take only first 2 digits
+                    if (val.length > 2) val = val.substring(0, 2);
+                    // Clamp: if value > 60, set to 60
+                    if (val !== '' && parseInt(val, 10) > 60) val = '60';
+                    this.value = val;
+                });
+            }
+
+            // ── Total Valuation: 50,000 – 1,000,000,000 ──
+            const totalValInput = document.getElementById('total_valuation');
+            const totalValError = document.getElementById('total_val_error');
+
+            function showTotalValError(msg) {
+                totalValError.textContent = msg;
+                totalValError.classList.remove('hidden');
+                totalValInput.classList.add('border-red-500', 'focus:ring-red-500');
+                totalValInput.classList.remove('focus:ring-brand-green');
+                totalValInput.setCustomValidity(msg);
+            }
+            function clearTotalValError() {
+                totalValError.textContent = '';
+                totalValError.classList.add('hidden');
+                totalValInput.classList.remove('border-red-500', 'focus:ring-red-500');
+                totalValInput.classList.add('focus:ring-brand-green');
+                totalValInput.setCustomValidity('');
+            }
+
+            if (totalValInput) {
+                totalValInput.addEventListener('input', function() {
+                    const val = parseFloat(this.value);
+                    if (isNaN(val) || this.value === '') { clearTotalValError(); return; }
+                    if (val < 50000) {
+                        showTotalValError('Current valuation minimum should be 50,000.');
+                    } else if (val > 1000000000) {
+                        showTotalValError('Total Valuation must be under 1,000,000,000 (1 Billion).');
+                    } else {
+                        clearTotalValError();
+                    }
+                });
+                totalValInput.addEventListener('blur', function() {
+                    const val = parseFloat(this.value);
+                    if (!isNaN(val) && val < 50000) {
+                        showTotalValError('Current valuation minimum should be 50,000.');
+                    } else if (!isNaN(val) && val > 1000000000) {
+                        showTotalValError('Total Valuation must be under 1,000,000,000 (1 Billion).');
+                    }
+                });
+            }
+
+            // ── Future Valuation: 80,000 – 100,000,000,000 ──
+            const futureValInput = document.getElementById('future_valuation');
+            const futureValError = document.getElementById('future_val_error');
+
+            function showFutureValError(msg) {
+                futureValError.textContent = msg;
+                futureValError.classList.remove('hidden');
+                futureValInput.classList.add('border-red-500', 'focus:ring-red-500');
+                futureValInput.classList.remove('focus:ring-brand-green');
+                futureValInput.setCustomValidity(msg);
+            }
+            function clearFutureValError() {
+                futureValError.textContent = '';
+                futureValError.classList.add('hidden');
+                futureValInput.classList.remove('border-red-500', 'focus:ring-red-500');
+                futureValInput.classList.add('focus:ring-brand-green');
+                futureValInput.setCustomValidity('');
+            }
+
+            if (futureValInput) {
+                futureValInput.addEventListener('input', function() {
+                    const val = parseFloat(this.value);
+                    if (isNaN(val) || this.value === '') { clearFutureValError(); return; }
+                    if (val < 80000) {
+                        showFutureValError('Future valuation minimum should be 80,000.');
+                    } else if (val > 100000000000) {
+                        showFutureValError('Future Valuation must be under 100,000,000,000 (100 Billion).');
+                    } else {
+                        clearFutureValError();
+                    }
+                });
+                futureValInput.addEventListener('blur', function() {
+                    const val = parseFloat(this.value);
+                    if (!isNaN(val) && val < 80000) {
+                        showFutureValError('Future valuation minimum should be 80,000.');
+                    } else if (!isNaN(val) && val > 100000000000) {
+                        showFutureValError('Future Valuation must be under 100,000,000,000 (100 Billion).');
+                    }
+                });
+            }
+
+            const cnicInput = document.querySelector('input[name="cnic"]');
+
+            if (cnicInput) {
+                cnicInput.addEventListener('input', function(e) {
+                    let val = e.target.value.replace(/\D/g, ''); // Remove non-digits
+                    if (val.length > 13) {
+                        val = val.substring(0, 13);
+                    }
+                    let formatted = '';
+                    if (val.length > 0) {
+                        formatted += val.substring(0, 5);
+                    }
+                    if (val.length > 5) {
+                        formatted += '-' + val.substring(5, 12);
+                    }
+                    if (val.length > 12) {
+                        formatted += '-' + val.substring(12, 13);
+                    }
+                    e.target.value = formatted;
+                });
+            }
+
+            const phoneInput = document.querySelector('input[name="phone"]');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let rawVal = e.target.value;
+                    let digits = rawVal.replace(/\D/g, '');
+
+                    // Strip leading zeros
+                    while (digits.startsWith('0')) {
+                        digits = digits.substring(1);
+                    }
+
+                    let phoneDigits = '';
+                    if (digits.startsWith('923')) {
+                        phoneDigits = digits.substring(2); // Keep starting with 3
+                    } else if (digits.startsWith('3')) {
+                        phoneDigits = digits;
+                    } else {
+                        phoneDigits = '';
+                    }
+
+                    // Max 10 digits
+                    if (phoneDigits.length > 10) {
+                        phoneDigits = phoneDigits.substring(0, 10);
+                    }
+
+                    if (phoneDigits.length > 0) {
+                        e.target.value = '+92-' + phoneDigits;
+                    } else {
+                        e.target.value = '';
+                    }
+                });
+            }
+
+            // ── Password Validation ──
+            const pwInput        = document.getElementById('password');
+            const pwError        = document.getElementById('pw_error');
+            const pwConfirmInput = document.getElementById('password_confirmation');
+            const pwConfirmError = document.getElementById('pw_confirm_error');
+
+            function validatePassword(val) {
+                if (val.length > 16)          return 'Password must not exceed 16 characters.';
+                if (!/[A-Z]/.test(val))        return 'Password must contain at least 1 uppercase letter.';
+                if (!/[0-9]/.test(val))        return 'Password must contain at least 1 number.';
+                if (!/[^A-Za-z0-9]/.test(val)) return 'Password must contain at least 1 special symbol (e.g. @, #, $).';
+                return '';
+            }
+
+            function showPwError(msg) {
+                pwError.textContent = msg;
+                pwError.classList.remove('hidden');
+                pwInput.classList.add('border-red-500');
+                pwInput.setCustomValidity(msg);
+            }
+            function clearPwError() {
+                pwError.textContent = '';
+                pwError.classList.add('hidden');
+                pwInput.classList.remove('border-red-500');
+                pwInput.setCustomValidity('');
+            }
+
+            if (pwInput) {
+                pwInput.addEventListener('input', function() {
+                    if (this.value === '') { clearPwError(); return; }
+                    const msg = validatePassword(this.value);
+                    msg ? showPwError(msg) : clearPwError();
+                    // Re-check confirm field if already filled
+                    if (pwConfirmInput && pwConfirmInput.value) {
+                        pwConfirmInput.dispatchEvent(new Event('input'));
+                    }
+                });
+            }
+
+            if (pwConfirmInput) {
+                pwConfirmInput.addEventListener('input', function() {
+                    if (this.value === '') {
+                        pwConfirmError.textContent = '';
+                        pwConfirmError.classList.add('hidden');
+                        this.classList.remove('border-red-500');
+                        this.setCustomValidity('');
+                        return;
+                    }
+                    if (pwInput && this.value !== pwInput.value) {
+                        pwConfirmError.textContent = 'Passwords do not match.';
+                        pwConfirmError.classList.remove('hidden');
+                        this.classList.add('border-red-500');
+                        this.setCustomValidity('Passwords do not match.');
+                    } else {
+                        pwConfirmError.textContent = '';
+                        pwConfirmError.classList.add('hidden');
+                        this.classList.remove('border-red-500');
+                        this.setCustomValidity('');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

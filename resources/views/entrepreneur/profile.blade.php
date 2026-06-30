@@ -273,6 +273,25 @@
 
 </body>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent entering 'e', 'E', '+', '-' in number fields
+            const numberInputs = document.querySelectorAll('input[type="number"]');
+            numberInputs.forEach(input => {
+                input.addEventListener('keydown', function(e) {
+                    if (['e', 'E', '+', '-'].includes(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+                input.addEventListener('paste', function(e) {
+                    const clipboardData = e.clipboardData || window.clipboardData;
+                    const pastedData = clipboardData.getData('text');
+                    if (/[eE\+\-]/.test(pastedData)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        });
+
         const imageForm = document.getElementById('profileImageForm');
         const imageInput = document.getElementById('profileImageInput');
         const previewContainer = document.getElementById('imagePreviewContainer');
