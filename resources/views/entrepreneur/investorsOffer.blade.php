@@ -54,18 +54,18 @@
                             </div>
                             <div class="text-right">
                                 <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-1">Offer Amount</div>
-                                <div class="text-4xl font-bold text-brand-green">PKR {{ number_format($offer->offer_amount) }}</div>
+                                <div class="text-4xl font-bold text-brand-green">Rs {{ number_format($offer->offer_amount) }}</div>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-3 gap-8 mb-10">
                             <div>
-                                <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-2">Time Period</div>
+                                <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-2">Return Time (years)</div>
                                 <div class="text-xl font-bold text-gray-200">{{ $offer->time_period }}</div>
                             </div>
                             <div>
                                 <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-2">Valuation</div>
-                                <div class="text-xl font-bold text-gray-200">PKR {{ number_format($offer->valuation) }}</div>
+                                <div class="text-xl font-bold text-gray-200">Rs {{ number_format($offer->valuation) }}</div>
                             </div>
                             <div>
                                 <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-2">Date</div>

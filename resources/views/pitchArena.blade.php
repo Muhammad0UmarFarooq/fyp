@@ -88,7 +88,7 @@
                                 <div class="text-lg font-bold text-white">PKR {{ number_format($pitch->monthly_net_value) }}</div>
                             </div>
                             <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Time Period</div>
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Return Time (years)</div>
                                 <div class="text-lg font-bold text-brand-green">{{ $pitch->return_time }}</div>
                             </div>
                             <div class="bg-brand-box rounded px-5 py-4 border border-white/5">

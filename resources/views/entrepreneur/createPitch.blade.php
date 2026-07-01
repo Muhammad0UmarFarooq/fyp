@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Create Your Pitch - InvestBridge</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet" />
-    
+
     <!-- Tailwind & Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="bg-[#0b1120] text-white font-sans min-h-screen antialiased">
 
     <x-navbar />
@@ -25,11 +27,13 @@
                 <div class="mb-12">
                     <h1 class="text-4xl font-bold mb-4">Create Your Pitch</h1>
                     <p class="text-gray-400 text-sm max-w-2xl leading-relaxed">
-                        Transform your vision into an institutional-grade investment opportunity. Complete the following dimensions of your venture.
+                        Transform your vision into an institutional-grade investment opportunity. Complete the following
+                        dimensions of your venture.
                     </p>
                 </div>
 
-                <form method="POST" action="{{ route('entrepreneur.pitch.store') }}" enctype="multipart/form-data" class="space-y-16">
+                <form method="POST" action="{{ route('entrepreneur.pitch.store') }}" enctype="multipart/form-data"
+                    class="space-y-16">
                     @csrf
 
                     @if ($errors->any())
@@ -48,112 +52,162 @@
                             <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-sm">01. VIDEO TRANSMISSION</h2>
                             <span class="text-[10px] text-gray-500 font-bold uppercase">MAX 2,500 MB - MP4/MOV</span>
                         </div>
-                        
-                        <div id="drop-zone" class="relative w-full aspect-video bg-[#111625] rounded-xl overflow-hidden border border-white/5 group cursor-pointer transition-colors duration-300" onclick="document.getElementById('video-upload').click()">
-                            <input type="file" name="video" id="video-upload" accept="video/mp4,video/quicktime" class="hidden" onchange="handleFileSelect(event)">
-                            <img id="placeholder-img" src="{{ asset('images/shoes_shop.jpg') }}" class="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity">
-                            <video id="video-preview" class="hidden w-full h-full object-cover z-10 relative" controls></video>
-                            
-                            <div id="upload-overlay" class="absolute inset-0 flex flex-col items-center justify-center space-y-4 pointer-events-none z-20">
-                                <div class="bg-brand-green/20 p-4 rounded-xl border border-brand-green/30 transition-transform group-hover:scale-110 duration-300">
-                                    <svg class="w-6 h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+
+                        <div id="drop-zone"
+                            class="relative w-full aspect-video bg-[#111625] rounded-xl overflow-hidden border border-white/5 group cursor-pointer transition-colors duration-300"
+                            onclick="document.getElementById('video-upload').click()">
+                            <input type="file" required name="video" id="video-upload" accept="video/mp4,video/quicktime"
+                                class="hidden" onchange="handleFileSelect(event)">
+                            <img id="placeholder-img" src="{{ asset('images/shoes_shop.jpg') }}"
+                                class="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity">
+                            <video id="video-preview" class="hidden w-full h-full object-cover z-10 relative"
+                                controls></video>
+
+                            <div id="upload-overlay"
+                                class="absolute inset-0 flex flex-col items-center justify-center space-y-4 pointer-events-none z-20">
+                                <div
+                                    class="bg-brand-green/20 p-4 rounded-xl border border-brand-green/30 transition-transform group-hover:scale-110 duration-300">
+                                    <svg class="w-6 h-6 text-brand-green" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
                                 </div>
-                                <span id="upload-text" class="text-sm font-medium text-gray-300">Drop your executive pitch here or click to browse</span>
+                                <span id="upload-text" class="text-sm font-medium text-gray-300">Drop your executive
+                                    pitch here or click to browse</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- 02. Pitches Identity -->
                     <div class="space-y-8">
-                        <h2 class="text-[#facc15] font-bold tracking-[0.2em] text-sm uppercase">02. Pitches Identity</h2>
-                        
+                        <h2 class="text-[#facc15] font-bold tracking-[0.2em] text-sm uppercase">02. Pitches Identity
+                        </h2>
+
                         <div id="pitch-identity-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
                             <div class="space-y-2">
-                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Startup Name</label>
-                                <input type="text" name="startup_name" placeholder="Enter your startup name" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm" required>
+                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Startup
+                                    Name</label>
+                                <input type="text" required name="startup_name" value="{{ old('startup_name') }}" placeholder="Enter your startup name"
+                                    maxlength="20" pattern="^[A-Za-z ]{1,20}$"
+                                    oninput="this.value=this.value.replace(/[^A-Za-z ]/g,'')"
+                                    class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm"
+                                    required>
                             </div>
                             <div class="space-y-2">
-                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Invested Amount (Owner Investment)</label>
-                                <input type="text" name="invested_amount" placeholder="e.g. PKR 5,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Invested
+                                    Amount (Owner Investment)</label>
+                                <input type="number" required name="invested_amount" value="{{ old('invested_amount') }}" placeholder="e.g. 5000000" min="50000"
+                                    max="1000000000" oninput="validateMax(this, 1000000000)"
+                                    class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div class="space-y-2">
-                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Net Value(Total Revenue - Total Expenses )</label>
-                                <input type="text" name="monthly_net_value" placeholder="e.g. PKR 1,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly
+                                    Net Value(Total Revenue - Total Expenses )</label>
+                                <input type="number" required name="monthly_net_value" value="{{ old('monthly_net_value') }}" placeholder="e.g. 1000000" min="20000"
+                                    max="1000000000" oninput="validateMax(this, 1000000000)"
+                                    class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div id="monthly-growth-field" class="space-y-2">
-                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Growth</label>
+                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly
+                                    Growth</label>
                                 <div class="flex items-center bg-[#0b1120] border border-white/5 rounded">
-                                    <input type="text" name="monthly_growth" placeholder="e.g. 22%" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
+                                    <input type="number" required name="monthly_growth" value="{{ old('monthly_growth') }}" placeholder="e.g. 22" min="1"
+                                        max="100" oninput="validateRange(this,1,100)"
+                                        class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
                                     <div class="p-2">
-                                        <button type="button" onclick="removeFinalField('monthly-growth-field')" class="bg-white w-8 h-8 flex items-center justify-center rounded shadow-sm group">
-                                            <div class="bg-[#ff0000] w-6 h-6 rounded-full flex items-center justify-center group-hover:bg-[#b30000] transition-colors">
-                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"></path></svg>
+                                        <button type="button" onclick="removeFinalField('monthly-growth-field')"
+                                            class="bg-white w-8 h-8 flex items-center justify-center rounded shadow-sm group">
+                                            <div
+                                                class="bg-[#ff0000] w-6 h-6 rounded-full flex items-center justify-center group-hover:bg-[#b30000] transition-colors">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="3" d="M20 12H4"></path>
+                                                </svg>
                                             </div>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Add Button Box (Always at the end) -->
-                            <div id="add-button-box" class="bg-[#0b1120] border border-white/5 h-[84px] rounded flex items-center justify-center">
-                                <button type="button" onclick="showFieldCreator()" class="bg-white w-10 h-10 flex items-center justify-center rounded shadow-sm group">
-                                    <div class="bg-[#007bff] w-8 h-8 rounded-full flex items-center justify-center group-hover:bg-[#0056b3] transition-colors">
-                                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
+                            <div id="add-button-box"
+                                class="bg-[#0b1120] border border-white/5 h-[84px] rounded flex items-center justify-center">
+                                <button type="button" onclick="showFieldCreator()"
+                                    class="bg-white w-10 h-10 flex items-center justify-center rounded shadow-sm group">
+                                    <div
+                                        class="bg-[#007bff] w-8 h-8 rounded-full flex items-center justify-center group-hover:bg-[#0056b3] transition-colors">
+                                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M12 4v16m8-8H4"></path>
+                                        </svg>
                                     </div>
                                 </button>
                             </div>
                         </div>
-                            <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Vision Statement</label>
-                            <textarea name="vision_statement" rows="4" placeholder="Describe your vision for the future of this venture..." class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed"></textarea>
-                        </div>
+                        <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Vision
+                            Statement</label>
+                        <textarea name="vision_statement" rows="4" placeholder="Describe your vision for the future of this venture..."
+                            class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed"></textarea>
                     </div>
-
-                    <!-- 03. The Capital Architecture -->
-                    <div class="bg-[#111625] border border-white/5 p-8 rounded-2xl space-y-8">
-                        <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-sm">03. THE CAPITAL ARCHITECTURE</h2>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                            <div class="space-y-6">
-                                <div class="space-y-2">
-                                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required (PKR)</label>
-                                    <input type="text" name="funding_required" placeholder="e.g. PKR 5,000,000" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Return Time (Period)</label>
-                                    <input type="text" name="return_time" placeholder="e.g. 2 years" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
-                                </div>
-                            </div>
-
-                            <div class="bg-[#0b1120] p-10 rounded-xl border border-white/5 text-center">
-                                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total Valuation</label>
-                                <div class="flex items-center justify-center space-x-2">
-                                    <span class="text-5xl font-bold text-brand-green">PKR</span>
-                                    <input type="text" name="total_valuation" placeholder="10,000,000" class="bg-transparent text-5xl font-bold text-brand-green focus:outline-none w-full text-center">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Publish Button -->
-                    <div class="flex justify-center pb-12">
-                        <button type="submit" class="bg-[#4ade80] text-[#064e3b] px-16 py-4 rounded font-bold text-sm tracking-widest uppercase hover:bg-[#3dbd6d] transition-all shadow-xl shadow-brand-green/10">
-                            Publish Pitch
-                        </button>
-                    </div>
-                </form>
             </div>
-        </main>
+
+            <!-- 03. The Capital Architecture -->
+            <div class="bg-[#111625] border border-white/5 p-8 rounded-2xl space-y-8">
+                <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-sm">03. THE CAPITAL ARCHITECTURE</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount
+                                Required (Rs)</label>
+                            <input type="text" required name="funding_required" value="{{ old('funding_required') }}" placeholder="e.g. Rs 5,000,000"
+                                class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Return Time
+                                (years)</label>
+                            <input type="text" required name="return_time" value="{{ old('return_time') }}" placeholder="e.g. 2 years"
+                                class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                        </div>
+                    </div>
+
+                    <div class="bg-[#0b1120] p-10 rounded-xl border border-white/5 text-center">
+                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total
+                            Valuation</label>
+                        <div class="flex items-center justify-center space-x-2">
+                            <span class="text-5xl font-bold text-brand-green">Rs</span>
+                            <input type="text" required name="total_valuation" value="{{ old('total_valuation') }}" placeholder="10,000,000"
+                                class="bg-transparent text-5xl font-bold text-brand-green focus:outline-none w-full text-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Publish Button -->
+            <div class="flex justify-center pb-12">
+                <button type="submit"
+                    class="bg-[#4ade80] text-[#064e3b] px-16 py-4 rounded font-bold text-sm tracking-widest uppercase hover:bg-[#3dbd6d] transition-all shadow-xl shadow-brand-green/10">
+                    Publish Pitch
+                </button>
+            </div>
+            </form>
+    </div>
+    </main>
     </div>
 
     <script>
         let fieldCount = 0;
-        
+
         function showFieldCreator() {
             fieldCount++;
             const grid = document.getElementById('pitch-identity-grid');
             const addButtonBox = document.getElementById('add-button-box');
             const creatorId = `creator-${fieldCount}`;
-            
+
             const creatorHTML = `
                 <div id="${creatorId}" class="bg-[#0b1120] border border-white/10 p-4 rounded space-y-3">
                     <div class="space-y-1">
@@ -170,7 +224,7 @@
                     </div>
                 </div>
             `;
-            
+
             // Insert before the add button box
             addButtonBox.insertAdjacentHTML('beforebegin', creatorHTML);
         }
@@ -182,7 +236,7 @@
             const value = valueInput.value || '';
             const creator = document.getElementById(`creator-${id}`);
             const addButtonBox = document.getElementById('add-button-box');
-            
+
             const fieldId = `field-final-${id}`;
             const fieldHTML = `
                 <div id="${fieldId}" class="space-y-2">
@@ -200,14 +254,14 @@
                     </div>
                 </div>
             `;
-            
+
             // Remove the creator box
             creator.remove();
-            
+
             // Insert the permanent field before the add button box
             addButtonBox.insertAdjacentHTML('beforebegin', fieldHTML);
         }
-        
+
         function removeCreator(id) {
             document.getElementById(id).remove();
         }
@@ -215,9 +269,9 @@
         function removeFinalField(id) {
             document.getElementById(id).remove();
             // Also if they delete the monthly growth field
-            if(id === 'monthly-growth-field') {
+            if (id === 'monthly-growth-field') {
                 const mgf = document.getElementById('monthly-growth-field');
-                if(mgf) mgf.remove();
+                if (mgf) mgf.remove();
             }
         }
 
@@ -278,7 +332,7 @@
                         videoPreview.classList.remove('hidden');
                         placeholderImg.classList.add('hidden');
                         uploadOverlay.classList.add('hidden');
-                        
+
                         if (videoUpload.files !== files) {
                             const dataTransfer = new DataTransfer();
                             dataTransfer.items.add(file);
@@ -296,7 +350,34 @@
         videoPreview.addEventListener('click', function(e) {
             e.stopPropagation();
         });
+        //  added new function
+        function validateMax(input, max) {
+            // Remove non-digits
+            input.value = input.value.replace(/\D/g, '');
+
+            if (input.value !== '' && Number(input.value) > max) {
+                input.value = max;
+            }
+        }
+
+        function validateRange(input, min, max) {
+            // Remove non-digits
+            input.value = input.value.replace(/\D/g, '');
+
+            if (input.value === '') return;
+
+            let value = Number(input.value);
+
+            if (value > max) {
+                input.value = max;
+            }
+
+            if (value < min && input.value.length > 0) {
+                input.value = min;
+            }
+        }
     </script>
 
 </body>
+
 </html>

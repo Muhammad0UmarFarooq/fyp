@@ -22,9 +22,9 @@ class OfferController extends Controller
     public function store(Request $request, Pitch $pitch)
     {
         $validated = $request->validate([
-            'offer_amount' => 'required|numeric|min:1',
-            'time_period' => 'required|string|max:255',
-            'valuation' => 'required|numeric|min:1',
+            'offer_amount' => 'required|integer|min:50000|max:1000000000',
+            'time_period' => 'required|integer|min:1|max:10',
+            'valuation' => 'required|integer|min:50000|max:10000000000',
         ]);
 
         Offer::create([
@@ -46,9 +46,9 @@ class OfferController extends Controller
         }
 
         $validated = $request->validate([
-            'offer_amount' => 'required|numeric|min:1',
-            'time_period' => 'required|string|max:255',
-            'valuation' => 'required|numeric|min:1',
+            'offer_amount' => 'required|integer|min:50000|max:1000000000',
+            'time_period' => 'required|integer|min:1|max:10',
+            'valuation' => 'required|integer|min:50000|max:10000000000',
         ]);
 
         $offer->update([

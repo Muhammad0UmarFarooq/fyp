@@ -14,17 +14,17 @@ class PitchController extends Controller
     {
         $validated = $request->validate([
             'video' => 'required|file|mimes:mp4,mov|max:2500000', // 250MB
-            'startup_name' => 'required|string|max:255',
-            'invested_amount' => 'nullable|string',
-            'monthly_net_value' => 'nullable|string',
-            'monthly_growth' => 'nullable|string',
-            'vision_statement' => 'nullable|string',
+            'startup_name' => 'required|regex:/^[A-Za-z ]+$/|max:20',
+            'invested_amount' => 'required|integer|min:50000|max:1000000000',
+            'monthly_net_value' => 'required|integer|min:20000|max:1000000000',
+            'monthly_growth' => 'required|integer|min:1|max:100',
+            'vision_statement' => 'required|string',
             'additional_detail' => 'nullable|string',
-            'funding_required' => 'nullable|string',
-            'return_time' => 'nullable|string',
-            'total_valuation' => 'nullable|string',
-            'custom_fields.*.label' => 'nullable|string',
-            'custom_fields.*.value' => 'nullable|string',
+            'funding_required' => 'required|integer|min:50000|max:10000000000',
+            'return_time' => 'required|integer|min:1|max:10',
+            'total_valuation' => 'required|integer|min:50000|max:10000000000',
+            'custom_fields.*.label' => 'required|string',
+            'custom_fields.*.value' => 'required|string',
         ]);
 
         if (Pitch::where('user_id', auth()->id())->exists()) {
@@ -83,20 +83,19 @@ class PitchController extends Controller
         if ($pitch->user_id !== auth()->id()) {
             abort(403);
         }
-
-        $validated = $request->validate([
-            'video' => 'nullable|file|mimes:mp4,mov|max:2500000', // 250MB
-            'startup_name' => 'required|string|max:255',
-            'invested_amount' => 'nullable|string',
-            'monthly_net_value' => 'nullable|string',
-            'monthly_growth' => 'nullable|string',
-            'vision_statement' => 'nullable|string',
+         $validated = $request->validate([
+            'video' => 'required|file|mimes:mp4,mov|max:2500000', // 250MB
+            'startup_name' => 'required|regex:/^[A-Za-z ]+$/|max:20',
+            'invested_amount' => 'required|integer|min:50000|max:1000000000',
+            'monthly_net_value' => 'required|integer|min:20000|max:1000000000',
+            'monthly_growth' => 'required|integer|min:1|max:100',
+            'vision_statement' => 'required|string',
             'additional_detail' => 'nullable|string',
-            'funding_required' => 'nullable|string',
-            'return_time' => 'nullable|string',
-            'total_valuation' => 'nullable|string',
-            'custom_fields.*.label' => 'nullable|string',
-            'custom_fields.*.value' => 'nullable|string',
+            'funding_required' => 'required|integer|min:50000|max:10000000000',
+            'return_time' => 'required|integer|min:1|max:10',
+            'total_valuation' => 'required|integer|min:50000|max:10000000000',
+            'custom_fields.*.label' => 'required|string',
+            'custom_fields.*.value' => 'required|string',
         ]);
 
         try {

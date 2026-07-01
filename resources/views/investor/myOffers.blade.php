@@ -65,7 +65,7 @@
 
                         <div class="grid grid-cols-3 gap-8 mb-10">
                             <div>
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Return Time Period</div>
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Return Time (years)</div>
                                 <div class="text-lg font-bold">{{ $offer->time_period }}</div>
                             </div>
                             <div>
