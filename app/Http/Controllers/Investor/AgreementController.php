@@ -26,10 +26,6 @@ class AgreementController extends Controller
 
     public function upload(Request $request, Agreement $agreement)
     {
-        if ($agreement->investor_id !== auth()->id()) {
-            abort(403);
-        }
-
         $request->validate([
             'agreement_file' => 'required|file|mimes:pdf,docx,doc|max:25600',
         ]);
@@ -58,10 +54,6 @@ class AgreementController extends Controller
 
     public function removeFile(Agreement $agreement)
     {
-        if ($agreement->investor_id !== auth()->id()) {
-            abort(403);
-        }
-
         if ($agreement->agreement_file) {
             Storage::disk('public')->delete($agreement->agreement_file);
         }
@@ -78,10 +70,6 @@ class AgreementController extends Controller
 
     public function send(Agreement $agreement)
     {
-        if ($agreement->investor_id !== auth()->id()) {
-            abort(403);
-        }
-
         if (! $agreement->agreement_file) {
             return back()->with('error', 'Please upload a signed agreement document first.');
         }
@@ -95,10 +83,6 @@ class AgreementController extends Controller
 
     public function download(Agreement $agreement)
     {
-        if ($agreement->investor_id !== auth()->id() && $agreement->entrepreneur_id !== auth()->id()) {
-            abort(403);
-        }
-
         if (! $agreement->agreement_file || ! Storage::disk('public')->exists($agreement->agreement_file)) {
             return back()->with('error', 'Agreement file not found.');
         }
@@ -108,10 +92,6 @@ class AgreementController extends Controller
 
     public function downloadEntrepreneurFile(Agreement $agreement)
     {
-        if ($agreement->investor_id !== auth()->id() && $agreement->entrepreneur_id !== auth()->id()) {
-            abort(403);
-        }
-
         if (! $agreement->entrepreneur_file || ! Storage::disk('public')->exists($agreement->entrepreneur_file)) {
             return back()->with('error', 'Entrepreneur document not found.');
         }

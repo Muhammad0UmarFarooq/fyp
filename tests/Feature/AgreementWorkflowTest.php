@@ -69,6 +69,43 @@ test('investor can upload and send an agreement to entrepreneur', function () {
     expect($agreement->fresh()->entrepreneur_file)->not->toBeNull();
 });
 
+test('deleting a pitch preserves its agreements', function () {
+    $entrepreneur = User::factory()->create(['role' => 'entrepreneur']);
+    $investor = User::factory()->create(['role' => 'investor']);
+
+    $pitch = Pitch::create([
+        'user_id' => $entrepreneur->id,
+        'startup_name' => 'Green Energy',
+    ]);
+
+    $offer = Offer::create([
+        'pitch_id' => $pitch->id,
+        'investor_id' => $investor->id,
+        'offer_amount' => 200000,
+        'time_period' => '3 years',
+        'valuation' => 2000000,
+        'status' => 'accepted',
+    ]);
+
+    $agreement = Agreement::create([
+        'offer_id' => $offer->id,
+        'pitch_id' => $pitch->id,
+        'entrepreneur_id' => $entrepreneur->id,
+        'investor_id' => $investor->id,
+        'ownership_stake' => 15,
+        'estimated_roi' => 180000,
+        'agreement_date' => now()->toDateString(),
+        'status' => 'active',
+    ]);
+
+    $pitch->delete();
+
+    $preservedAgreement = Agreement::find($agreement->id);
+
+    expect($preservedAgreement)->not->toBeNull();
+    expect($preservedAgreement->pitch_id)->toBeNull();
+});
+
 test('entrepreneur can reject an agreement with a reason', function () {
     $entrepreneur = User::factory()->create(['role' => 'entrepreneur']);
     $investor = User::factory()->create(['role' => 'investor']);

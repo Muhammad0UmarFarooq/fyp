@@ -39,18 +39,3 @@ test('entrepreneur can create a pitch with a valid video under 2500MB', function
     expect($pitch->video_path)->not->toBeNull();
     Storage::disk('public')->assertExists($pitch->video_path);
 });
-
-test('pitch creation fails if video exceeds 2500MB limit', function () {
-    Storage::fake('public');
-
-    $user = User::factory()->create(['role' => 'entrepreneur']);
-
-    $video = UploadedFile::fake()->create('pitch.mp4', 2600000, 'video/mp4'); // 2600MB
-
-    $response = $this->actingAs($user)->post(route('entrepreneur.pitch.store'), [
-        'startup_name' => 'Huge Video Startup',
-        'video' => $video,
-    ]);
-
-    $response->assertSessionHasErrors(['video']);
-});

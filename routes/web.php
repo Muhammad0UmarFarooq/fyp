@@ -87,19 +87,19 @@ Route::middleware('auth')->group(function () {
 
             Route::get('/{pitch}/update', function (Pitch $pitch) {
                 return view('entrepreneur.updatePitch', compact('pitch'));
-            })->name('update');
-            Route::put('/{pitch}/update', [PitchController::class, 'update'])->name('update.put');
-            Route::delete('/{pitch}', [PitchController::class, 'destroy'])->name('destroy');
+            })->middleware('owns:pitch')->name('update');
+            Route::put('/{pitch}/update', [PitchController::class, 'update'])->middleware('owns:pitch')->name('update.put');
+            Route::delete('/{pitch}', [PitchController::class, 'destroy'])->middleware('owns:pitch')->name('destroy');
         });
 
         Route::get('/offers', [OfferController::class, 'index'])->name('offers');
         Route::post('/offers/{offer}/status', [OfferController::class, 'updateStatus'])->name('offers.status');
 
         Route::get('/agreements', [AgreementController::class, 'index'])->name('agreements');
-        Route::post('/agreements/{agreement}/sign', [AgreementController::class, 'sign'])->name('agreements.sign');
-        Route::post('/agreements/{agreement}/reject', [AgreementController::class, 'reject'])->name('agreements.reject');
-        Route::get('/agreements/{agreement}/download', [App\Http\Controllers\Investor\AgreementController::class, 'download'])->name('agreements.download');
-        Route::get('/agreements/{agreement}/download-signed', [App\Http\Controllers\Investor\AgreementController::class, 'downloadEntrepreneurFile'])->name('agreements.download.entrepreneur');
+        Route::post('/agreements/{agreement}/sign', [AgreementController::class, 'sign'])->middleware('owns:agreement,entrepreneur_id', 'agreement.status:sent_to_entrepreneur')->name('agreements.sign');
+        Route::post('/agreements/{agreement}/reject', [AgreementController::class, 'reject'])->middleware('owns:agreement,entrepreneur_id')->name('agreements.reject');
+        Route::get('/agreements/{agreement}/download', [App\Http\Controllers\Investor\AgreementController::class, 'download'])->middleware('file.download')->name('agreements.download');
+        Route::get('/agreements/{agreement}/download-signed', [App\Http\Controllers\Investor\AgreementController::class, 'downloadEntrepreneurFile'])->middleware('file.download')->name('agreements.download.entrepreneur');
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('/profile/image', [ProfileController::class, 'uploadImage'])->name('profile.image');
@@ -115,18 +115,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/home', [App\Http\Controllers\Investor\PitchController::class, 'index'])->name('home');
 
         Route::get('/offers', [App\Http\Controllers\Investor\OfferController::class, 'index'])->name('myOffers');
-        Route::post('/pitch/{pitch}/offer', [App\Http\Controllers\Investor\OfferController::class, 'store'])->name('offers.store');
-        Route::put('/offers/{offer}', [App\Http\Controllers\Investor\OfferController::class, 'update'])->name('offers.update');
-        Route::delete('/offers/{offer}', [App\Http\Controllers\Investor\OfferController::class, 'destroy'])->name('offers.destroy');
+        Route::post('/pitch/{pitch}/offer', [App\Http\Controllers\Investor\OfferController::class, 'store'])->middleware('pitch.status:active')->name('offers.store');
+        Route::put('/offers/{offer}', [App\Http\Controllers\Investor\OfferController::class, 'update'])->middleware('owns:offer,investor_id')->name('offers.update');
+        Route::delete('/offers/{offer}', [App\Http\Controllers\Investor\OfferController::class, 'destroy'])->middleware('owns:offer,investor_id')->name('offers.destroy');
 
         Route::get('/pitch/{pitch?}/view', [App\Http\Controllers\Investor\PitchController::class, 'show'])->name('pitch.view');
 
         Route::get('/agreements', [App\Http\Controllers\Investor\AgreementController::class, 'index'])->name('agreements');
-        Route::post('/agreements/{agreement}/upload', [App\Http\Controllers\Investor\AgreementController::class, 'upload'])->name('agreements.upload');
-        Route::post('/agreements/{agreement}/remove', [App\Http\Controllers\Investor\AgreementController::class, 'removeFile'])->name('agreements.remove');
-        Route::post('/agreements/{agreement}/send', [App\Http\Controllers\Investor\AgreementController::class, 'send'])->name('agreements.send');
-        Route::get('/agreements/{agreement}/download', [App\Http\Controllers\Investor\AgreementController::class, 'download'])->name('agreements.download');
-        Route::get('/agreements/{agreement}/download-signed', [App\Http\Controllers\Investor\AgreementController::class, 'downloadEntrepreneurFile'])->name('agreements.download.entrepreneur');
+        Route::post('/agreements/{agreement}/upload', [App\Http\Controllers\Investor\AgreementController::class, 'upload'])->middleware('owns:agreement,investor_id', 'agreement.status:pending_signature')->name('agreements.upload');
+        Route::post('/agreements/{agreement}/remove', [App\Http\Controllers\Investor\AgreementController::class, 'removeFile'])->middleware('owns:agreement,investor_id')->name('agreements.remove');
+        Route::post('/agreements/{agreement}/send', [App\Http\Controllers\Investor\AgreementController::class, 'send'])->middleware('owns:agreement,investor_id', 'agreement.status:investor_uploaded')->name('agreements.send');
+        Route::get('/agreements/{agreement}/download', [App\Http\Controllers\Investor\AgreementController::class, 'download'])->middleware('file.download')->name('agreements.download');
+        Route::get('/agreements/{agreement}/download-signed', [App\Http\Controllers\Investor\AgreementController::class, 'downloadEntrepreneurFile'])->middleware('file.download')->name('agreements.download.entrepreneur');
 
         Route::get('/profile', [App\Http\Controllers\Investor\ProfileController::class, 'index'])->name('profile');
         Route::post('/profile/image', [App\Http\Controllers\Investor\ProfileController::class, 'uploadImage'])->name('profile.image');

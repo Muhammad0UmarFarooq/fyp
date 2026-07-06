@@ -11,6 +11,13 @@ class Pitch extends Model
     /** @use HasFactory<PitchFactory> */
     use HasFactory;
 
+    protected static function booted(): void
+    {
+        static::deleting(function (self $pitch): void {
+            $pitch->agreements()->update(['pitch_id' => null]);
+        });
+    }
+
     protected $fillable = [
         'user_id',
         'startup_name',
@@ -39,5 +46,10 @@ class Pitch extends Model
     public function offers()
     {
         return $this->hasMany(Offer::class);
+    }
+
+    public function agreements()
+    {
+        return $this->hasMany(Agreement::class);
     }
 }

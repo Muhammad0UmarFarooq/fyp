@@ -25,14 +25,6 @@ class AgreementController extends Controller
 
     public function sign(Request $request, Agreement $agreement)
     {
-        if ($agreement->entrepreneur_id !== auth()->id()) {
-            abort(403);
-        }
-
-        if ($agreement->status !== 'sent_to_entrepreneur') {
-            return back()->with('error', 'Agreement is not ready for signing.');
-        }
-
         $request->validate([
             'signature' => 'required|string',
         ]);
@@ -78,10 +70,6 @@ class AgreementController extends Controller
 
     public function reject(Request $request, Agreement $agreement)
     {
-        if ($agreement->entrepreneur_id !== auth()->id()) {
-            abort(403);
-        }
-
         $validated = $request->validate([
             'rejection_reason' => 'required|string|max:1000',
         ]);

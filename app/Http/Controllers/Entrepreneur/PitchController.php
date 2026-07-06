@@ -13,12 +13,12 @@ class PitchController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'video' => 'required|file|mimes:mp4,mov|max:2500000', // 250MB
+            'video' => 'required|file|mimes:mp4,mov|max:2500000', // 2500MB
             'startup_name' => 'required|regex:/^[A-Za-z ]+$/|max:20',
             'invested_amount' => 'required|integer|min:50000|max:1000000000',
             'monthly_net_value' => 'required|integer|min:20000|max:1000000000',
             'monthly_growth' => 'required|integer|min:1|max:100',
-            'vision_statement' => 'required|string',
+            'vision_statement' => 'nullable|string',
             'additional_detail' => 'nullable|string',
             'funding_required' => 'required|integer|min:50000|max:10000000000',
             'return_time' => 'required|integer|min:1|max:10',
@@ -84,12 +84,12 @@ class PitchController extends Controller
             abort(403);
         }
          $validated = $request->validate([
-            'video' => 'required|file|mimes:mp4,mov|max:2500000', // 250MB
+            'video' => 'required|file|mimes:mp4,mov|max:2500000', // 2500MB
             'startup_name' => 'required|regex:/^[A-Za-z ]+$/|max:20',
             'invested_amount' => 'required|integer|min:50000|max:1000000000',
             'monthly_net_value' => 'required|integer|min:20000|max:1000000000',
             'monthly_growth' => 'required|integer|min:1|max:100',
-            'vision_statement' => 'required|string',
+            'vision_statement' => 'nullable|string',
             'additional_detail' => 'nullable|string',
             'funding_required' => 'required|integer|min:50000|max:10000000000',
             'return_time' => 'required|integer|min:1|max:10',
@@ -158,6 +158,8 @@ class PitchController extends Controller
         if ($pitch->video_path) {
             Storage::disk('public')->delete($pitch->video_path);
         }
+
+        $pitch->agreements()->update(['pitch_id' => null]);
 
         $pitch->delete();
 

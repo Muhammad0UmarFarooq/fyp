@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Middleware\AgreementStatusMiddleware;
+use App\Http\Middleware\FileDownloadMiddleware;
+use App\Http\Middleware\OwnsResourceMiddleware;
+use App\Http\Middleware\PitchStatusMiddleware;
+use App\Http\Middleware\ProfileCompleteMiddleware;
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -14,6 +19,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'role' => RoleMiddleware::class,
+            'owns' => OwnsResourceMiddleware::class,
+            'agreement.status' => AgreementStatusMiddleware::class,
+            'pitch.status' => PitchStatusMiddleware::class,
+            'profile.complete' => ProfileCompleteMiddleware::class,
+            'file.download' => FileDownloadMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
