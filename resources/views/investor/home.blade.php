@@ -44,6 +44,9 @@
                 <!-- Pitch List -->
                 <div class="space-y-12">
                     @forelse($pitches as $pitch)
+                    @php
+                        $existingOffer = \App\Models\Offer::where('pitch_id', $pitch->id)->where('investor_id', auth()->id())->first();
+                    @endphp
                     <div class="bg-[#161e2d] rounded-2xl overflow-hidden shadow-2xl border border-white/5">
                         <div class="relative aspect-video bg-gray-900 group">
                             @if($pitch->video_path)
@@ -68,8 +71,8 @@
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">Seeking Capital</div>
-                                    <div class="text-3xl font-bold text-brand-green">Rs {{ number_format($pitch->funding_required ?? 0) }}</div>
+                                    <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1">{{ $existingOffer ? 'Offered Capital' : 'Seeking Capital' }}</div>
+                                    <div class="text-3xl font-bold text-brand-green">Rs {{ number_format($existingOffer ? $existingOffer->offer_amount : ($pitch->funding_required ?? 0)) }}</div>
                                 </div>
                             </div>
 
@@ -88,12 +91,12 @@
                                     <div class="text-lg font-bold text-brand-green">{{ $pitch->monthly_growth ?? 0 }}%</div>
                                 </div>
                                 <div class="bg-[#0b1120] p-4 rounded-xl border border-white/5">
-                                    <div class="text-[8px] font-bold text-gray-500 tracking-widest uppercase mb-1">Return Time (years)</div>
-                                    <div class="text-lg font-bold text-brand-green">{{ $pitch->return_time ?? 'N/A' }}</div>
+                                    <div class="text-[8px] font-bold text-gray-500 tracking-widest uppercase mb-1">{{ $existingOffer ? 'Offered Return Time' : 'Return Time (years)' }}</div>
+                                    <div class="text-lg font-bold text-brand-green">{{ $existingOffer ? $existingOffer->time_period : ($pitch->return_time ?? 'N/A') }}</div>
                                 </div>
                                 <div class="bg-[#0b1120] p-4 rounded-xl border border-white/5">
-                                    <div class="text-[8px] font-bold text-gray-500 tracking-widest uppercase mb-1">Valuation</div>
-                                    <div class="text-lg font-bold">Rs {{ number_format($pitch->total_valuation ?? 0) }}</div>
+                                    <div class="text-[8px] font-bold text-gray-500 tracking-widest uppercase mb-1">{{ $existingOffer ? 'Offered Valuation' : 'Valuation' }}</div>
+                                    <div class="text-lg font-bold">Rs {{ number_format($existingOffer ? $existingOffer->valuation : ($pitch->total_valuation ?? 0)) }}</div>
                                 </div>
                             </div>
 
@@ -110,17 +113,13 @@
                             @endif
 
                             <!-- Bid Section -->
-                            @php
-                                $existingOffer = \App\Models\Offer::where('pitch_id', $pitch->id)->where('investor_id', auth()->id())->first();
-                            @endphp
-
                             @if($existingOffer)
                             <div class="flex items-center justify-between bg-brand-green/10 border border-brand-green/20 p-6 rounded-xl mt-8">
                                 <div class="flex items-center space-x-3">
                                     <svg class="w-6 h-6 text-brand-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <div>
                                         <div class="text-sm font-bold text-white">Offer Already Placed</div>
-                                        <div class="text-xs text-gray-400">You submitted a bid of Rs {{ number_format($existingOffer->offer_amount) }}. Status: <span class="text-brand-green font-bold uppercase tracking-wider">{{ $existingOffer->status }}</span></div>
+                                        <div class="text-xs text-gray-400">You submitted a bid of Rs {{ number_format($existingOffer->offer_amount) }} for {{ $existingOffer->time_period }} years with valuation of Rs {{ number_format($existingOffer->valuation) }}. Status: <span class="text-brand-green font-bold uppercase tracking-wider">{{ $existingOffer->status }}</span></div>
                                     </div>
                                 </div>
                                 <a href="{{ route('investor.myOffers') }}" class="bg-brand-green text-[#064e3b] px-6 py-2.5 rounded font-black text-xs uppercase tracking-wider hover:bg-[#3dbd6d] transition-colors cursor-pointer font-extrabold">Manage in My Offers</a>
