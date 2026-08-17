@@ -14,7 +14,13 @@ class OfferController extends Controller
     public function index()
     {
         $pitch = Pitch::where('user_id', auth()->id())->first();
-        $offers = $pitch ? Offer::with('investor')->where('pitch_id', $pitch->id)->latest()->get() : collect();
+        $offers = $pitch ? Offer::with('investor')
+            ->where('pitch_id', $pitch->id)
+            ->whereDoesntHave('agreement', function ($query) {
+                $query->whereIn('status', ['active', 'completed']);
+            })
+            ->latest()
+            ->get() : collect();
 
         return view('entrepreneur.investorsOffer', compact('offers', 'pitch'));
     }

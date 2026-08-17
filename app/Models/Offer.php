@@ -24,4 +24,9 @@ class Offer extends Model
     {
         return $this->belongsTo(User::class, 'investor_id');
     }
+
+    public function agreement()
+    {
+        return $this->hasOne(Agreement::class);
+    }
 }

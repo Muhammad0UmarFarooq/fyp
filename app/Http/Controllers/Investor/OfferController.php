@@ -13,6 +13,9 @@ class OfferController extends Controller
     {
         $offers = Offer::with(['pitch.user'])
             ->where('investor_id', auth()->id())
+            ->whereDoesntHave('agreement', function ($query) {
+                $query->whereIn('status', ['active', 'completed']);
+            })
             ->latest()
             ->get();
 

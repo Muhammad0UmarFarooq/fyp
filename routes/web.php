@@ -122,7 +122,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/pitch/{pitch?}/view', [App\Http\Controllers\Investor\PitchController::class, 'show'])->name('pitch.view');
 
         Route::get('/agreements', [App\Http\Controllers\Investor\AgreementController::class, 'index'])->name('agreements');
-        Route::post('/agreements/{agreement}/upload', [App\Http\Controllers\Investor\AgreementController::class, 'upload'])->middleware('owns:agreement,investor_id', 'agreement.status:pending_signature')->name('agreements.upload');
+        Route::post('/agreements/{agreement}/upload', [App\Http\Controllers\Investor\AgreementController::class, 'upload'])->middleware('owns:agreement,investor_id', 'agreement.status:pending_signature,rejected')->name('agreements.upload');
         Route::post('/agreements/{agreement}/remove', [App\Http\Controllers\Investor\AgreementController::class, 'removeFile'])->middleware('owns:agreement,investor_id')->name('agreements.remove');
         Route::post('/agreements/{agreement}/send', [App\Http\Controllers\Investor\AgreementController::class, 'send'])->middleware('owns:agreement,investor_id', 'agreement.status:investor_uploaded')->name('agreements.send');
         Route::get('/agreements/{agreement}/download', [App\Http\Controllers\Investor\AgreementController::class, 'download'])->middleware('file.download')->name('agreements.download');
