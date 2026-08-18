@@ -70,7 +70,22 @@
                                     <span class="mr-2">📞</span> {{ $user->phone ?? 'Phone Not Provided' }}
                                 </div>
                             </div>
+
+
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                        <div class="bg-[#0b1120] px-4 py-3 rounded-xl border border-white/5">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Investment Amount</span>
+                            <span class="text-base font-bold text-brand-green">PKR {{ number_format($investorProfile->investment_amount ?? 0) }}</span>
                         </div>
+                        <div class="bg-[#0b1120] px-4 py-3 rounded-xl border border-white/5">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Investment Focus</span>
+                            <span class="text-sm font-bold text-white">{{ $investorProfile->investment_focus ?? 'Not Specified' }}</span>
+                        </div>
+                        <div class="bg-[#0b1120] px-4 py-3 rounded-xl border border-white/5">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Portfolio Size</span>
+                            <span class="text-sm font-bold text-white">{{ $investorProfile->portfolio_size ?? 'Not Specified' }}</span>
+                        </div>
+                    </div>                        </div>
                     </div>
 
                     <button onclick="document.getElementById('editProfileModal').classList.remove('hidden')" class="bg-brand-green text-[#064e3b] px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#3dbd6d] transition-colors flex items-center space-x-2 shadow-lg shadow-brand-green/20 cursor-pointer">
@@ -212,6 +227,21 @@
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Focus Sectors (Comma separated)</label>
                     <input type="text" name="interested_businesses" value="{{ is_array($investorProfile->interested_businesses) ? implode(', ', $investorProfile->interested_businesses) : '' }}" placeholder="Energy, Technology, E-Commerce, Fintech" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                </div>
+
+                <div class="grid grid-cols-3 gap-6">
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Investment Amount (PKR)</label>
+                        <input type="number" name="investment_amount" value="{{ $investorProfile->investment_amount }}" placeholder="e.g. 1200000" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Investment Focus</label>
+                        <input type="text" name="investment_focus" value="{{ $investorProfile->investment_focus }}" placeholder="e.g. Tech Startups" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Portfolio Size</label>
+                        <input type="text" name="portfolio_size" value="{{ $investorProfile->portfolio_size }}" placeholder="e.g. 5 Companies, $500k+" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                    </div>
                 </div>
 
                 <div>

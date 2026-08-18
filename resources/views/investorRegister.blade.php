@@ -151,6 +151,13 @@
                                 class="input" required>
                         </div>
 
+                <!-- Portfolio Size -->
+                <div>
+                    <label class="label">Portfolio Size (Optional)</label>
+                    <input type="text" name="portfolio_size" placeholder="e.g. 5 Startups, $500k+"
+                        class="input">
+                </div>
+
                         <!-- Password -->
                         <div>
                             <label class="label">Secure Password</label>

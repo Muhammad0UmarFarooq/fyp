@@ -61,6 +61,7 @@ class AuthController extends Controller
             'city' => 'required|string|max:100',
             'investment_amount' => 'required|numeric',
             'investment_focus' => 'required|string',
+            'portfolio_size' => 'nullable|string|max:255',
             'businesses' => 'nullable|array',
         ]);
 
@@ -76,8 +77,9 @@ class AuthController extends Controller
 
         $user->investorProfile()->create([
             'investment_amount' => $request->investment_amount,
-            'investment_focus' => $request->investment_focus,
-            'interested_businesses' => $request->businesses, // Will be cast to JSON if defined in model
+           'investment_focus' => $request->investment_focus,
+            'portfolio_size' => $request->portfolio_size,
+            'interested_businesses' => $request->businesses,
         ]);
 
         Auth::login($user);

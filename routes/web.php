@@ -104,6 +104,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('/profile/image', [ProfileController::class, 'uploadImage'])->name('profile.image');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/profile/update', fn() => redirect()->route('entrepreneur.profile'));
     });
 
     /*
@@ -131,6 +132,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/profile', [App\Http\Controllers\Investor\ProfileController::class, 'index'])->name('profile');
         Route::post('/profile/image', [App\Http\Controllers\Investor\ProfileController::class, 'uploadImage'])->name('profile.image');
         Route::post('/profile/update', [App\Http\Controllers\Investor\ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/profile/update', fn() => redirect()->route('investor.profile'));
     });
 });
 
