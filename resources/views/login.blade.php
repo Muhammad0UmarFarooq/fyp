@@ -38,6 +38,12 @@
                 <form action="{{ route('login.post') }}" method="POST" class="space-y-6">
                     @csrf
                     
+                    @if (session('status'))
+                        <div class="bg-green-500/10 border border-green-500/20 text-green-400 text-xs p-4 rounded-sm mb-4">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
                     @if ($errors->any())
                         <div class="bg-red-500/10 border border-red-500/20 text-red-500 text-xs p-4 rounded-sm">
                             <ul class="list-disc list-inside">
@@ -66,7 +72,7 @@
                             <input type="checkbox" name="remember" class="form-checkbox h-3.5 w-3.5 bg-[#111625] border-transparent rounded-sm text-brand-green focus:ring-0 focus:ring-offset-0">
                             <span class="ml-2 font-medium">Remember Me</span>
                         </label>
-                        <a href="#" class="text-brand-yellow font-medium hover:underline">Forgot Password?</a>
+                        <a href="{{ route('password.request') }}" class="text-brand-yellow font-medium hover:underline">Forgot Password?</a>
                     </div>
 
                     <!-- Submit Button -->

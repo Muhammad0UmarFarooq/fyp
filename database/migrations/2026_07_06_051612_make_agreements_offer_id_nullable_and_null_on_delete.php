@@ -16,6 +16,7 @@ return new class extends Migration
         });
 
         Schema::table('agreements', function (Blueprint $table) {
+            $table->dropForeign(['offer_id']);
             $table->foreign('offer_id')->references('id')->on('offers')->nullOnDelete();
         });
     }
