@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Admin\AdminController;
 
 
 /*
@@ -124,6 +125,21 @@ Route::middleware('guest')->group(function () {
 */
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Dashboard
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/users', [AdminController::class, 'users'])->name('users');
+        Route::get('/users/{user}', [AdminController::class, 'userDetail'])->name('users.detail');
+        Route::get('/pitches', [AdminController::class, 'pitches'])->name('pitches');
+        Route::get('/offers', [AdminController::class, 'offers'])->name('offers');
+        Route::get('/agreements', [AdminController::class, 'agreements'])->name('agreements');
+    });
 
     /*
     |--------------------------------------------------------------------------

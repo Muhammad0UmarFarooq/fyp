@@ -17,13 +17,13 @@ test('entrepreneur can create a pitch with a valid video under 2500MB', function
 
     $response = $this->actingAs($user)->post(route('entrepreneur.pitch.store'), [
         'startup_name' => 'Tech Startup',
-        'invested_amount' => '$ 5000000',
-        'monthly_net_value' => '$ 1000000',
-        'monthly_growth' => '25%',
+        'invested_amount' => 5000000,
+        'monthly_net_value' => 1000000,
+        'monthly_growth' => 25,
         'vision_statement' => 'Revolutionizing the market',
-        'funding_required' => '$ 2000000',
-        'return_time' => '3 years',
-        'total_valuation' => '$ 10000000',
+        'funding_required' => 2000000,
+        'return_time' => 3,
+        'total_valuation' => 10000000,
         'video' => $video,
     ]);
 
