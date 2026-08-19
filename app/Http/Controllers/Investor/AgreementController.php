@@ -27,7 +27,7 @@ class AgreementController extends Controller
     public function upload(Request $request, Agreement $agreement)
     {
         $request->validate([
-            'agreement_file' => 'required|file|mimes:pdf,docx,doc|max:25600',
+            'agreement_file' => 'required|file|clamav|mimes:pdf,docx,doc|max:25600',
         ]);
 
         if ($request->hasFile('agreement_file')) {
