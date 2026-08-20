@@ -43,4 +43,24 @@ class Agreement extends Model
     {
         return $this->belongsTo(User::class, 'investor_id');
     }
+
+    public function getEstimatedRoiAttribute($value)
+    {
+        if (is_null($value)) {
+            return 0;
+        }
+
+        if ($value > 100) {
+            $offerAmount = $this->offer?->offer_amount;
+            if ($offerAmount && $offerAmount > 0) {
+                if ($value >= $offerAmount) {
+                    return (int) round((($value - $offerAmount) / $offerAmount) * 100);
+                }
+                return (int) round(($value / $offerAmount) * 100);
+            }
+            return 50;
+        }
+
+        return (int) $value;
+    }
 }

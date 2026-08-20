@@ -161,3 +161,22 @@ test('investor can update profile and focus sectors', function () {
     expect($investor->fresh()->bio)->toBe('New investor bio');
     expect($investor->fresh()->investorProfile->interested_businesses)->toBe(['AI', 'Robotics', 'Solar']);
 });
+
+
+test('agreement entrepreneur relation returns the correct entrepreneur user', function () {
+    $entrepreneur = User::factory()->create(['role' => 'entrepreneur', 'name' => 'John Doe']);
+    $investor = User::factory()->create(['role' => 'investor', 'name' => 'Jane Smith']);
+
+    $agreement = Agreement::create([
+        'entrepreneur_id' => $entrepreneur->id,
+        'investor_id' => $investor->id,
+        'ownership_stake' => 10,
+        'estimated_roi' => 50,
+        'agreement_date' => now()->toDateString(),
+        'status' => 'active',
+    ]);
+
+    expect($agreement->entrepreneur)->not->toBeNull();
+    expect($agreement->entrepreneur->name)->toBe('John Doe');
+    expect($agreement->investor->name)->toBe('Jane Smith');
+});

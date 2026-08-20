@@ -12,6 +12,19 @@ class PitchController extends Controller
 {
     public function store(Request $request)
     {
+        $cleanInt = function ($val) {
+            return ($val !== null && $val !== '') ? (int) preg_replace('/[^0-9]/', '', (string)$val) : null;
+        };
+
+        $request->merge([
+            'invested_amount' => $cleanInt($request->input('invested_amount')),
+            'monthly_net_value' => $cleanInt($request->input('monthly_net_value')),
+            'monthly_growth' => $cleanInt($request->input('monthly_growth')),
+            'funding_required' => $cleanInt($request->input('funding_required')),
+            'return_time' => $cleanInt($request->input('return_time')),
+            'total_valuation' => $cleanInt($request->input('total_valuation')),
+        ]);
+
         $validated = $request->validate([
             'video' => 'required|file|clamav|mimes:mp4,mov|max:2500000', // 2500MB
             'startup_name' => 'required|regex:/^[A-Za-z ]+$/|max:20',
@@ -23,8 +36,9 @@ class PitchController extends Controller
             'funding_required' => 'required|integer|min:50000|max:10000000000',
             'return_time' => 'required|integer|min:1|max:10',
             'total_valuation' => 'required|integer|min:50000|max:10000000000',
-            'custom_fields.*.label' => 'required|string',
-            'custom_fields.*.value' => 'required|string',
+            'custom_fields' => 'nullable|array',
+            'custom_fields.*.label' => 'required_with:custom_fields|string',
+            'custom_fields.*.value' => 'required_with:custom_fields|string',
         ]);
 
         if (Pitch::where('user_id', auth()->id())->exists()) {
@@ -39,21 +53,17 @@ class PitchController extends Controller
                 $videoPath = $request->file('video')->store('pitches', 'public');
             }
 
-            $cleanInt = function ($val) {
-                return $val ? (int) preg_replace('/[^0-9]/', '', $val) : null;
-            };
-
             $pitch = Pitch::create([
                 'user_id' => auth()->id(),
                 'startup_name' => $validated['startup_name'],
-                'invested_amount' => $cleanInt($validated['invested_amount'] ?? null),
-                'monthly_net_value' => $cleanInt($validated['monthly_net_value'] ?? null),
-                'monthly_growth' => $cleanInt($validated['monthly_growth'] ?? null),
+                'invested_amount' => $validated['invested_amount'],
+                'monthly_net_value' => $validated['monthly_net_value'],
+                'monthly_growth' => $validated['monthly_growth'],
                 'vision_statement' => $validated['vision_statement'] ?? null,
                 'additional_detail' => $validated['additional_detail'] ?? null,
-                'funding_required' => $cleanInt($validated['funding_required'] ?? null),
-                'return_time' => $validated['return_time'] ?? null,
-                'total_valuation' => $cleanInt($validated['total_valuation'] ?? null),
+                'funding_required' => $validated['funding_required'],
+                'return_time' => $validated['return_time'],
+                'total_valuation' => $validated['total_valuation'],
                 'video_path' => $videoPath,
             ]);
 
@@ -83,8 +93,22 @@ class PitchController extends Controller
         if ($pitch->user_id !== auth()->id()) {
             abort(403);
         }
-         $validated = $request->validate([
-            'video' => 'required|file|clamav|mimes:mp4,mov|max:2500000', // 2500MB
+
+        $cleanInt = function ($val) {
+            return ($val !== null && $val !== '') ? (int) preg_replace('/[^0-9]/', '', (string)$val) : null;
+        };
+
+        $request->merge([
+            'invested_amount' => $cleanInt($request->input('invested_amount')),
+            'monthly_net_value' => $cleanInt($request->input('monthly_net_value')),
+            'monthly_growth' => $cleanInt($request->input('monthly_growth')),
+            'funding_required' => $cleanInt($request->input('funding_required')),
+            'return_time' => $cleanInt($request->input('return_time')),
+            'total_valuation' => $cleanInt($request->input('total_valuation')),
+        ]);
+
+        $validated = $request->validate([
+            'video' => 'nullable|file|clamav|mimes:mp4,mov|max:2500000', // 2500MB
             'startup_name' => 'required|regex:/^[A-Za-z ]+$/|max:20',
             'invested_amount' => 'required|integer|min:50000|max:1000000000',
             'monthly_net_value' => 'required|integer|min:20000|max:1000000000',
@@ -94,8 +118,9 @@ class PitchController extends Controller
             'funding_required' => 'required|integer|min:50000|max:10000000000',
             'return_time' => 'required|integer|min:1|max:10',
             'total_valuation' => 'required|integer|min:50000|max:10000000000',
-            'custom_fields.*.label' => 'required|string',
-            'custom_fields.*.value' => 'required|string',
+            'custom_fields' => 'nullable|array',
+            'custom_fields.*.label' => 'required_with:custom_fields|string',
+            'custom_fields.*.value' => 'required_with:custom_fields|string',
         ]);
 
         try {
@@ -109,20 +134,16 @@ class PitchController extends Controller
                 $videoPath = $request->file('video')->store('pitches', 'public');
             }
 
-            $cleanInt = function ($val) {
-                return $val ? (int) preg_replace('/[^0-9]/', '', $val) : null;
-            };
-
             $pitch->update([
                 'startup_name' => $validated['startup_name'],
-                'invested_amount' => $cleanInt($validated['invested_amount'] ?? null),
-                'monthly_net_value' => $cleanInt($validated['monthly_net_value'] ?? null),
-                'monthly_growth' => $cleanInt($validated['monthly_growth'] ?? null),
+                'invested_amount' => $validated['invested_amount'],
+                'monthly_net_value' => $validated['monthly_net_value'],
+                'monthly_growth' => $validated['monthly_growth'],
                 'vision_statement' => $validated['vision_statement'] ?? null,
                 'additional_detail' => $validated['additional_detail'] ?? null,
-                'funding_required' => $cleanInt($validated['funding_required'] ?? null),
-                'return_time' => $validated['return_time'] ?? null,
-                'total_valuation' => $cleanInt($validated['total_valuation'] ?? null),
+                'funding_required' => $validated['funding_required'],
+                'return_time' => $validated['return_time'],
+                'total_valuation' => $validated['total_valuation'],
                 'video_path' => $videoPath,
             ]);
 

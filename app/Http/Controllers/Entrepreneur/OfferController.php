@@ -50,7 +50,7 @@ class OfferController extends Controller
                     'entrepreneur_id' => $offer->pitch->user_id,
                     'investor_id' => $offer->investor_id,
                     'ownership_stake' => $offer->valuation > 0 ? round(($offer->offer_amount / $offer->valuation) * 100) : 10,
-                    'estimated_roi' => $offer->offer_amount * 1.5,
+                    'estimated_roi' => 50,
                     'agreement_date' => now()->toDateString(),
                     'status' => 'pending_signature',
                 ]);

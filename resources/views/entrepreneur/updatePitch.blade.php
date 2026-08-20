@@ -29,7 +29,7 @@
                     </p>
                 </div>
 
-                <form method="POST" action="{{ route('entrepreneur.pitch.update.put', $pitch->id ?? 1) }}" enctype="multipart/form-data" class="space-y-16">
+                <form method="POST" action="{{ route('entrepreneur.pitch.update.put', $pitch) }}" enctype="multipart/form-data" class="space-y-16">
                     @csrf
                     @method('PUT')
 
@@ -51,7 +51,7 @@
                         </div>
                         
                         <div id="drop-zone" class="relative w-full aspect-video bg-[#111625] rounded-xl overflow-hidden border border-white/5 group cursor-pointer transition-colors duration-300" onclick="document.getElementById('video-upload').click()">
-                            <input type="file" required name="video" id="video-upload" accept="video/mp4,video/quicktime" class="hidden" onchange="handleFileSelect(event)">
+                            <input type="file" name="video" id="video-upload" accept="video/mp4,video/quicktime" class="hidden" onchange="handleFileSelect(event)">
                             @if(isset($pitch) && $pitch->video_path)
                                 <img id="placeholder-img" src="{{ asset('images/shoes_shop.jpg') }}" class="hidden w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity">
                                 <video id="video-preview" src="{{ asset('storage/' . $pitch->video_path) }}" class="w-full h-full object-cover z-10 relative" controls></video>
@@ -88,20 +88,20 @@
                         <div id="pitch-identity-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Startup Name</label>
-                                <input type="text" required name="startup_name" value="{{ $pitch->startup_name ?? 'Shoes shop' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="text" required name="startup_name" value="{{ old('startup_name', $pitch->startup_name ?? '') }}" maxlength="20" pattern="^[A-Za-z ]{1,20}$" oninput="this.value=this.value.replace(/[^A-Za-z ]/g,'')" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Invested Amount (Owner Investment)</label>
-                                <input type="text" required name="invested_amount" value="{{ $pitch->invested_amount ?? 'Rs 5000000' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="number" required name="invested_amount" value="{{ old('invested_amount', $pitch->invested_amount ?? '') }}" min="50000" max="1000000000" oninput="validateMax(this, 1000000000)" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Net Value(Total Revenue - Total Expenses )</label>
-                                <input type="text" required name="monthly_net_value" value="{{ $pitch->monthly_net_value ?? 'Rs 1000000' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="number" required name="monthly_net_value" value="{{ old('monthly_net_value', $pitch->monthly_net_value ?? '') }}" min="20000" max="1000000000" oninput="validateMax(this, 1000000000)" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div id="monthly-growth-field" class="space-y-2">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Growth</label>
                                 <div class="flex items-center bg-[#0b1120] border border-white/5 rounded">
-                                    <input type="text" required name="monthly_growth" value="{{ $pitch->monthly_growth ?? '22%' }}" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
+                                    <input type="number" required name="monthly_growth" value="{{ old('monthly_growth', $pitch->monthly_growth ?? '') }}" min="1" max="100" oninput="validateRange(this,1,100)" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
                                     <div class="p-2">
                                         <button type="button" onclick="removeFinalField('monthly-growth-field')" class="bg-white w-8 h-8 flex items-center justify-center rounded shadow-sm group">
                                             <div class="bg-[#ff0000] w-6 h-6 rounded-full flex items-center justify-center group-hover:bg-[#b30000] transition-colors">
@@ -117,8 +117,8 @@
                                     <div id="field-final-existing-{{ $index }}" class="space-y-2">
                                         <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">{{ $field->label }}</label>
                                         <div class="flex items-center bg-[#0b1120] border border-white/5 rounded">
-                                            <input type="hidden" required name="custom_fields[existing_{{ $index }}][label]" value="{{ $field->label }}">
-                                            <input type="text" required name="custom_fields[existing_{{ $index }}][value]" value="{{ $field->value }}" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
+                                            <input type="hidden" name="custom_fields[existing_{{ $index }}][label]" value="{{ $field->label }}">
+                                            <input type="text" required name="custom_fields[existing_{{ $index }}][value]" value="{{ old('custom_fields.existing_' . $index . '.value', $field->value) }}" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
                                             <div class="p-2">
                                                 <button type="button" onclick="removeFinalField('field-final-existing-{{ $index }}')" class="bg-white w-8 h-8 flex items-center justify-center rounded shadow-sm group">
                                                     <div class="bg-[#ff0000] w-6 h-6 rounded-full flex items-center justify-center group-hover:bg-[#b30000] transition-colors">
@@ -140,8 +140,10 @@
                                 </button>
                             </div>
                         </div>
+
+                        <div class="space-y-2">
                             <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Vision Statement</label>
-                            <textarea name="vision_statement" rows="4" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed">{{ $pitch->vision_statement ?? "A future where no shoe is mass-produced before it's sold. We are building the infrastructure for footwear that fits every foot perfectly, is manufactured only when ordered, and scales without warehouses of dead stock — making traditional retail inventory obsolete." }}</textarea>
+                            <textarea name="vision_statement" rows="4" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 focus:outline-none focus:border-brand-green/50 text-sm leading-relaxed">{{ old('vision_statement', $pitch->vision_statement ?? '') }}</textarea>
                         </div>
                     </div>
 
@@ -153,11 +155,11 @@
                             <div class="space-y-6">
                                 <div class="space-y-2">
                                     <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required (Rs)</label>
-                                    <input type="text" required name="funding_required" value="{{ $pitch->funding_required ?? 'Rs 5000000' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                                    <input type="text" required name="funding_required" value="{{ old('funding_required', $pitch->funding_required ?? '') }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
                                 </div>
                                 <div class="space-y-2">
                                     <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Return Time (years)</label>
-                                    <input type="text" required name="return_time" value="{{ $pitch->return_time ?? '2 years' }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                                    <input type="text" required name="return_time" value="{{ old('return_time', $pitch->return_time ?? '') }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
                                 </div>
                             </div>
 
@@ -165,7 +167,7 @@
                                 <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total Valuation</label>
                                 <div class="flex items-center justify-center space-x-2">
                                     <span class="text-5xl font-bold text-brand-green">Rs</span>
-                                    <input type="text" required name="total_valuation" value="{{ $pitch->total_valuation ?? '10000000' }}" class="bg-transparent text-5xl font-bold text-brand-green focus:outline-none w-full text-center">
+                                    <input type="text" required name="total_valuation" value="{{ old('total_valuation', $pitch->total_valuation ?? '') }}" class="bg-transparent text-5xl font-bold text-brand-green focus:outline-none w-full text-center">
                                 </div>
                             </div>
                         </div>
@@ -250,11 +252,26 @@
         }
 
         function removeFinalField(id) {
-            document.getElementById(id).remove();
-            // Also if they delete the monthly growth field
-            if(id === 'monthly-growth-field') {
-                const mgf = document.getElementById('monthly-growth-field');
-                if(mgf) mgf.remove();
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        function validateMax(input, max) {
+            input.value = input.value.replace(/\D/g, '');
+            if (input.value !== '' && Number(input.value) > max) {
+                input.value = max;
+            }
+        }
+
+        function validateRange(input, min, max) {
+            input.value = input.value.replace(/\D/g, '');
+            if (input.value === '') return;
+            let value = Number(input.value);
+            if (value > max) {
+                input.value = max;
+            }
+            if (value < min && input.value.length > 0) {
+                input.value = min;
             }
         }
 
