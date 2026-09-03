@@ -26,7 +26,23 @@
                 </div>
             </div>
         </div>
-        
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="{{ route('pitch.arena') }}" class="text-gray-400 hover:text-gray-300 text-sm font-bold pb-1 transition-colors">
+                Home
+            </a>
+            <a href="{{ route('about') }}" class="text-brand-green text-sm font-bold border-b-2 border-brand-green pb-1">
+                About
+            </a>
+        </div>
+
+        <div class="hidden md:block">
+            <a href="{{ route('home') }}" class="bg-brand-green text-[#064e3b] px-6 py-2 rounded font-bold text-sm hover:bg-brand-green/90 transition-colors">
+                Join us
+            </a>
+        </div>
+
         <!-- Mobile Menu Toggle -->
         <button class="md:hidden text-gray-400 hover:text-white transition-colors cursor-pointer" onclick="document.getElementById('about-mobile-menu').classList.toggle('hidden')">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -36,24 +52,8 @@
     <div id="about-mobile-menu" class="hidden md:hidden bg-[#111625] border-b border-white/5 px-4 py-3 space-y-2">
         <a href="{{ route('pitch.arena') }}" class="block text-gray-400 hover:text-gray-300 text-sm font-bold py-2 transition-colors">Home</a>
         <a href="{{ route('about') }}" class="block text-brand-green text-sm font-bold py-2">About</a>
+        <a href="{{ route('home') }}" class="block bg-brand-green text-[#064e3b] text-center text-sm font-bold px-6 py-2 rounded transition-colors">Join us</a>
     </div>
-
-    <nav class="hidden">
-    <div class="hidden md:flex items-center space-x-8">
-            <a href="{{ route('pitch.arena') }}" class="text-gray-400 hover:text-gray-300 text-sm font-bold pb-1 transition-colors">
-                Home
-            </a>
-            <a href="{{ route('about') }}" class="text-brand-green text-sm font-bold border-b-2 border-brand-green pb-1">
-                About
-            </a>
-        </div>
-
-        <div>
-            <a href="{{ route('home') }}" class="bg-brand-green text-[#064e3b] px-6 py-2 rounded font-bold text-sm hover:bg-brand-green/90 transition-colors">
-                Join us
-            </a>
-        </div>
-    </nav>
 
     <!-- Main Content -->
     <main class="w-full max-w-6xl mx-auto px-6 py-16 md:py-24">
