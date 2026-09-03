@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Top Navigation -->
-    <nav class="w-full px-8 py-8 flex justify-between items-center absolute top-0 left-0">
+    <nav class="w-full px-4 md:px-8 py-6 md:py-8 flex justify-between items-center absolute top-0 left-0">
         <div class="text-xl font-bold tracking-tight">
             Invest<span class="text-brand-green">Bridge</span>
         </div>

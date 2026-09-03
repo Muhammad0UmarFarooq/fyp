@@ -19,7 +19,7 @@
     <div class="flex">
         <x-investor-sidebar />
 
-        <main class="flex-1 p-12">
+        <main class="flex-1 p-4 md:p-12">
             <div class="max-w-8xl mx-auto space-y-16">
                 
                 @if(session('success'))
@@ -46,7 +46,7 @@
                     <div class="space-y-4">
                         @forelse($pendingSign as $agreement)
                             <div class="bg-[#161e2d] border border-white/5 rounded-xl p-6 flex justify-between items-center shadow-lg">
-                                <div class="flex items-center space-x-4">
+                                <div class="flex flex-wrap items-center gap-2 md:gap-4">
                                     <div class="w-12 h-12 rounded-lg overflow-hidden border border-white/10 bg-gray-800 flex items-center justify-center text-lg font-bold text-brand-green">
                                         @if($agreement->entrepreneur->profile_image)
                                             <img src="{{ asset('storage/' . $agreement->entrepreneur->profile_image) }}" class="w-full h-full object-cover">
@@ -83,7 +83,7 @@
                         <div class="space-y-4">
                             @foreach($rejected as $agreement)
                                 <div class="bg-[#161e2d] border border-red-500/20 rounded-xl p-6 flex justify-between items-center shadow-lg">
-                                    <div class="flex items-center space-x-4">
+                                    <div class="flex flex-wrap items-center gap-2 md:gap-4">
                                         <div class="w-12 h-12 rounded-lg overflow-hidden border border-red-500/30 bg-red-500/10 flex items-center justify-center text-lg font-bold text-red-500">
                                             @if($agreement->entrepreneur->profile_image)
                                                 <img src="{{ asset('storage/' . $agreement->entrepreneur->profile_image) }}" class="w-full h-full object-cover">
@@ -125,8 +125,8 @@
                             
                             @foreach($staged as $agreement)
                                 <div class="space-y-4">
-                                    <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 flex justify-between items-center shadow-xl">
-                                        <div class="flex items-center space-x-4">
+                                    <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-4 md:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xl">
+                                        <div class="flex flex-wrap items-center gap-2 md:gap-4">
                                             <div class="w-12 h-12 rounded-xl overflow-hidden border border-white/10 bg-gray-800 flex items-center justify-center font-bold text-brand-green">
                                                 @if($agreement->entrepreneur->profile_image)
                                                     <img src="{{ asset('storage/' . $agreement->entrepreneur->profile_image) }}" class="w-full h-full object-cover">
@@ -144,7 +144,7 @@
 
                                     <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 space-y-8 shadow-2xl">
                                         <div class="flex justify-between items-center">
-                                            <div class="flex items-center space-x-4">
+                                            <div class="flex flex-wrap items-center gap-2 md:gap-4">
                                                 <div class="bg-red-500/10 p-3 rounded-lg text-red-500">
                                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                                 </div>
@@ -184,8 +184,8 @@
                         
                         <div class="space-y-4">
                             @forelse($vault as $agreement)
-                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 flex justify-between items-center shadow-xl hover:border-brand-green/30 transition-colors">
-                                    <div class="flex items-center space-x-4">
+                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-4 md:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xl hover:border-brand-green/30 transition-colors">
+                                    <div class="flex flex-wrap items-center gap-2 md:gap-4">
                                         <div class="w-12 h-12 rounded-xl overflow-hidden border border-white/10 bg-gray-800 flex items-center justify-center font-bold text-brand-green">
                                             @if($agreement->entrepreneur->profile_image)
                                                 <img src="{{ asset('storage/' . $agreement->entrepreneur->profile_image) }}" class="w-full h-full object-cover">
@@ -198,7 +198,7 @@
                                             <div class="text-[10px] text-gray-400 font-bold uppercase">{{ $agreement->pitch->startup_name ?? $agreement->pitch->company_name ?? 'Startup' }} • Signed {{ \Carbon\Carbon::parse($agreement->agreement_date)->format('M d, Y') }}</div>
                                         </div>
                                     </div>
-                                    <div class="flex items-center space-x-4">
+                                    <div class="flex flex-wrap items-center gap-2 md:gap-4">
                                         <span class="bg-brand-green/10 text-brand-green px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
                                         <a href="{{ route('investor.agreements.download', $agreement->id) }}" class="bg-[#1e293b] text-brand-green hover:bg-brand-green hover:text-[#064e3b] px-6 py-2.5 rounded-lg font-bold text-xs tracking-widest uppercase transition-all flex items-center space-x-2 shadow-lg">
                                             <span>📥</span>

@@ -19,7 +19,7 @@
     <div class="flex">
         <x-sidebar />
 
-        <main class="flex-1 p-12">
+        <main class="flex-1 p-4 md:p-12">
             <div class="max-w-8xl mx-auto space-y-16">
                 
                 @if(session('success'))
@@ -45,22 +45,22 @@
 
                     <div class="space-y-6">
                         @forelse($readyToSign as $agreement)
-                            <div class="bg-[#161e2d] border border-white/5 rounded-xl p-6 shadow-xl space-y-6">
-                                <div class="flex justify-between items-center">
-                                    <div class="flex items-center space-x-4">
-                                        <div class="w-12 h-12 rounded-lg overflow-hidden border border-white/10 bg-gray-800 flex items-center justify-center font-bold text-lg text-brand-green">
+                            <div class="bg-[#161e2d] border border-white/5 rounded-xl p-4 sm:p-6 shadow-xl space-y-6">
+                                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                                    <div class="flex items-center space-x-4 min-w-0">
+                                        <div class="w-12 h-12 rounded-lg overflow-hidden border border-white/10 bg-gray-800 flex items-center justify-center font-bold text-lg text-brand-green flex-shrink-0">
                                             @if($agreement->investor->profile_image)
                                                 <img src="{{ asset('storage/' . $agreement->investor->profile_image) }}" class="w-full h-full object-cover">
                                             @else
                                                 {{ strtoupper(substr($agreement->investor->name, 0, 2)) }}
                                             @endif
                                         </div>
-                                        <div>
-                                            <span class="font-bold text-gray-200 text-lg block">{{ $agreement->investor->name }}</span>
+                                        <div class="min-w-0">
+                                            <span class="font-bold text-gray-200 text-base sm:text-lg block break-words">{{ $agreement->investor->name }}</span>
                                             <span class="text-xs text-gray-400">{{ $agreement->agreement_filename ?? 'Agreement Document' }} • {{ $agreement->agreement_filesize ?? '' }}</span>
                                         </div>
                                     </div>
-                                    <div class="flex space-x-4 items-center">
+                                    <div class="flex flex-wrap gap-3 items-center">
                                         <button onclick="document.getElementById('reject-box-{{ $agreement->id }}').classList.toggle('hidden')" class="bg-red-600/20 border border-red-500/30 text-red-400 px-6 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider hover:bg-red-600 hover:text-white transition-colors cursor-pointer shadow-lg">Reject</button>
                                         <a href="{{ route('entrepreneur.agreements.download', $agreement->id) }}" class="bg-[#1e293b] text-brand-green px-6 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-[#064e3b] transition-colors flex items-center space-x-2 shadow-lg">
                                             <span>📥</span>
@@ -78,7 +78,7 @@
                                         @csrf
                                         <label class="text-xs font-bold text-red-400 uppercase tracking-widest block">Reason for Rejection</label>
                                         <textarea name="rejection_reason" required rows="3" placeholder="Explain why you are rejecting this agreement (e.g. valuation terms, time period)..." class="w-full bg-[#161e2d] border border-white/10 rounded-lg p-4 text-sm text-gray-200 focus:outline-none focus:border-red-500 transition-colors"></textarea>
-                                        <div class="flex justify-end space-x-4">
+                                        <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
                                             <button type="button" onclick="document.getElementById('reject-box-{{ $agreement->id }}').classList.add('hidden')" class="px-6 py-2 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
                                             <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-red-700 transition-colors cursor-pointer shadow-lg">Submit Rejection</button>
                                         </div>
@@ -163,7 +163,7 @@
 
     <!-- Signature Modal -->
     <div id="signatureModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity">
-        <div class="bg-[#161e2d] border border-white/10 rounded-3xl max-w-2xl w-full p-8 shadow-2xl space-y-6 relative">
+        <div class="bg-[#161e2d] border border-white/10 rounded-3xl max-w-2xl w-full p-4 md:p-8 shadow-2xl space-y-6 relative">
             <div class="flex justify-between items-center border-b border-white/10 pb-4">
                 <h3 class="text-2xl font-bold text-white flex items-center space-x-3">
                     <span>✍️</span>

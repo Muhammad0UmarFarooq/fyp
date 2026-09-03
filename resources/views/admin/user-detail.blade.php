@@ -6,7 +6,7 @@
     <div class="flex flex-1">
         @include('components.admin-sidebar')
 
-        <main class="flex-1 p-8 overflow-y-auto">
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto">
             <!-- Back Button -->
             <a href="{{ route('admin.users') }}" class="inline-flex items-center text-gray-400 hover:text-white text-sm mb-6 transition-colors">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -15,7 +15,7 @@
 
             <!-- User Profile Card -->
             <div class="bg-[#161e2d] rounded-xl border border-white/5 p-8 mb-6">
-                <div class="flex items-start space-x-6">
+                <div class="flex flex-col sm:flex-row items-start gap-4 sm:space-x-6">
                     <div class="w-20 h-20 rounded-xl {{ $user->role === 'entrepreneur' ? 'bg-emerald-500/10' : 'bg-violet-500/10' }} flex items-center justify-center flex-shrink-0 overflow-hidden">
                         @if($user->profile_image)
                             <img src="{{ asset('storage/' . $user->profile_image) }}" alt="{{ $user->name }}" class="w-full h-full object-cover">

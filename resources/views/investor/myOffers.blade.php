@@ -25,7 +25,7 @@
     <div class="flex">
         <x-investor-sidebar />
 
-        <main class="flex-1 p-12">
+        <main class="flex-1 p-4 md:p-12">
             <div class="max-w-8xl mx-auto">
                 <!-- Header -->
                 <div class="mb-12">
@@ -44,7 +44,7 @@
                 <div class="space-y-6">
                     @forelse($offers as $offer)
                     <div x-data="{ editing: false }" class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl">
-                        <div class="flex justify-between items-start mb-10">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-6 md:mb-10 gap-4">
                             <div class="flex items-center space-x-4">
                                 <div class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center text-brand-green overflow-hidden font-bold text-xl">
                                     {{ substr($offer->pitch ? $offer->pitch->startup_name : 'S', 0, 1) }}
@@ -63,7 +63,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-3 gap-8 mb-10">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 mb-6 md:mb-10">
                             <div>
                                 <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-2">Return Time (years)</div>
                                 <div class="text-lg font-bold">{{ $offer->time_period }}</div>
@@ -78,8 +78,8 @@
                             </div>
                         </div>
 
-                        <div class="flex justify-between items-center" x-show="!editing">
-                            <div class="flex items-center space-x-3">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3" x-show="!editing">
+                            <div class="flex flex-wrap items-center gap-2">
                                 <form action="{{ route('investor.offers.destroy', $offer) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to cancel this offer?');">
                                     @csrf
                                     @method('DELETE')

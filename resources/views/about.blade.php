@@ -15,7 +15,7 @@
 <body class="bg-[#111625] text-white font-sans min-h-screen antialiased">
 
     <!-- Top Navigation -->
-    <nav class="w-full px-8 py-5 flex justify-between items-center border-b border-white/5">
+    <nav class="w-full px-4 md:px-8 py-5 flex justify-between items-center border-b border-white/5">
         <div class="flex items-center space-x-2">
             <div class="leading-none">
                 <div class="text-xl font-bold tracking-tight">
@@ -27,7 +27,19 @@
             </div>
         </div>
         
-        <div class="hidden md:flex items-center space-x-8">
+        <!-- Mobile Menu Toggle -->
+        <button class="md:hidden text-gray-400 hover:text-white transition-colors cursor-pointer" onclick="document.getElementById('about-mobile-menu').classList.toggle('hidden')">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </nav>
+
+    <div id="about-mobile-menu" class="hidden md:hidden bg-[#111625] border-b border-white/5 px-4 py-3 space-y-2">
+        <a href="{{ route('pitch.arena') }}" class="block text-gray-400 hover:text-gray-300 text-sm font-bold py-2 transition-colors">Home</a>
+        <a href="{{ route('about') }}" class="block text-brand-green text-sm font-bold py-2">About</a>
+    </div>
+
+    <nav class="hidden">
+    <div class="hidden md:flex items-center space-x-8">
             <a href="{{ route('pitch.arena') }}" class="text-gray-400 hover:text-gray-300 text-sm font-bold pb-1 transition-colors">
                 Home
             </a>

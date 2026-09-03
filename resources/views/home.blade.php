@@ -21,7 +21,7 @@
 <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[600px] bg-brand-green/5 rounded-full blur-[100px] pointer-events-none"></div>
 
 <!-- Navbar -->
-<header class="bg-[#0B1326] relative z-10 container mx-auto px-6 py-8 flex items-center justify-between">
+<header class="bg-[#0B1326] relative z-10 container mx-auto px-4 md:px-6 py-6 md:py-8 flex items-center justify-between">
 
     <!-- Logo -->
     <div class="flex items-center gap-2">
@@ -30,7 +30,12 @@
         </span>
     </div>
 
-    <!-- Navigation -->
+    <!-- Mobile Menu Toggle -->
+    <button id="home-mobile-toggle" class="md:hidden text-gray-400 hover:text-white transition-colors cursor-pointer" aria-label="Toggle menu" onclick="document.getElementById('home-mobile-menu').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+    </button>
+
+    <!-- Desktop Navigation -->
     <nav class="hidden md:flex items-center gap-6">
         @guest
             <a href="{{ route('pitch.arena') }}" class="text-brand-muted hover:text-white transition-colors text-sm font-medium">
@@ -67,8 +72,36 @@
     </nav>
 </header>
 
+<!-- Mobile Navigation Menu -->
+<div id="home-mobile-menu" class="hidden md:hidden relative z-10 bg-[#0B1326] border-b border-white/5 px-4 py-4 space-y-3">
+    @guest
+        <a href="{{ route('pitch.arena') }}" class="block text-brand-muted hover:text-white transition-colors text-sm font-medium py-2">
+            Continue as Guest
+        </a>
+        <a href="{{ route('login') }}" class="block bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors text-center">
+            Login
+        </a>
+    @else
+        @if(auth()->user()->role === 'entrepreneur')
+            <a href="{{ route('entrepreneur.dashboard') }}" class="block bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors text-center">
+                Go to Dashboard
+            </a>
+        @else
+            <a href="{{ route('investor.home') }}" class="block bg-brand-green/10 text-brand-green border border-brand-green/30 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-green/20 transition-colors text-center">
+                Go to Dashboard
+            </a>
+        @endif
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="w-full text-brand-muted hover:text-white transition-colors text-sm font-medium py-2">
+                Sign Out
+            </button>
+        </form>
+    @endguest
+</div>
+
 <!-- Main Content -->
-<main class="relative z-10 container mx-auto px-6 pt-16 pb-20 flex flex-col items-center text-center">
+<main class="relative z-10 container mx-auto px-4 md:px-6 pt-10 md:pt-16 pb-16 md:pb-20 flex flex-col items-center text-center">
 
     <!-- Subtitle -->
     <div class="text-brand-green text-[11px] font-bold tracking-[0.25em] uppercase mb-8">
@@ -91,10 +124,10 @@
     </p>
 
     <!-- Cards -->
-    <div class="grid md:grid-cols-2 gap-8 w-full max-w-5xl mb-24 text-left">
+    <div class="grid md:grid-cols-2 gap-6 md:gap-8 w-full max-w-5xl mb-16 md:mb-24 text-left">
 
         <!-- Investor Card -->
-        <div class="bg-[#1e293b]/60 backdrop-blur-md border border-brand-green/20 rounded-xl p-8 hover:border-brand-green/40 transition-colors group">
+        <div class="bg-[#1e293b]/60 backdrop-blur-md border border-brand-green/20 rounded-xl p-6 md:p-8 hover:border-brand-green/40 transition-colors group">
 
             <h3 class="text-2xl font-bold mb-3 text-white">
                 Investor Entry
@@ -112,7 +145,7 @@
         </div>
 
         <!-- Entrepreneur Card -->
-        <div class="bg-[#1e293b]/60 backdrop-blur-md border border-brand-yellow/20 rounded-xl p-8 hover:border-brand-yellow/40 transition-colors group">
+        <div class="bg-[#1e293b]/60 backdrop-blur-md border border-brand-yellow/20 rounded-xl p-6 md:p-8 hover:border-brand-yellow/40 transition-colors group">
 
             <h3 class="text-2xl font-bold mb-3 text-white">
                 Entrepreneur Entry
@@ -132,7 +165,7 @@
     </div>
 
     <!-- Stats -->
-    <div class="bg-[#1e293b]/40 backdrop-blur-lg border border-white/5 rounded-2xl w-full max-w-5xl px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-10">
+    <div class="bg-[#1e293b]/40 backdrop-blur-lg border border-white/5 rounded-2xl w-full max-w-5xl px-6 md:px-12 py-8 md:py-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10">
 
         <div class="text-center">
             <div class="text-3xl md:text-4xl font-bold text-brand-green mb-2">PKR 100M+</div>

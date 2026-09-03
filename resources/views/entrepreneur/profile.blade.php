@@ -19,7 +19,7 @@
     <div class="flex">
         <x-sidebar />
 
-        <main class="flex-1 p-12">
+        <main class="flex-1 p-4 md:p-12">
             <div class="max-w-8xl mx-auto">
 
                 @if(session('success'))
@@ -37,15 +37,15 @@
                 @endif
 
                 <!-- Profile Header -->
-                <div class="flex items-center justify-between bg-[#161e2d] border border-white/5 rounded-3xl p-12 shadow-2xl relative overflow-hidden mb-16">
-                    <div class="flex items-center space-x-12">
-                        <form action="{{ route('entrepreneur.profile.image') }}" method="POST" enctype="multipart/form-data" class="relative group cursor-pointer" id="profileImageForm">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-[#161e2d] border border-white/5 rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden mb-16">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:space-x-6 md:space-x-12 w-full md:w-auto">
+                        <form action="{{ route('entrepreneur.profile.image') }}" method="POST" enctype="multipart/form-data" class="relative group cursor-pointer flex-shrink-0" id="profileImageForm">
                             @csrf
-                            <div class="w-40 h-40 bg-[#0b1120] rounded-2xl flex items-center justify-center border-4 border-white/10 overflow-hidden shadow-2xl relative transition-colors duration-300" id="imagePreviewContainer">
+                            <div class="w-32 h-32 sm:w-40 sm:h-40 bg-[#0b1120] rounded-2xl flex items-center justify-center border-4 border-white/10 overflow-hidden shadow-2xl relative transition-colors duration-300" id="imagePreviewContainer">
                                 @if(auth()->user()->profile_image)
                                     <img src="{{ asset('storage/' . auth()->user()->profile_image) }}" alt="Profile Image" class="w-full h-full object-cover">
                                 @else
-                                    <span class="text-5xl font-extrabold text-brand-green">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</span>
+                                    <span class="text-4xl sm:text-5xl font-extrabold text-brand-green">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</span>
                                 @endif
                                 <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -54,14 +54,14 @@
                             <input type="file" name="profile_image" id="profileImageInput" class="hidden" accept="image/*" onchange="document.getElementById('profileImageForm').submit()">
                         </form>
 
-                        <div class="space-y-4">
-                            <span class="bg-[#1e293b] text-brand-green px-4 py-1.5 rounded text-[10px] font-bold tracking-widest uppercase">Verified Entrepreneur</span>
-                            <h1 class="text-6xl font-bold">{{ auth()->user()->name }}</h1>
-                            <div class="flex items-center space-x-12 text-sm text-gray-400 font-medium">
+                        <div class="space-y-4 text-center sm:text-left min-w-0">
+                            <span class="inline-block bg-[#1e293b] text-brand-green px-4 py-1.5 rounded text-[10px] font-bold tracking-widest uppercase">Verified Entrepreneur</span>
+                            <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold break-words">{{ auth()->user()->name }}</h1>
+                            <div class="flex flex-col md:flex-row items-center md:items-start gap-2 md:space-x-12 text-sm text-gray-400 font-medium">
                                 <div class="flex items-center">
                                     <span class="mr-2">📍</span> {{ auth()->user()->city ?? 'City Not Provided' }}
                                 </div>
-                                <div class="flex items-center">
+                                <div class="flex items-center break-all">
                                     <span class="mr-2">✉️</span> {{ auth()->user()->email }}
                                 </div>
                                 <div class="flex items-center">
@@ -71,7 +71,7 @@
                         </div>
                     </div>
 
-                    <button onclick="document.getElementById('editProfileModal').classList.remove('hidden')" class="bg-brand-green text-[#064e3b] px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#3dbd6d] transition-colors flex items-center space-x-2 shadow-lg shadow-brand-green/20 cursor-pointer">
+                    <button onclick="document.getElementById('editProfileModal').classList.remove('hidden')" class="w-full sm:w-auto bg-brand-green text-[#064e3b] px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#3dbd6d] transition-colors flex items-center justify-center space-x-2 shadow-lg shadow-brand-green/20 cursor-pointer">
                         <span>✏️</span>
                         <span>Edit Profile</span>
                     </button>
@@ -100,7 +100,7 @@
                         </div>
                         
                         @if(auth()->user()->entrepreneurProfile && auth()->user()->entrepreneurProfile->company_name)
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                                 <!-- Startup Profile Card -->
                                 <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
                                     <div>
@@ -125,16 +125,16 @@
                                 </div>
 
                                 <!-- Financial Matrix Cards -->
-                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 shadow-xl flex flex-col justify-center space-y-4">
+                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col justify-center space-y-4">
                                     <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Current Valuation</div>
-                                    <div class="text-4xl font-extrabold text-white">
+                                    <div class="text-2xl sm:text-4xl font-extrabold text-white break-words">
                                         {{ auth()->user()->entrepreneurProfile->total_valuation ? 'Rs ' . number_format(auth()->user()->entrepreneurProfile->total_valuation) : 'Not Disclosed' }}
                                     </div>
                                 </div>
 
-                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 shadow-xl flex flex-col justify-center space-y-4">
+                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col justify-center space-y-4">
                                     <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Targeted / Future Valuation</div>
-                                    <div class="text-4xl font-extrabold text-brand-green">
+                                    <div class="text-2xl sm:text-4xl font-extrabold text-brand-green break-words">
                                         {{ auth()->user()->entrepreneurProfile->future_valuation ? 'Rs ' . number_format(auth()->user()->entrepreneurProfile->future_valuation) : 'Not Disclosed' }}
                                     </div>
                                 </div>
@@ -154,17 +154,17 @@
                         </div>
                         <div class="space-y-4">
                             @forelse($activeAgreements as $agreement)
-                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-6 flex justify-between items-center shadow-xl">
-                                    <div class="flex items-center space-x-4">
-                                        <div class="bg-[#0b1120] p-3 rounded-xl text-brand-green">
+                                <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row justify-between sm:items-center gap-4 shadow-xl">
+                                    <div class="flex items-center space-x-4 min-w-0">
+                                        <div class="bg-[#0b1120] p-3 rounded-xl text-brand-green flex-shrink-0">
                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         </div>
-                                        <div>
-                                            <span class="font-bold text-gray-200 block text-base">{{ $agreement->agreement_filename ?? 'Signed_Agreement.pdf' }}</span>
+                                        <div class="min-w-0">
+                                            <span class="font-bold text-gray-200 block text-base break-words">{{ $agreement->agreement_filename ?? 'Signed_Agreement.pdf' }}</span>
                                             <span class="text-xs text-gray-500">Investor: {{ $agreement->investor->name }} • Signed on {{ \Carbon\Carbon::parse($agreement->agreement_date)->format('M d, Y') }}</span>
                                         </div>
                                     </div>
-                                    <div class="flex items-center space-x-3">
+                                    <div class="flex flex-wrap items-center gap-3">
                                         <a href="{{ route('entrepreneur.agreements.download', $agreement->id) }}" class="bg-[#1e293b] text-brand-green hover:bg-brand-green hover:text-[#064e3b] px-4 py-2 rounded-lg font-bold text-xs uppercase transition-colors flex items-center space-x-2">
                                             <span>📥</span>
                                             <span>Contract</span>
@@ -191,11 +191,11 @@
 
     <!-- Edit Profile Modal -->
     <div id="editProfileModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity">
-        <div class="bg-[#161e2d] border border-white/10 rounded-3xl max-w-4xl w-full p-10 shadow-2xl space-y-8 relative">
+        <div class="bg-[#161e2d] border border-white/10 rounded-3xl max-w-4xl w-full p-4 sm:p-8 md:p-10 shadow-2xl space-y-8 relative">
             <div class="flex justify-between items-center border-b border-white/10 pb-6">
-                <h3 class="text-3xl font-bold text-white flex items-center space-x-3">
+                <h3 class="text-xl sm:text-3xl font-bold text-white flex items-center space-x-3">
                     <span>⚙️</span>
-                    <span>Edit Profile Details</span>
+                    <span class="break-words">Edit Profile Details</span>
                 </h3>
                 <button onclick="document.getElementById('editProfileModal').classList.add('hidden')" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer">&times;</button>
             </div>
@@ -206,7 +206,7 @@
                 <!-- Personal Info -->
                 <div>
                     <h4 class="text-sm font-bold text-brand-green uppercase tracking-widest mb-4">Personal Details</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                         <div>
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Full Name</label>
                             <input type="text" name="name" value="{{ auth()->user()->name }}" required class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
@@ -225,7 +225,7 @@
                 <!-- Venture Info -->
                 <div class="border-t border-white/5 pt-6">
                     <h4 class="text-sm font-bold text-brand-green uppercase tracking-widest mb-4">Venture & Company Details</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                         <div>
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Company Name</label>
                             <input type="text" name="company_name" value="{{ auth()->user()->entrepreneurProfile->company_name ?? '' }}" placeholder="e.g. Acme Corp" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
@@ -241,7 +241,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Experience (Years)</label>
                         <input type="number" name="experience_years" value="{{ auth()->user()->entrepreneurProfile->experience_years ?? '' }}" placeholder="e.g. 5" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
@@ -263,9 +263,9 @@
                 </div>
 
                 <!-- Form Actions -->
-                <div class="flex justify-end space-x-4 border-t border-white/10 pt-6">
-                    <button type="button" onclick="document.getElementById('editProfileModal').classList.add('hidden')" class="px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors cursor-pointer">Cancel</button>
-                    <button type="submit" class="bg-brand-green text-[#064e3b] px-10 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#3dbd6d] transition-colors shadow-lg shadow-brand-green/20 cursor-pointer">Save Changes</button>
+                <div class="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4 border-t border-white/10 pt-6">
+                    <button type="button" onclick="document.getElementById('editProfileModal').classList.add('hidden')" class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors cursor-pointer">Cancel</button>
+                    <button type="submit" class="w-full sm:w-auto bg-brand-green text-[#064e3b] px-10 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#3dbd6d] transition-colors shadow-lg shadow-brand-green/20 cursor-pointer">Save Changes</button>
                 </div>
             </form>
         </div>

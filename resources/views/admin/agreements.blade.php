@@ -6,7 +6,7 @@
     <div class="flex flex-1">
         @include('components.admin-sidebar')
 
-        <main class="flex-1 p-8 overflow-y-auto">
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto">
             <div class="mb-8">
                 <h1 class="text-3xl font-bold text-white">Agreements</h1>
                 <p class="text-gray-400 text-sm mt-1">All deals finalized between entrepreneurs and investors</p>

@@ -15,7 +15,7 @@
 <body class="bg-[#111625] text-white font-sans min-h-screen antialiased">
 
     <!-- Top Navigation -->
-    <nav class="w-full px-8 py-5 flex justify-between items-center border-b border-white/5">
+    <nav class="w-full px-4 md:px-8 py-5 flex justify-between items-center border-b border-white/5">
         <div class="flex items-center space-x-2">
             <div class="leading-none">
                 <div class="text-xl font-bold tracking-tight">
@@ -27,7 +27,20 @@
             </div>
         </div>
         
-        <div class="hidden md:flex items-center space-x-8">
+        <!-- Mobile Menu Toggle -->
+        <button class="md:hidden text-gray-400 hover:text-white transition-colors cursor-pointer" onclick="document.getElementById('arena-mobile-menu').classList.toggle('hidden')">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="arena-mobile-menu" class="hidden md:hidden bg-[#111625] border-b border-white/5 px-4 py-3 space-y-2">
+        <a href="{{ route('pitch.arena') }}" class="block text-brand-green text-sm font-bold py-2">Home</a>
+        <a href="{{ route('about') }}" class="block text-gray-400 hover:text-gray-300 text-sm font-bold py-2 transition-colors">About</a>
+    </div>
+
+    <nav class="hidden"><!-- placeholder to close replaced structure -->
+    <div class="hidden md:flex items-center space-x-8">
             <a href="{{ route('pitch.arena') }}" class="text-brand-green text-sm font-bold border-b-2 border-brand-green pb-1">
                 Home
             </a>
@@ -56,7 +69,7 @@
             @forelse($pitches as $pitch)
                 <div class="bg-brand-card rounded-lg overflow-hidden shadow-2xl border border-white/5">
                     <!-- Video/Image Section -->
-                    <div class="relative w-full h-[70vh] bg-gray-900 group flex items-center justify-center">
+                    <div class="relative w-full h-[40vh] md:h-[70vh] bg-gray-900 group flex items-center justify-center">
                         @if($pitch->video_path)
                             <video src="{{ asset('storage/' . $pitch->video_path) }}" controls controlsList="nodownload" class="w-full h-full object-cover max-h-[70vh]"></video>
                         @else

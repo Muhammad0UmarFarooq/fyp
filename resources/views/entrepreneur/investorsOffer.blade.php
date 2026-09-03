@@ -19,11 +19,11 @@
     <div class="flex">
         <x-sidebar />
 
-        <main class="flex-1 p-12">
+        <main class="flex-1 p-4 md:p-12">
             <div class="max-w-8xl mx-auto">
                 <!-- Header -->
-                <div class="flex justify-between items-end mb-12">
-                    <h1 class="text-4xl font-bold">Active <span class="text-brand-green">Offers</span></h1>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 mb-12">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold">Active <span class="text-brand-green">Offers</span></h1>
                     <span class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">{{ $offers->where('status', 'pending')->count() }} PENDING DECISIONS</span>
                 </div>
 
@@ -44,47 +44,47 @@
                 <!-- Offers List -->
                 <div class="space-y-6">
                     @forelse($offers as $offer)
-                    <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-8 shadow-xl">
-                        <div class="flex justify-between items-start mb-10">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-16 h-16 rounded-xl overflow-hidden border border-white/10 bg-gray-800 flex items-center justify-center font-bold text-xl text-brand-green">
+                    <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-4 sm:p-8 shadow-xl">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-6 md:mb-10 gap-4">
+                            <div class="flex items-center space-x-4 min-w-0">
+                                <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-white/10 bg-gray-800 flex items-center justify-center font-bold text-lg sm:text-xl text-brand-green flex-shrink-0">
                                     {{ substr($offer->investor ? $offer->investor->name : 'I', 0, 1) }}
                                 </div>
-                                <h2 class="text-2xl font-bold text-gray-200">{{ $offer->investor ? $offer->investor->name : 'Investor' }}</h2>
+                                <h2 class="text-lg sm:text-2xl font-bold text-gray-200 break-words">{{ $offer->investor ? $offer->investor->name : 'Investor' }}</h2>
                             </div>
-                            <div class="text-right">
+                            <div class="text-left sm:text-right">
                                 <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-1">Offer Amount</div>
-                                <div class="text-4xl font-bold text-brand-green">Rs {{ number_format($offer->offer_amount) }}</div>
+                                <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-green break-words">Rs {{ number_format($offer->offer_amount) }}</div>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-3 gap-8 mb-10">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 mb-6 md:mb-10">
                             <div>
                                 <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-2">Return Time (years)</div>
-                                <div class="text-xl font-bold text-gray-200">{{ $offer->time_period }}</div>
+                                <div class="text-lg sm:text-xl font-bold text-gray-200">{{ $offer->time_period }}</div>
                             </div>
                             <div>
                                 <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-2">Valuation</div>
-                                <div class="text-xl font-bold text-gray-200">Rs {{ number_format($offer->valuation) }}</div>
+                                <div class="text-lg sm:text-xl font-bold text-gray-200 break-words">Rs {{ number_format($offer->valuation) }}</div>
                             </div>
                             <div>
                                 <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-2">Date</div>
-                                <div class="text-xl font-bold text-gray-200">{{ $offer->created_at->format('d M Y') }}</div>
+                                <div class="text-lg sm:text-xl font-bold text-gray-200">{{ $offer->created_at->format('d M Y') }}</div>
                             </div>
                         </div>
 
                         @if($offer->status === 'pending')
-                        <div class="flex space-x-4">
-                            <form action="{{ route('entrepreneur.offers.status', $offer) }}" method="POST" class="inline">
+                        <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+                            <form action="{{ route('entrepreneur.offers.status', $offer) }}" method="POST" class="inline w-full sm:w-auto">
                                 @csrf
                                 <input type="hidden" name="status" value="rejected">
-                                <button type="submit" class="bg-[#991b1b] text-white px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-red-900 transition-colors cursor-pointer">Reject</button>
+                                <button type="submit" class="w-full sm:w-auto bg-[#991b1b] text-white px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-red-900 transition-colors cursor-pointer">Reject</button>
                             </form>
 
-                            <form action="{{ route('entrepreneur.offers.status', $offer) }}" method="POST" class="inline">
+                            <form action="{{ route('entrepreneur.offers.status', $offer) }}" method="POST" class="inline w-full sm:w-auto">
                                 @csrf
                                 <input type="hidden" name="status" value="accepted">
-                                <button type="submit" class="bg-brand-green text-[#064e3b] px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-[#3dbd6d] transition-colors cursor-pointer font-extrabold">Accept</button>
+                                <button type="submit" class="w-full sm:w-auto bg-brand-green text-[#064e3b] px-8 py-2.5 rounded text-xs font-bold tracking-widest uppercase hover:bg-[#3dbd6d] transition-colors cursor-pointer font-extrabold">Accept</button>
                             </form>
                         </div>
                         @else

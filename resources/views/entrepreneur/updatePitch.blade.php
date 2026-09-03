@@ -12,24 +12,24 @@
     <!-- Tailwind & Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-[#0b1120] text-white font-sans min-h-screen antialiased">
+<body class="bg-[#0b1120] text-white font-sans min-h-screen antialiased overflow-x-hidden">
 
     <x-navbar />
 
-    <div class="flex">
+    <div class="flex min-w-0">
         <x-sidebar />
 
-        <main class="flex-1 p-12">
-            <div class="max-w-8xl mx-auto">
+        <main class="flex-1 min-w-0 p-4 sm:p-6 md:p-12">
+            <div class="max-w-8xl mx-auto w-full">
                 <!-- Header -->
-                <div class="mb-12">
-                    <h1 class="text-4xl font-bold mb-4">Update Your Pitch</h1>
+                <div class="mb-8 md:mb-12">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4">Update Your Pitch</h1>
                     <p class="text-gray-400 text-sm max-w-2xl leading-relaxed">
                         Transform your vision into an institutional-grade investment opportunity. Complete the following dimensions of your venture.
                     </p>
                 </div>
 
-                <form method="POST" action="{{ route('entrepreneur.pitch.update.put', $pitch) }}" enctype="multipart/form-data" class="space-y-16">
+                <form method="POST" action="{{ route('entrepreneur.pitch.update.put', $pitch) }}" enctype="multipart/form-data" class="space-y-8 md:space-y-16">
                     @csrf
                     @method('PUT')
 
@@ -44,13 +44,13 @@
                     @endif
 
                     <!-- 01. Video Transmission -->
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-end">
-                            <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-sm">01. VIDEO TRANSMISSION</h2>
-                            <span class="text-[10px] text-gray-500 font-bold uppercase">MAX 2,500 MB - MP4/MOV</span>
+                    <div class="space-y-4 md:space-y-6">
+                        <div class="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-end">
+                            <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-xs sm:text-sm">01. VIDEO TRANSMISSION</h2>
+                            <span class="text-[9px] sm:text-[10px] text-gray-500 font-bold uppercase">MAX 2,500 MB - MP4/MOV</span>
                         </div>
                         
-                        <div id="drop-zone" class="relative w-full aspect-video bg-[#111625] rounded-xl overflow-hidden border border-white/5 group cursor-pointer transition-colors duration-300" onclick="document.getElementById('video-upload').click()">
+                        <div id="drop-zone" class="relative w-full aspect-video bg-[#111625] rounded-xl overflow-hidden border border-white/5 group cursor-pointer transition-colors duration-300 min-w-0" onclick="document.getElementById('video-upload').click()">
                             <input type="file" name="video" id="video-upload" accept="video/mp4,video/quicktime" class="hidden" onchange="handleFileSelect(event)">
                             @if(isset($pitch) && $pitch->video_path)
                                 <img id="placeholder-img" src="{{ asset('images/shoes_shop.jpg') }}" class="hidden w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity">
@@ -85,23 +85,23 @@
                     <div class="space-y-8">
                         <h2 class="text-[#facc15] font-bold tracking-[0.2em] text-sm uppercase">02. Pitches Identity</h2>
                         
-                        <div id="pitch-identity-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
-                            <div class="space-y-2">
+                        <div id="pitch-identity-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-end min-w-0">
+                            <div class="space-y-2 min-w-0">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Startup Name</label>
-                                <input type="text" required name="startup_name" value="{{ old('startup_name', $pitch->startup_name ?? '') }}" maxlength="20" pattern="^[A-Za-z ]{1,20}$" oninput="this.value=this.value.replace(/[^A-Za-z ]/g,'')" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="text" required name="startup_name" value="{{ old('startup_name', $pitch->startup_name ?? '') }}" maxlength="20" pattern="^[A-Za-z ]{1,20}$" oninput="this.value=this.value.replace(/[^A-Za-z ]/g,'')" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 sm:py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
-                            <div class="space-y-2">
+                            <div class="space-y-2 min-w-0">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Invested Amount (Owner Investment)</label>
-                                <input type="number" required name="invested_amount" value="{{ old('invested_amount', $pitch->invested_amount ?? '') }}" min="50000" max="1000000000" oninput="validateMax(this, 1000000000)" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="number" required name="invested_amount" value="{{ old('invested_amount', $pitch->invested_amount ?? '') }}" min="50000" max="1000000000" oninput="validateMax(this, 1000000000)" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 sm:py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
-                            <div class="space-y-2">
+                            <div class="space-y-2 min-w-0">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Net Value(Total Revenue - Total Expenses )</label>
-                                <input type="number" required name="monthly_net_value" value="{{ old('monthly_net_value', $pitch->monthly_net_value ?? '') }}" min="20000" max="1000000000" oninput="validateMax(this, 1000000000)" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-sm">
+                                <input type="number" required name="monthly_net_value" value="{{ old('monthly_net_value', $pitch->monthly_net_value ?? '') }}" min="20000" max="1000000000" oninput="validateMax(this, 1000000000)" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 sm:py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
-                            <div id="monthly-growth-field" class="space-y-2">
+                            <div id="monthly-growth-field" class="space-y-2 min-w-0">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Growth</label>
                                 <div class="flex items-center bg-[#0b1120] border border-white/5 rounded">
-                                    <input type="number" required name="monthly_growth" value="{{ old('monthly_growth', $pitch->monthly_growth ?? '') }}" min="1" max="100" oninput="validateRange(this,1,100)" class="flex-1 bg-transparent px-4 py-4 focus:outline-none text-sm">
+                                    <input type="number" required name="monthly_growth" value="{{ old('monthly_growth', $pitch->monthly_growth ?? '') }}" min="1" max="100" oninput="validateRange(this,1,100)" class="flex-1 min-w-0 bg-transparent px-4 py-3 sm:py-4 focus:outline-none text-sm">
                                     <div class="p-2">
                                         <button type="button" onclick="removeFinalField('monthly-growth-field')" class="bg-white w-8 h-8 flex items-center justify-center rounded shadow-sm group">
                                             <div class="bg-[#ff0000] w-6 h-6 rounded-full flex items-center justify-center group-hover:bg-[#b30000] transition-colors">
@@ -132,7 +132,7 @@
                             @endif
 
                             <!-- Add Button Box (Always at the end) -->
-                            <div id="add-button-box" class="bg-[#0b1120] border border-white/5 h-[84px] rounded flex items-center justify-center">
+                            <div id="add-button-box" class="bg-[#0b1120] border border-white/5 h-[84px] rounded flex items-center justify-center min-w-0">
                                 <button type="button" onclick="showFieldCreator()" class="bg-white w-10 h-10 flex items-center justify-center rounded shadow-sm group">
                                     <div class="bg-[#007bff] w-8 h-8 rounded-full flex items-center justify-center group-hover:bg-[#0056b3] transition-colors">
                                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
@@ -148,26 +148,26 @@
                     </div>
 
                     <!-- 03. The Capital Architecture -->
-                    <div class="bg-[#111625] border border-white/5 p-8 rounded-2xl space-y-8">
-                        <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-sm">03. THE CAPITAL ARCHITECTURE</h2>
+                    <div class="bg-[#111625] border border-white/5 p-5 sm:p-6 md:p-8 rounded-2xl space-y-8">
+                        <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-xs sm:text-sm">03. THE CAPITAL ARCHITECTURE</h2>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
                             <div class="space-y-6">
                                 <div class="space-y-2">
                                     <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required (Rs)</label>
-                                    <input type="text" required name="funding_required" value="{{ old('funding_required', $pitch->funding_required ?? '') }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                                    <input type="text" required name="funding_required" value="{{ old('funding_required', $pitch->funding_required ?? '') }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 sm:py-4 focus:outline-none focus:border-brand-green/50 text-base sm:text-lg font-bold">
                                 </div>
                                 <div class="space-y-2">
                                     <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Return Time (years)</label>
-                                    <input type="text" required name="return_time" value="{{ old('return_time', $pitch->return_time ?? '') }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-4 focus:outline-none focus:border-brand-green/50 text-lg font-bold">
+                                    <input type="text" required name="return_time" value="{{ old('return_time', $pitch->return_time ?? '') }}" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 sm:py-4 focus:outline-none focus:border-brand-green/50 text-base sm:text-lg font-bold">
                                 </div>
                             </div>
 
-                            <div class="bg-[#0b1120] p-10 rounded-xl border border-white/5 text-center">
+                            <div class="bg-[#0b1120] p-6 sm:p-8 md:p-10 rounded-xl border border-white/5 text-center">
                                 <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total Valuation</label>
-                                <div class="flex items-center justify-center space-x-2">
-                                    <span class="text-5xl font-bold text-brand-green">Rs</span>
-                                    <input type="text" required name="total_valuation" value="{{ old('total_valuation', $pitch->total_valuation ?? '') }}" class="bg-transparent text-5xl font-bold text-brand-green focus:outline-none w-full text-center">
+                                <div class="flex items-center justify-center space-x-1 sm:space-x-2">
+                                    <span class="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-green">Rs</span>
+                                    <input type="text" required name="total_valuation" value="{{ old('total_valuation', $pitch->total_valuation ?? '') }}" class="bg-transparent text-3xl sm:text-4xl md:text-5xl font-bold text-brand-green focus:outline-none w-full text-center min-w-0">
                                 </div>
                             </div>
                         </div>
@@ -175,7 +175,7 @@
 
                     <!-- Edit Button -->
                     <div class="flex justify-center pb-12">
-                        <button type="submit" class="bg-[#4ade80] text-[#064e3b] px-16 py-4 rounded font-bold text-sm tracking-widest uppercase hover:bg-[#3dbd6d] transition-all shadow-xl shadow-brand-green/10">
+                        <button type="submit" class="bg-[#4ade80] text-[#064e3b] w-full sm:w-auto px-8 sm:px-16 py-4 rounded font-bold text-sm tracking-widest uppercase hover:bg-[#3dbd6d] transition-all shadow-xl shadow-brand-green/10">
                             Edit Pitch
                         </button>
                     </div>

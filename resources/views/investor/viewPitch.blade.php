@@ -19,11 +19,11 @@
     <div class="flex">
         <x-investor-sidebar />
 
-        <main class="flex-1 p-12 relative">
+        <main class="flex-1 p-4 sm:p-6 md:p-12 relative">
             <div class="max-w-8xl mx-auto space-y-16">
                 <!-- Header -->
                 <div>
-                    <h1 class="text-4xl font-bold mb-2">{{ $pitch ? $pitch->startup_name : 'View Pitch Page' }}</h1>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 break-words">{{ $pitch ? $pitch->startup_name : 'View Pitch Page' }}</h1>
                     <div class="flex items-center text-sm text-gray-400 mt-2">
                         <svg class="w-4 h-4 mr-2 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -34,8 +34,8 @@
 
                 <!-- 01. VIDEO TRANSMISSION -->
                 <div class="space-y-6">
-                    <div class="flex justify-between items-end">
-                        <h2 class="text-brand-yellow font-bold text-sm tracking-widest uppercase">01. VIDEO TRANSMISSION</h2>
+                    <div class="flex flex-wrap justify-between items-end gap-2">
+                        <h2 class="text-brand-yellow font-bold text-xs sm:text-sm tracking-widest uppercase">01. VIDEO TRANSMISSION</h2>
                         <span class="text-[9px] text-gray-500 font-bold uppercase tracking-widest">EXECUTIVE PITCH PRESENTATION</span>
                     </div>
                     <div class="bg-[#161e2d] rounded-2xl overflow-hidden shadow-2xl border border-white/5">
@@ -58,7 +58,7 @@
                 <div class="space-y-8">
                     <h2 class="text-brand-yellow font-bold text-sm tracking-widest uppercase">02. PITCHES IDENTITY</h2>
                     
-                    <div class="grid grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         <div class="space-y-2">
                             <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Startup Name</label>
                             <input type="text" value="{{ $pitch ? $pitch->startup_name : 'N/A' }}" readonly class="w-full bg-[#0b1120] border border-transparent rounded px-4 py-4 text-sm text-gray-200 focus:outline-none">
@@ -79,7 +79,7 @@
 
                     @if($pitch && $pitch->pitchFields->isNotEmpty())
                     <!-- Dynamic Custom Fields -->
-                    <div class="grid grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         @foreach($pitch->pitchFields as $field)
                         <div class="space-y-2">
                             <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">{{ $field->label }}</label>
@@ -105,10 +105,10 @@
                 </div>
 
                 <!-- 03. THE CAPITAL ARCHITECTURE -->
-                <div class="bg-[#161e2d] border border-white/5 rounded-3xl p-10 shadow-2xl">
+                <div class="bg-[#161e2d] border border-white/5 rounded-3xl p-4 md:p-10 shadow-2xl">
                     <h2 class="text-brand-yellow font-bold text-sm tracking-widest uppercase mb-10">03. THE CAPITAL ARCHITECTURE</h2>
                     
-                    <div class="flex justify-between items-start">
+                    <div class="flex flex-col md:flex-row justify-between items-start gap-6">
                         <div class="space-y-8 flex-1 max-w-md">
                             <div class="space-y-2">
                                 <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Funding Amount Required (PKR)</label>
@@ -124,9 +124,9 @@
                             </div>
                         </div>
 
-                        <div class="ml-12 bg-[#1e293b] rounded-2xl p-8 flex-shrink-0 w-80 text-center shadow-xl border border-white/5">
+                        <div class="md:ml-12 bg-[#1e293b] rounded-2xl p-6 md:p-8 flex-shrink-0 w-full md:w-80 text-center shadow-xl border border-white/5">
                             <div class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-4">Total Valuation</div>
-                            <div class="text-4xl font-black text-brand-green">PKR {{ $pitch && $pitch->total_valuation ? number_format($pitch->total_valuation) : '0' }}</div>
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-green break-words">PKR {{ $pitch && $pitch->total_valuation ? number_format($pitch->total_valuation) : '0' }}</div>
                         </div>
                     </div>
                 </div>

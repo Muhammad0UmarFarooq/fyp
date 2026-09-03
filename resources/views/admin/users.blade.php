@@ -6,7 +6,7 @@
     <div class="flex flex-1">
         @include('components.admin-sidebar')
 
-        <main class="flex-1 p-8 overflow-y-auto">
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto">
             <div class="flex justify-between items-center mb-8">
                 <div>
                     <h1 class="text-3xl font-bold text-white">Users</h1>

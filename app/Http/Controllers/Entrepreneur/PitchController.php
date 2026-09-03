@@ -13,7 +13,7 @@ class PitchController extends Controller
     public function store(Request $request)
     {
         $cleanInt = function ($val) {
-            return ($val !== null && $val !== '') ? (int) preg_replace('/[^0-9]/', '', (string)$val) : null;
+            return ($val !== null && $val !== '') ? (int) preg_replace('/[^0-9]/', '', (string) $val) : null;
         };
 
         $request->merge([
@@ -26,7 +26,7 @@ class PitchController extends Controller
         ]);
 
         $validated = $request->validate([
-            'video' => 'required|file|clamav|mimes:mp4,mov|max:2500000', // 2500MB
+            'video' => 'required|file|mimes:mp4,mov|max:2500000', // 2500MB
             'startup_name' => 'required|regex:/^[A-Za-z ]+$/|max:20',
             'invested_amount' => 'required|integer|min:50000|max:1000000000',
             'monthly_net_value' => 'required|integer|min:20000|max:1000000000',
@@ -95,7 +95,7 @@ class PitchController extends Controller
         }
 
         $cleanInt = function ($val) {
-            return ($val !== null && $val !== '') ? (int) preg_replace('/[^0-9]/', '', (string)$val) : null;
+            return ($val !== null && $val !== '') ? (int) preg_replace('/[^0-9]/', '', (string) $val) : null;
         };
 
         $request->merge([
@@ -108,7 +108,7 @@ class PitchController extends Controller
         ]);
 
         $validated = $request->validate([
-            'video' => 'nullable|file|clamav|mimes:mp4,mov|max:2500000', // 2500MB
+            'video' => 'nullable|file|mimes:mp4,mov|max:2500000', // 2500MB
             'startup_name' => 'required|regex:/^[A-Za-z ]+$/|max:20',
             'invested_amount' => 'required|integer|min:50000|max:1000000000',
             'monthly_net_value' => 'required|integer|min:20000|max:1000000000',

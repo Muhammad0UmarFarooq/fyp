@@ -27,7 +27,7 @@ class ProfileController extends Controller
     public function uploadImage(Request $request)
     {
         $request->validate([
-            'profile_image' => 'required|image|clamav|mimes:jpeg,png,jpg,gif|max:5120',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
 
         $user = auth()->user();

@@ -1,5 +1,9 @@
-<nav class="bg-[#0f1523] border-b border-white/5 px-8 py-4 flex justify-between items-center z-50 sticky top-0 w-full">
-    <div class="flex items-center space-x-2 w-64">
+<nav class="bg-[#0f1523] border-b border-white/5 px-4 md:px-8 py-4 flex justify-between items-center z-50 sticky top-0 w-full">
+    <div class="flex items-center space-x-3">
+        <!-- Mobile Hamburger -->
+        <button onclick="document.getElementById('mobile-sidebar').classList.toggle('hidden')" class="md:hidden text-gray-400 hover:text-white transition-colors cursor-pointer" aria-label="Toggle menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
         <div class="leading-none">
             <div class="text-xl font-bold tracking-tight text-white">
                 Invest<span class="text-[#4ade80]">Bridge</span>
@@ -11,7 +15,7 @@
     </div>
 
     <div class="flex items-center space-x-4">
-        <div class="text-right">
+        <div class="text-right hidden sm:block">
             <a href="{{ route('entrepreneur.profile') }}" class="text-xs font-bold text-white cursor-pointer hover:text-gray-200 transition-colors block">{{ auth()->user()->name }}</a>
             <form action="{{ route('logout') }}" method="POST" class="inline">
                 @csrf

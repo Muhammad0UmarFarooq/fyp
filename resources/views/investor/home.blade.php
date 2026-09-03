@@ -21,7 +21,7 @@
     <div class="flex">
         <x-investor-sidebar />
 
-        <main class="flex-1 p-12">
+        <main class="flex-1 p-4 md:p-12">
             <div class="max-w-8xl mx-auto">
                 <!-- Header -->
                 <div class="mb-12">
