@@ -209,44 +209,59 @@
 
             <form action="{{ route('investor.profile.update') }}" method="POST" class="space-y-6">
                 @csrf
+<<<<<<< HEAD
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+=======
+
+                @if ($errors->any())
+                    <div class="bg-red-500/10 border border-red-500/50 text-red-500 p-4 rounded-xl">
+                        <ul class="list-disc list-inside text-sm">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <div class="grid grid-cols-3 gap-6">
+>>>>>>> ff4cae4 (clamav remove)
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Full Name</label>
-                        <input type="text" name="name" value="{{ $user->name }}" required class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                        <input type="text" name="name" value="{{ old('name', $user->name) }}" required class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">City / Location</label>
-                        <input type="text" name="city" value="{{ $user->city }}" placeholder="e.g. Lahore (DHA)" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                        <input type="text" name="city" value="{{ old('city', $user->city) }}" placeholder="e.g. Lahore (DHA)" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Phone Number</label>
-                        <input type="text" name="phone" value="{{ $user->phone }}" placeholder="e.g. 03123311111" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                        <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="e.g. 03123311111" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                 </div>
 
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Focus Sectors (Comma separated)</label>
-                    <input type="text" name="interested_businesses" value="{{ is_array($investorProfile->interested_businesses) ? implode(', ', $investorProfile->interested_businesses) : '' }}" placeholder="Energy, Technology, E-Commerce, Fintech" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                    <input type="text" name="interested_businesses" value="{{ old('interested_businesses', is_array($investorProfile->interested_businesses) ? implode(', ', $investorProfile->interested_businesses) : '') }}" placeholder="Energy, Technology, E-Commerce, Fintech" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Investment Amount (PKR)</label>
-                        <input type="number" name="investment_amount" value="{{ $investorProfile->investment_amount }}" placeholder="e.g. 1200000" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                        <input type="number" name="investment_amount" value="{{ old('investment_amount', $investorProfile->investment_amount) }}" placeholder="e.g. 1200000" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Investment Focus</label>
-                        <input type="text" name="investment_focus" value="{{ $investorProfile->investment_focus }}" placeholder="e.g. Tech Startups" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                        <input type="text" name="investment_focus" value="{{ old('investment_focus', $investorProfile->investment_focus) }}" placeholder="e.g. Tech Startups" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Portfolio Size</label>
-                        <input type="text" name="portfolio_size" value="{{ $investorProfile->portfolio_size }}" placeholder="e.g. 5 Companies, $500k+" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                        <input type="text" name="portfolio_size" value="{{ old('portfolio_size', $investorProfile->portfolio_size) }}" placeholder="e.g. 5 Companies, $500k+" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                 </div>
 
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Investment Philosophy / Bio</label>
-                    <textarea name="bio" rows="4" placeholder="Share your investment strategy, vision, and what kind of founders you seek..." class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">{{ $user->bio }}</textarea>
+                    <textarea name="bio" rows="4" placeholder="Share your investment strategy, vision, and what kind of founders you seek..." class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">{{ old('bio', $user->bio) }}</textarea>
                 </div>
 
                 <div class="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4 border-t border-white/10 pt-6">

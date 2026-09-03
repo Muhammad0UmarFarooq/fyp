@@ -202,6 +202,16 @@
 
             <form action="{{ route('entrepreneur.profile.update') }}" method="POST" class="space-y-6">
                 @csrf
+
+                @if ($errors->any())
+                    <div class="bg-red-500/10 border border-red-500/50 text-red-500 p-4 rounded-xl">
+                        <ul class="list-disc list-inside text-sm">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 
                 <!-- Personal Info -->
                 <div>
@@ -209,15 +219,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                         <div>
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Full Name</label>
-                            <input type="text" name="name" value="{{ auth()->user()->name }}" required class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                            <input type="text" name="name" value="{{ old('name', auth()->user()->name) }}" required class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                         </div>
                         <div>
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">City / Location</label>
-                            <input type="text" name="city" value="{{ auth()->user()->city }}" placeholder="e.g. Islamabad" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                            <input type="text" name="city" value="{{ old('city', auth()->user()->city) }}" placeholder="e.g. Islamabad" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                         </div>
                         <div>
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Phone Number</label>
-                            <input type="text" name="phone" value="{{ auth()->user()->phone }}" placeholder="e.g. +923001234567" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                            <input type="text" name="phone" value="{{ old('phone', auth()->user()->phone) }}" placeholder="e.g. +923001234567" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                         </div>
                     </div>
                 </div>
@@ -228,15 +238,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                         <div>
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Company Name</label>
-                            <input type="text" name="company_name" value="{{ auth()->user()->entrepreneurProfile->company_name ?? '' }}" placeholder="e.g. Acme Corp" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                            <input type="text" name="company_name" value="{{ old('company_name', auth()->user()->entrepreneurProfile->company_name ?? '') }}" placeholder="e.g. Acme Corp" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                         </div>
                         <div>
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Industry / Sector</label>
-                            <input type="text" name="industry" value="{{ auth()->user()->entrepreneurProfile->industry ?? '' }}" placeholder="e.g. Fintech" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                            <input type="text" name="industry" value="{{ old('industry', auth()->user()->entrepreneurProfile->industry ?? '') }}" placeholder="e.g. Fintech" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                         </div>
                         <div>
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Website URL</label>
-                            <input type="text" name="website" value="{{ auth()->user()->entrepreneurProfile->website ?? '' }}" placeholder="e.g. https://example.com" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                            <input type="text" name="website" value="{{ old('website', auth()->user()->entrepreneurProfile->website ?? '') }}" placeholder="e.g. https://example.com" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                         </div>
                     </div>
                 </div>
@@ -244,22 +254,22 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Experience (Years)</label>
-                        <input type="number" name="experience_years" value="{{ auth()->user()->entrepreneurProfile->experience_years ?? '' }}" placeholder="e.g. 5" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                        <input type="number" name="experience_years" value="{{ old('experience_years', auth()->user()->entrepreneurProfile->experience_years ?? '') }}" placeholder="e.g. 5" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Current Valuation (Rs)</label>
-                        <input type="number" name="total_valuation" value="{{ auth()->user()->entrepreneurProfile->total_valuation ?? '' }}" placeholder="e.g. 500000" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                        <input type="number" name="total_valuation" value="{{ old('total_valuation', auth()->user()->entrepreneurProfile->total_valuation ?? '') }}" placeholder="e.g. 500000" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Future Valuation Target (Rs)</label>
-                        <input type="number" name="future_valuation" value="{{ auth()->user()->entrepreneurProfile->future_valuation ?? '' }}" placeholder="e.g. 2000000" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
+                        <input type="number" name="future_valuation" value="{{ old('future_valuation', auth()->user()->entrepreneurProfile->future_valuation ?? '') }}" placeholder="e.g. 2000000" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                 </div>
 
                 <!-- Bio / Vision -->
                 <div class="border-t border-white/5 pt-6">
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Operational Vision / Bio</label>
-                    <textarea name="bio" rows="4" placeholder="Describe your operational philosophy, milestones, and venture roadmap..." class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">{{ auth()->user()->bio }}</textarea>
+                    <textarea name="bio" rows="4" placeholder="Describe your operational philosophy, milestones, and venture roadmap..." class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">{{ old('bio', auth()->user()->bio) }}</textarea>
                 </div>
 
                 <!-- Form Actions -->

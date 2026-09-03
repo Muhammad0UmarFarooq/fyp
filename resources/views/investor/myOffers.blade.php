@@ -40,6 +40,16 @@
                 </div>
                 @endif
 
+                @if ($errors->any())
+                <div class="bg-red-500/10 border border-red-500/50 text-red-500 p-4 rounded-xl mb-8">
+                    <ul class="list-disc list-inside text-sm">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
                 <!-- Offers List -->
                 <div class="space-y-6">
                     @forelse($offers as $offer)
@@ -115,15 +125,15 @@
                             @method('PUT')
                             <div class="space-y-1">
                                 <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Offer Amount (PKR)</label>
-                                <input type="number" name="offer_amount" value="{{ $offer->offer_amount }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
+                                <input type="number" name="offer_amount" value="{{ old('offer_amount', $offer->offer_amount) }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Return Time Period</label>
-                                <input type="text" name="time_period" value="{{ $offer->time_period }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
+                                <input type="text" name="time_period" value="{{ old('time_period', $offer->time_period) }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">Return Value (PKR)</label>
-                                <input type="number" name="valuation" value="{{ $offer->valuation }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
+                                <input type="number" name="valuation" value="{{ old('valuation', $offer->valuation) }}" required class="w-full bg-[#0b1120] text-brand-green font-bold border border-white/10 rounded px-3 py-3 text-sm focus:outline-none">
                             </div>
                             <div class="md:col-span-3 flex justify-end space-x-3 pt-4 items-center">
                                 <button type="button" @click="editing = false" class="border border-red-900/30 text-red-400 px-8 py-2.5 rounded font-bold text-[11px] uppercase tracking-wider hover:bg-red-500/10 transition-colors cursor-pointer">Cancel</button>

@@ -29,13 +29,38 @@
             <div class="p-8 md:p-14">
                 <form action="{{ route('entrepreneur.register.post') }}" method="POST" class="space-y-8">
                     @csrf
+
+                    @if ($errors->any())
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-red-700 font-bold uppercase tracking-wider">
+                                        Please correct the following errors:
+                                    </p>
+                                    <ul class="mt-2 list-disc list-inside text-xs text-red-600 space-y-1">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
 
                         <!-- Full Legal Name -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Full
                                 Legal Name</label>
-                            <input type="text" name="name" placeholder="Johnathan Doe" class="input" required
+                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Johnathan Doe" class="input" required
                                 maxlength="25" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$"
                                 title="Only letters and single spaces allowed. Maximum 25 characters.">
                         </div>
@@ -45,7 +70,7 @@
                             <label
                                 class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Professional
                                 Email</label>
-                            <input type="email" name="email" class="input" placeholder="example@gmail.com"
+                            <input type="email" name="email" value="{{ old('email') }}" class="input" placeholder="example@gmail.com"
                                 maxlength="100" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required
                                 title="Enter a valid email address (e.g., user@example.com).">
                         </div>
@@ -54,7 +79,7 @@
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">CNIC
                                 (13-Digit Format)</label>
-                            <input type="text" name="cnic" placeholder="XXXXX-XXXXXXX-X"
+                            <input type="text" name="cnic" value="{{ old('cnic') }}" placeholder="XXXXX-XXXXXXX-X"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
                                 required maxlength="15" title="CNIC must be in the format XXXXX-XXXXXXX-X">
                         </div>
@@ -62,7 +87,7 @@
                         <!-- Phone No -->
                         <div>
                             <label class="label">Phone No</label>
-                            <input type="text" name="phone" placeholder="+92-3XXXXXXXXX" class="input" required
+                            <input type="text" name="phone" value="{{ old('phone') }}" placeholder="+92-3XXXXXXXXX" class="input" required
                                 maxlength="15" pattern="^\+92-3\d{9}$"
                                 title="Phone number must start with 3 and have exactly 10 digits (excluding +92-)">
                         </div>
@@ -75,10 +100,10 @@
                                 <select name="city"
                                     class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-500 appearance-none focus:outline-none focus:ring-1 focus:ring-brand-green"
                                     required>
-                                    <option value="" disabled selected>Select Territory</option>
-                                    <option value="karachi">Karachi</option>
-                                    <option value="lahore">Lahore</option>
-                                    <option value="islamabad">Islamabad</option>
+                                    <option value="" disabled {{ old('city') ? '' : 'selected' }}>Select Territory</option>
+                                    <option value="karachi" {{ old('city') === 'karachi' ? 'selected' : '' }}>Karachi</option>
+                                    <option value="lahore" {{ old('city') === 'lahore' ? 'selected' : '' }}>Lahore</option>
+                                    <option value="islamabad" {{ old('city') === 'islamabad' ? 'selected' : '' }}>Islamabad</option>
                                 </select>
                                 <div
                                     class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
@@ -97,10 +122,10 @@
                                 <select name="industry"
                                     class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-500 appearance-none focus:outline-none focus:ring-1 focus:ring-brand-green"
                                     required>
-                                    <option value="" disabled selected>Select Industry</option>
-                                    <option value="karachi">technology</option>
-                                    <option value="lahore">E-Commerece</option>
-                                    <option value="islamabad">Real State</option>
+                                    <option value="" disabled {{ old('industry') ? '' : 'selected' }}>Select Industry</option>
+                                    <option value="technology" {{ old('industry') === 'technology' ? 'selected' : '' }}>technology</option>
+                                    <option value="ecommerce" {{ old('industry') === 'ecommerce' ? 'selected' : '' }}>E-Commerece</option>
+                                    <option value="realestate" {{ old('industry') === 'realestate' ? 'selected' : '' }}>Real State</option>
                                 </select>
                                 <div
                                     class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
@@ -115,7 +140,7 @@
                         <div class="space-y-2.5">
                             <label
                                 class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Business</label>
-                            <input type="text" name="company_name" placeholder="Shoes Shop Store"
+                            <input type="text" name="company_name" value="{{ old('company_name') }}" placeholder="Shoes Shop Store"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
                                 pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$" maxlength="50" required
                                 title="Business name: letters only with single spaces between words. No numbers, symbols or double spaces.">
@@ -126,7 +151,7 @@
                             <label
                                 class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Experience
                                 (Years)</label>
-                            <input type="text" inputmode="numeric" name="experience" placeholder="e.g. 3"
+                            <input type="text" inputmode="numeric" name="experience" value="{{ old('experience') }}" placeholder="e.g. 3"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green"
                                 pattern="^([0-5]?[0-9]|60)$" maxlength="2" required
                                 title="Experience must be between 0 and 60 years (max 2 digits).">
@@ -135,7 +160,7 @@
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Total
                                 Valuation</label>
-                            <input type="number" id="total_valuation" name="total_valuation" placeholder="e.g. 50000"
+                            <input type="number" id="total_valuation" name="total_valuation" value="{{ old('total_valuation') }}" placeholder="e.g. 50000"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 min="50000" max="1000000000" required
                                 title="Total Valuation must be between 50,000 and 1,000,000,000 (1 Billion).">
@@ -146,7 +171,7 @@
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Future
                                 Valuation</label>
-                            <input type="number" id="future_valuation" name="future_valuation" placeholder="e.g. 80000"
+                            <input type="number" id="future_valuation" name="future_valuation" value="{{ old('future_valuation') }}" placeholder="e.g. 80000"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 min="80000" max="100000000000" required
                                 title="Future Valuation must be between 80,000 and 100,000,000,000 (100 Billion).">

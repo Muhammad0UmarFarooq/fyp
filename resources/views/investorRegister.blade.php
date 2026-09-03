@@ -67,7 +67,7 @@
                         <!-- Full Name -->
                         <div>
                             <label class="label">Full Legal Name</label>
-                            <input type="text" name="name" placeholder="Johnathan Doe" class="input" required
+                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Johnathan Doe" class="input" required
                                 maxlength="25" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$"
                                 title="Only letters and single spaces allowed. Maximum 25 characters.">
                         </div>
@@ -75,7 +75,7 @@
                         <!-- Email -->
                         <div>
                             <label class="label">Professional Email</label>
-                            <input type="email" name="email" class="input" placeholder="example@gmail.com"
+                            <input type="email" name="email" value="{{ old('email') }}" class="input" placeholder="example@gmail.com"
                                 maxlength="100" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required
                                 title="Enter a valid email address (e.g., user@example.com).">
                         </div>
@@ -83,7 +83,7 @@
                         <!-- CNIC -->
                         <div>
                             <label class="label">CNIC (13-Digit Format)</label>
-                            <input type="text" name="cnic" placeholder="XXXXX-XXXXXXX-X" class="input" required
+                            <input type="text" name="cnic" value="{{ old('cnic') }}" placeholder="XXXXX-XXXXXXX-X" class="input" required
                                 maxlength="15" pattern="^\d{5}-\d{7}-\d{1}$"
                                 title="CNIC must be in the format XXXXX-XXXXXXX-X">
                         </div>
@@ -91,7 +91,7 @@
                         <!-- Phone -->
                         <div>
                             <label class="label">Phone No(start from 3)</label>
-                            <input type="text" name="phone" placeholder="+92-3XXXXXXXXX" class="input" required
+                            <input type="text" name="phone" value="{{ old('phone') }}" placeholder="+92-3XXXXXXXXX" class="input" required
                                 maxlength="15" pattern="^\+92-3\d{9}$"
                                 title="Phone number must start with 3 and have exactly 10 digits (excluding +92-)">
                         </div>
@@ -100,10 +100,10 @@
                         <div>
                             <label class="label">City</label>
                             <select name="city" class="input text-gray-500" required>
-                                <option disabled selected>Select Territory</option>
-                                <option>Karachi</option>
-                                <option>Lahore</option>
-                                <option>Islamabad</option>
+                                <option disabled {{ old('city') ? '' : 'selected' }}>Select Territory</option>
+                                <option {{ old('city') === 'Karachi' ? 'selected' : '' }}>Karachi</option>
+                                <option {{ old('city') === 'Lahore' ? 'selected' : '' }}>Lahore</option>
+                                <option {{ old('city') === 'Islamabad' ? 'selected' : '' }}>Islamabad</option>
                             </select>
                         </div>
 
@@ -115,19 +115,19 @@
 
                                 <label class="flex items-center gap-2">
                                     <input type="checkbox" name="businesses[]" value="technology"
-                                        class="accent-green-500">
+                                        class="accent-green-500" {{ in_array('technology', (array) old('businesses')) ? 'checked' : '' }}>
                                     Technology
                                 </label>
 
                                 <label class="flex items-center gap-2">
                                     <input type="checkbox" name="businesses[]" value="realestate"
-                                        class="accent-green-500">
+                                        class="accent-green-500" {{ in_array('realestate', (array) old('businesses')) ? 'checked' : '' }}>
                                     Real Estate
                                 </label>
 
                                 <label class="flex items-center gap-2">
                                     <input type="checkbox" name="businesses[]" value="ecommerce"
-                                        class="accent-green-500">
+                                        class="accent-green-500" {{ in_array('ecommerce', (array) old('businesses')) ? 'checked' : '' }}>
                                     E-Commerce
                                 </label>
 
@@ -137,7 +137,7 @@
                         <!-- Investment Amount -->
                         <div>
                             <label class="label">Investment Amount (PKR)</label>
-                            <input type="number" id="investment_amount" name="investment_amount" placeholder="e.g. 80000"
+                            <input type="number" id="investment_amount" name="investment_amount" value="{{ old('investment_amount') }}" placeholder="e.g. 80000"
                                 class="input [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 min="80000" max="100000000000" required
                                 title="Investment amount must be between 80,000 and 100,000,000,000 (100 Billion).">
@@ -147,14 +147,14 @@
                         <!-- Investment Focus -->
                         <div>
                             <label class="label">Investment Interest / Description</label>
-                            <input type="text" name="investment_focus" placeholder="Primary investment focus..."
+                            <input type="text" name="investment_focus" value="{{ old('investment_focus') }}" placeholder="Primary investment focus..."
                                 class="input" required>
                         </div>
 
                 <!-- Portfolio Size -->
                 <div>
                     <label class="label">Portfolio Size (Optional)</label>
-                    <input type="text" name="portfolio_size" placeholder="e.g. 5 Startups, $500k+"
+                    <input type="text" name="portfolio_size" value="{{ old('portfolio_size') }}" placeholder="e.g. 5 Startups, $500k+"
                         class="input">
                 </div>
 

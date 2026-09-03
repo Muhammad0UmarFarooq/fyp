@@ -17,8 +17,12 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
+<<<<<<< HEAD
     public function boot(): void
     {
         //
     }
+=======
+    public function boot(): void {}
+>>>>>>> ff4cae4 (clamav remove)
 }
