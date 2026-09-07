@@ -71,11 +71,11 @@
                             <div class="text-sm font-medium text-white">{{ $user->entrepreneurProfile->industry ?? '—' }}</div>
                         </div>
                         <div class="bg-[#0b1120] p-4 rounded-lg border border-white/5">
-                            <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-1">Total Valuation</div>
+                            <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-1">Total Return Amount</div>
                             <div class="text-sm font-medium text-emerald-400">Rs {{ number_format($user->entrepreneurProfile->total_valuation ?? 0) }}</div>
                         </div>
                         <div class="bg-[#0b1120] p-4 rounded-lg border border-white/5">
-                            <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-1">Future Valuation</div>
+                            <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-1">Future Return Amount</div>
                             <div class="text-sm font-medium text-emerald-400">Rs {{ number_format($user->entrepreneurProfile->future_valuation ?? 0) }}</div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                                 <div class="text-sm font-bold text-amber-400">{{ $user->pitch->monthly_growth ?? 0 }}%</div>
                             </div>
                             <div class="bg-[#0b1120] p-4 rounded-lg border border-white/5">
-                                <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-1">Valuation</div>
+                                <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-1">Return Amount</div>
                                 <div class="text-sm font-bold text-white">Rs {{ number_format($user->pitch->total_valuation ?? 0) }}</div>
                             </div>
                         </div>
@@ -202,7 +202,7 @@
                                     <th class="text-left px-6 py-3 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Startup</th>
                                     <th class="text-left px-6 py-3 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Amount</th>
                                     <th class="text-left px-6 py-3 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Time Period</th>
-                                    <th class="text-left px-6 py-3 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Valuation</th>
+                                    <th class="text-left px-6 py-3 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Return Amount</th>
                                     <th class="text-left px-6 py-3 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Status</th>
                                 </tr>
                             </thead>

@@ -137,7 +137,7 @@
                                     </div>
                                     <div class="bg-[#0b1120] p-4 rounded-xl border border-white/5">
                                         <div class="text-[8px] font-bold text-gray-500 tracking-widest uppercase mb-1">
-                                            {{ $existingOffer ? 'Offered Valuation' : 'Valuation' }}</div>
+                                            {{ $existingOffer ? 'Offered Return Amount' : 'Return Amount' }}</div>
                                         <div class="text-lg font-bold">Rs
                                             {{ number_format($existingOffer ? $existingOffer->valuation : $pitch->total_valuation ?? 0) }}
                                         </div>
@@ -173,7 +173,7 @@
                                                 <div class="text-sm font-bold text-white">Offer Already Placed</div>
                                                 <div class="text-xs text-gray-400">You submitted a bid of Rs
                                                     {{ number_format($existingOffer->offer_amount) }} for
-                                                    {{ $existingOffer->time_period }} years with valuation of Rs
+                                                    {{ $existingOffer->time_period }} years with return amount of Rs
                                                     {{ number_format($existingOffer->valuation) }}. Status: <span
                                                         class="text-brand-green font-bold uppercase tracking-wider">{{ $existingOffer->status }}</span>
                                                 </div>

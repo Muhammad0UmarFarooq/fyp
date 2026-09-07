@@ -99,7 +99,7 @@
                                 <input type="number" required name="monthly_net_value" value="{{ old('monthly_net_value', $pitch->monthly_net_value ?? '') }}" min="20000" max="1000000000" oninput="validateMax(this, 1000000000)" class="w-full bg-[#0b1120] border border-white/5 rounded px-4 py-3 sm:py-4 focus:outline-none focus:border-brand-green/50 text-sm">
                             </div>
                             <div id="monthly-growth-field" class="space-y-2 min-w-0">
-                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Growth</label>
+                                <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly Growth Rate (%)</label>
                                 <div class="flex items-center bg-[#0b1120] border border-white/5 rounded">
                                     <input type="number" required name="monthly_growth" value="{{ old('monthly_growth', $pitch->monthly_growth ?? '') }}" min="1" max="100" oninput="validateRange(this,1,100)" class="flex-1 min-w-0 bg-transparent px-4 py-3 sm:py-4 focus:outline-none text-sm">
                                     <div class="p-2">
@@ -164,7 +164,7 @@
                             </div>
 
                             <div class="bg-[#0b1120] p-6 sm:p-8 md:p-10 rounded-xl border border-white/5 text-center">
-                                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total Valuation</label>
+                                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total Return Amount</label>
                                 <div class="flex items-center justify-center space-x-1 sm:space-x-2">
                                     <span class="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-green">Rs</span>
                                     <input type="text" required name="total_valuation" value="{{ old('total_valuation', $pitch->total_valuation ?? '') }}" class="bg-transparent text-3xl sm:text-4xl md:text-5xl font-bold text-brand-green focus:outline-none w-full text-center min-w-0">

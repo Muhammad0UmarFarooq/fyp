@@ -41,7 +41,7 @@
                                 <th class="text-left px-6 py-4 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Startup / Pitch</th>
                                 <th class="text-left px-6 py-4 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Offer Amount</th>
                                 <th class="text-left px-6 py-4 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Time Period</th>
-                                <th class="text-left px-6 py-4 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Valuation</th>
+                                <th class="text-left px-6 py-4 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Return Amount</th>
                                 <th class="text-left px-6 py-4 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Status</th>
                                 <th class="text-left px-6 py-4 text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Date</th>
                             </tr>

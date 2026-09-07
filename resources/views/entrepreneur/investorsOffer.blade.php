@@ -64,7 +64,7 @@
                                 <div class="text-lg sm:text-xl font-bold text-gray-200">{{ $offer->time_period }}</div>
                             </div>
                             <div>
-                                <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-2">Valuation</div>
+                                <div class="text-[10px] font-bold text-gray-500 tracking-[0.15em] uppercase mb-2">Return Amount</div>
                                 <div class="text-lg sm:text-xl font-bold text-gray-200 break-words">Rs {{ number_format($offer->valuation) }}</div>
                             </div>
                             <div>

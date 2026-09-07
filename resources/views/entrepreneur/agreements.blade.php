@@ -77,7 +77,7 @@
                                     <form action="{{ route('entrepreneur.agreements.reject', $agreement->id) }}" method="POST" class="space-y-4">
                                         @csrf
                                         <label class="text-xs font-bold text-red-400 uppercase tracking-widest block">Reason for Rejection</label>
-                                        <textarea name="rejection_reason" required rows="3" placeholder="Explain why you are rejecting this agreement (e.g. valuation terms, time period)..." class="w-full bg-[#161e2d] border border-white/10 rounded-lg p-4 text-sm text-gray-200 focus:outline-none focus:border-red-500 transition-colors"></textarea>
+                                        <textarea name="rejection_reason" required rows="3" placeholder="Explain why you are rejecting this agreement (e.g. return amount terms, time period)..." class="w-full bg-[#161e2d] border border-white/10 rounded-lg p-4 text-sm text-gray-200 focus:outline-none focus:border-red-500 transition-colors"></textarea>
                                         <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
                                             <button type="button" onclick="document.getElementById('reject-box-{{ $agreement->id }}').classList.add('hidden')" class="px-6 py-2 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
                                             <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-red-700 transition-colors cursor-pointer shadow-lg">Submit Rejection</button>

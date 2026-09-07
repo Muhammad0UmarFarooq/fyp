@@ -110,7 +110,7 @@
                         
                         @if($pitch->total_valuation)
                         <div class="bg-[#0b1120] p-4 sm:p-6 rounded-xl border border-white/5">
-                            <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-2">Valuation</div>
+                            <div class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-2">Return Amount</div>
                             <div class="text-lg sm:text-2xl font-bold text-white break-words">Rs {{ number_format($pitch->total_valuation) }}</div>
                         </div>
                         @endif

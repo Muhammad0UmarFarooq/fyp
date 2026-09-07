@@ -156,25 +156,25 @@
                                 pattern="^([0-5]?[0-9]|60)$" maxlength="2" required
                                 title="Experience must be between 0 and 60 years (max 2 digits).">
                         </div>
-                        <!-- Total Valuation -->
+                        <!-- Total Return Amount -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Total
-                                Valuation</label>
+                                Return Amount</label>
                             <input type="number" id="total_valuation" name="total_valuation" value="{{ old('total_valuation') }}" placeholder="e.g. 50000"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 min="50000" max="1000000000" required
-                                title="Total Valuation must be between 50,000 and 1,000,000,000 (1 Billion).">
+                                title="Total Return Amount must be between 50,000 and 1,000,000,000 (1 Billion).">
                             <p id="total_val_error" class="hidden text-red-500 text-[11px] font-semibold mt-1"></p>
                         </div>
 
-                        <!-- Future Valuation -->
+                        <!-- Future Return Amount -->
                         <div class="space-y-2.5">
                             <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Future
-                                Valuation</label>
+                                Return Amount</label>
                             <input type="number" id="future_valuation" name="future_valuation" value="{{ old('future_valuation') }}" placeholder="e.g. 80000"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 min="80000" max="100000000000" required
-                                title="Future Valuation must be between 80,000 and 100,000,000,000 (100 Billion).">
+                                title="Future Return Amount must be between 80,000 and 100,000,000,000 (100 Billion).">
                             <p id="future_val_error" class="hidden text-red-500 text-[11px] font-semibold mt-1"></p>
                         </div>
 
@@ -346,7 +346,7 @@
                 });
             }
 
-            // ── Total Valuation: 50,000 – 1,000,000,000 ──
+            // ── Total Return Amount: 50,000 – 1,000,000,000 ──
             const totalValInput = document.getElementById('total_valuation');
             const totalValError = document.getElementById('total_val_error');
 
@@ -370,9 +370,9 @@
                     const val = parseFloat(this.value);
                     if (isNaN(val) || this.value === '') { clearTotalValError(); return; }
                     if (val < 50000) {
-                        showTotalValError('Current valuation minimum should be 50,000.');
+                        showTotalValError('Current return amount minimum should be 50,000.');
                     } else if (val > 1000000000) {
-                        showTotalValError('Total Valuation must be under 1,000,000,000 (1 Billion).');
+                        showTotalValError('Total Return Amount must be under 1,000,000,000 (1 Billion).');
                     } else {
                         clearTotalValError();
                     }
@@ -380,14 +380,14 @@
                 totalValInput.addEventListener('blur', function() {
                     const val = parseFloat(this.value);
                     if (!isNaN(val) && val < 50000) {
-                        showTotalValError('Current valuation minimum should be 50,000.');
+                        showTotalValError('Current return amount minimum should be 50,000.');
                     } else if (!isNaN(val) && val > 1000000000) {
-                        showTotalValError('Total Valuation must be under 1,000,000,000 (1 Billion).');
+                        showTotalValError('Total Return Amount must be under 1,000,000,000 (1 Billion).');
                     }
                 });
             }
 
-            // ── Future Valuation: 80,000 – 100,000,000,000 ──
+            // ── Future Return Amount: 80,000 – 100,000,000,000 ──
             const futureValInput = document.getElementById('future_valuation');
             const futureValError = document.getElementById('future_val_error');
 
@@ -411,9 +411,9 @@
                     const val = parseFloat(this.value);
                     if (isNaN(val) || this.value === '') { clearFutureValError(); return; }
                     if (val < 80000) {
-                        showFutureValError('Future valuation minimum should be 80,000.');
+                        showFutureValError('Future return amount minimum should be 80,000.');
                     } else if (val > 100000000000) {
-                        showFutureValError('Future Valuation must be under 100,000,000,000 (100 Billion).');
+                        showFutureValError('Future Return Amount must be under 100,000,000,000 (100 Billion).');
                     } else {
                         clearFutureValError();
                     }
@@ -421,9 +421,9 @@
                 futureValInput.addEventListener('blur', function() {
                     const val = parseFloat(this.value);
                     if (!isNaN(val) && val < 80000) {
-                        showFutureValError('Future valuation minimum should be 80,000.');
+                        showFutureValError('Future return amount minimum should be 80,000.');
                     } else if (!isNaN(val) && val > 100000000000) {
-                        showFutureValError('Future Valuation must be under 100,000,000,000 (100 Billion).');
+                        showFutureValError('Future Return Amount must be under 100,000,000,000 (100 Billion).');
                     }
                 });
             }

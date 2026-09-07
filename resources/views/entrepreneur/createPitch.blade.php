@@ -111,7 +111,7 @@
                             </div>
                             <div id="monthly-growth-field" class="space-y-2 min-w-0">
                                 <label class="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Monthly
-                                    Growth</label>
+                                    Growth Rate (%)</label>
                                 <div class="flex items-center bg-[#0b1120] border border-white/5 rounded">
                                     <input type="number" required name="monthly_growth" value="{{ old('monthly_growth') }}" placeholder="e.g. 22" min="1"
                                         max="100" oninput="validateRange(this,1,100)"
@@ -177,7 +177,7 @@
 
                     <div class="bg-[#0b1120] p-6 sm:p-8 md:p-10 rounded-xl border border-white/5 text-center">
                         <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">Total
-                            Valuation</label>
+                            Return Amount</label>
                         <div class="flex items-center justify-center space-x-1 sm:space-x-2">
                             <span class="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-green">Rs</span>
                             <input type="text" required name="total_valuation" value="{{ old('total_valuation') }}" placeholder="10,000,000"

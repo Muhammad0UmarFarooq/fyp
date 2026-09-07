@@ -209,9 +209,6 @@
 
             <form action="{{ route('investor.profile.update') }}" method="POST" class="space-y-6">
                 @csrf
-<<<<<<< HEAD
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-=======
 
                 @if ($errors->any())
                     <div class="bg-red-500/10 border border-red-500/50 text-red-500 p-4 rounded-xl">
@@ -223,8 +220,7 @@
                     </div>
                 @endif
 
-                <div class="grid grid-cols-3 gap-6">
->>>>>>> ff4cae4 (clamav remove)
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Full Name</label>
                         <input type="text" name="name" value="{{ old('name', $user->name) }}" required class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">

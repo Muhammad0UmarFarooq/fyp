@@ -125,7 +125,7 @@
                         </div>
 
                         <div class="md:ml-12 bg-[#1e293b] rounded-2xl p-6 md:p-8 flex-shrink-0 w-full md:w-80 text-center shadow-xl border border-white/5">
-                            <div class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-4">Total Valuation</div>
+                            <div class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-4">Total Return Amount</div>
                             <div class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-green break-words">PKR {{ $pitch && $pitch->total_valuation ? number_format($pitch->total_valuation) : '0' }}</div>
                         </div>
                     </div>

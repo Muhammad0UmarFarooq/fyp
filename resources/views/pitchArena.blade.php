@@ -105,7 +105,7 @@
                                 <div class="text-lg font-bold text-brand-green">{{ $pitch->return_time }}</div>
                             </div>
                             <div class="bg-brand-box rounded px-5 py-4 border border-white/5">
-                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Valuation</div>
+                                <div class="text-[9px] font-bold text-gray-500 tracking-widest uppercase mb-1.5">Return Amount</div>
                                 <div class="text-lg font-bold text-brand-yellow">PKR {{ number_format($pitch->total_valuation) }}</div>
                             </div>
                         </div>

@@ -126,14 +126,14 @@
 
                                 <!-- Financial Matrix Cards -->
                                 <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col justify-center space-y-4">
-                                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Current Valuation</div>
+                                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Current Return Amount</div>
                                     <div class="text-2xl sm:text-4xl font-extrabold text-white break-words">
                                         {{ auth()->user()->entrepreneurProfile->total_valuation ? 'Rs ' . number_format(auth()->user()->entrepreneurProfile->total_valuation) : 'Not Disclosed' }}
                                     </div>
                                 </div>
 
                                 <div class="bg-[#161e2d] border border-white/5 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col justify-center space-y-4">
-                                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Targeted / Future Valuation</div>
+                                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Targeted / Future Return Amount</div>
                                     <div class="text-2xl sm:text-4xl font-extrabold text-brand-green break-words">
                                         {{ auth()->user()->entrepreneurProfile->future_valuation ? 'Rs ' . number_format(auth()->user()->entrepreneurProfile->future_valuation) : 'Not Disclosed' }}
                                     </div>
@@ -257,11 +257,11 @@
                         <input type="number" name="experience_years" value="{{ old('experience_years', auth()->user()->entrepreneurProfile->experience_years ?? '') }}" placeholder="e.g. 5" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                     <div>
-                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Current Valuation (Rs)</label>
+                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Current Return Amount (Rs)</label>
                         <input type="number" name="total_valuation" value="{{ old('total_valuation', auth()->user()->entrepreneurProfile->total_valuation ?? '') }}" placeholder="e.g. 500000" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                     <div>
-                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Future Valuation Target (Rs)</label>
+                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Future Return Amount Target (Rs)</label>
                         <input type="number" name="future_valuation" value="{{ old('future_valuation', auth()->user()->entrepreneurProfile->future_valuation ?? '') }}" placeholder="e.g. 2000000" class="w-full bg-[#0b1120] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-brand-green">
                     </div>
                 </div>
