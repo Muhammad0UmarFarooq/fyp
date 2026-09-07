@@ -50,7 +50,7 @@
                     <div class="space-y-4 md:space-y-6">
                         <div class="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-end">
                             <h2 class="text-brand-yellow font-bold tracking-[0.2em] text-xs sm:text-sm">01. VIDEO TRANSMISSION</h2>
-                            <span class="text-[9px] sm:text-[10px] text-gray-500 font-bold uppercase">MAX 2,500 MB - MP4/MOV</span>
+                            <span class="text-[9px] sm:text-[10px] text-gray-500 font-bold uppercase">MAX 200 MB - MP4/MOV</span>
                         </div>
 
                         <div id="drop-zone"
