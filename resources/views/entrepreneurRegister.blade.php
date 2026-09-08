@@ -158,8 +158,7 @@
                         </div>
                         <!-- Total Return Amount -->
                         <div class="space-y-2.5">
-                            <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Total
-                                Return Amount</label>
+                            <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Total Amount</label>
                             <input type="number" id="total_valuation" name="total_valuation" value="{{ old('total_valuation') }}" placeholder="e.g. 50000"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 min="50000" max="1000000000" required
@@ -169,8 +168,7 @@
 
                         <!-- Future Return Amount -->
                         <div class="space-y-2.5">
-                            <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Future
-                                Return Amount</label>
+                            <label class="block text-[11px] font-bold text-gray-600 tracking-widest uppercase">Future Valuation</label>
                             <input type="number" id="future_valuation" name="future_valuation" value="{{ old('future_valuation') }}" placeholder="e.g. 80000"
                                 class="w-full bg-brand-input border border-gray-100 px-4 py-4 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-brand-green [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 min="80000" max="100000000000" required
